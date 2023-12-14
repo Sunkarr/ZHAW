@@ -129,16 +129,20 @@ insert into lieferung (l, s, f, k, lanzkg, ldatum) values
 ----------------------------------------------
 -- Aufgabe 2
 
-select distinct k, kname
-from kaffeesorte
-natural join abgabe
-natural join (
+with abgegebenekaffees as (
+    select distinct k, kname
+    from kaffeesorte
+    natural join abgabe),
+geliefertekaffees as (
     select *
     from kaffeesorte
     except
     select k, kname
     from lieferung
-    natural join kaffeesorte);
+    natural join kaffeesorte)
+select *
+from abgegebenekaffees
+natural join geliefertekaffees;
 
 ----------------------------------------------
 -- Aufgabe 3
