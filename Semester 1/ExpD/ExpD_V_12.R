@@ -6,6 +6,6 @@ View(zehnkampf_2021)
 library(ggplot2)
 
 # Aufgabe a)
-ggplot(zehnkampf_2021, aes(x = Punkte)) +
-  geom_boxplot()
-
+boxplot(zehnkampf_2021[,4:13], log = "y")
+apply(zehnkampf_2021[,4:13],MARGIN = 2 , FUN = sd )
+biplot

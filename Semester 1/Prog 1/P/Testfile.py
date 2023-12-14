@@ -1,1 +1,3 @@
-import numpy
+import random
+
+random.randint
