@@ -40,3 +40,12 @@ from abgabe_counts
 natural join lieferung_counts;
 
 ----------------
+
+-- Join ltp, l, p where L.Stadt = P.Stadt
+
+SELECT DISTINCT LTP.TNr
+FROM LTP, L, P
+WHERE LTP.LNr = L.LNr AND LTP.PNr = P.PNr AND
+L.Stadt = P.Stadt;
+
+----------------
