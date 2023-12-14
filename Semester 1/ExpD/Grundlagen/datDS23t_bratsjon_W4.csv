@@ -1,0 +1,26 @@
+"alter","geschlecht","haarfarbe","augenfarbe","koerpergroesse","sport","handspanne","geschwister","postleitzahl","schlafzimmer","ausbildung","programmierkenntnisse","statistische_vorkenntnisse","anreisezeit_an_die_zhaw","schuhgroesse","ratHKgr","ID"
+44,"weiblich","braun","blau",173,6,20,"1","8426","2. Stock","Gymnasium","nicht vorhanden","klein","40","39","mittel",1
+37,"weiblich","schwarz","Braun",165,12,NA,"2","8404","0 (Parterre)","Gymnasium","gering","mittel","25","39",NA,2
+29,"männlich","blond","Grün/Braun",180,10,20,"0","8004","3. Stock","KV","mittel","klein","30","43","mittel",3
+30,"männlich","blond","Grün",185,2,20,"3","8500","4. Stock","Gymnasium","gering","klein","25","44","klein",4
+19,"weiblich","braun","braun",178,6,21,"2","8404","1. Stock","Gymnasium","nicht vorhanden","mittel","10","42","mittel",5
+24,"männlich","braun","Grün",185,4,22,"2","8708","1. Stock","Zeichner Ing.-Bau","gering","klein","44","46","mittel",6
+21,"weiblich","braun","Grün",175,0,20,"2","8304","3. Stock","Kv","gering","mittel","40","38","mittel",7
+24,"männlich","braun","Braun",175,10,18,"2","8408","1. Stock","Elektroinstallateur","gering","klein","20","42","klein",8
+20,"männlich","braun","Blau",178,4,NA,"1","8610","1. Stock","Informatiker",NA,"mittel","45","42",NA,9
+23,"männlich","blond","Blau",188,10,21,"1","9444","2. Stock","Gymnasium","gering","mittel","90","44","mittel",10
+37,"männlich","blond","Blau",178,2,20,"2","8048","6. Stock","Gymnasium","gering","klein","40","42","mittel",11
+22,"männlich","braun","Braun / Grün",185,1,22.6,"2","8707","1. Stock","Elektroniker","mittel","klein","60","44","gross",12
+29,"männlich","braun","Braun",180,1,15,"3","8810","0 (Parterre)","Gymnasium","gering","klein","70","44","klein",13
+35,"weiblich","braun","Braun",166,2,20,"0","8117","0 (Parterre)",NA,"gross","klein","40","40","gross",14
+23,"weiblich","braun","grün",163,5,19.5,"1","8413","3. Stock","fms","nicht vorhanden","klein","30","40","mittel",15
+21,"männlich","schwarz","Braun",172,2,18,"2","9535","2. Stock","Applikationsentwickler","gross","mittel","40","42","klein",16
+NA,"weiblich","blond",NA,NA,3,NA,"3","8400",NA,NA,"gering","klein",NA,NA,NA,17
+31,"männlich","braun","Blaugrau",179,9,22,"2","8038","3. Stock",NA,"mittel","klein","45","44","gross",18
+21,"weiblich","schwarz","Schwarz",165,1,19,"1","8115","1. Stock","Systemtechnikerin EFZ","gering","klein","55","38","mittel",19
+21,"weiblich","braun","Grün",175,4,17,"1","5400","0 (Parterre)","Kantonsschule Wettingen","mittel","klein","55","40","klein",20
+26,"männlich","braun","Blau",182,3,NA,"1","9016","0 (Parterre)","Gymnasium","mittel","klein","60","43",NA,21
+22,"männlich","braun","braun",180,3,21,"4","8192","0 (Parterre)","Elektroniker","mittel","klein","45","42","mittel",22
+31,"männlich","braun","blau-grün",193,7,22,"0","8637","0 (Parterre)","KV","gering","klein","80","45","mittel",23
+21,"weiblich","braun","Braun",167,4,20,"1","8623","3. Stock","Applikationsentwicklung","mittel","klein","40","38","mittel",24
+23,"männlich","braun","braun",187,3,21,"1","8185","2. Stock","Konstrukteur","nicht vorhanden","klein","30","44","mittel",25

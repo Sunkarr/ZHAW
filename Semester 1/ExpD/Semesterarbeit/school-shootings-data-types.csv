@@ -1,0 +1,22 @@
+ shooter_deceased2, Qualitativ/kategoriell - nominal (ja/nein oder wahr/falsch)
+ deceased_notes2, Qualitativ/kategoriell - nominal
+ white, Quantitativ/numerisch - diskret
+ black, Quantitativ/numerisch - diskret
+ hispanic, Quantitativ/numerisch - diskret
+ asian, Quantitativ/numerisch - diskret
+ american_indian_alaska_native, Quantitativ/numerisch - diskret
+ hawaiian_native_pacific_islander, Quantitativ/numerisch - diskret
+ two_or_more, Quantitativ/numerisch - diskret
+ resource_officer, Qualitativ/kategoriell - nominal (z.B. ja/nein oder wahr/falsch)
+ weapon, Qualitativ/kategoriell - nominal
+ weapon_source, Qualitativ/kategoriell - nominal
+ lat, Quantitativ/numerisch - stetig
+ long, Quantitativ/numerisch - stetig
+ staffing, Quantitativ/numerisch - diskret
+ low_grade, Quantitativ/numerisch - diskret
+ high_grade, Quantitativ/numerisch - diskret
+ lunch, Quantitativ/numerisch - diskret
+ county, Qualitativ/kategoriell - nominal
+ state_fips, Qualitativ/kategoriell - nominal
+ county_fips, Qualitativ/kategoriell - nominal
+ ulocale, Qualitativ/kategoriell - nominal (basierend auf den städtischen Einstufungscodes)

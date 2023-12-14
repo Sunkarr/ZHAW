@@ -1,0 +1,64 @@
+
+Ranking based on elevation delta [m]:
+1. jakabnat.gpx - 598.0
+2. weileman.gpx - 447.3
+3. bratsjon.gpx - 423.9
+4. gampegia.gpx - 402.0
+5. ruchtgia.gpx - 368.20001220703125
+6. selesaro.gpx - 44.0
+7. fabiosi1.gpx - 21.0
+8. vocatgwe.gpx - 0.8
+
+Ranking based on max speed [km/h]:
+1. selesaro.gpx - 1101.820795453293
+2. bratsjon.gpx - 75.61707169808453
+3. jakabnat.gpx - 53.8465464951324
+4. ruchtgia.gpx - 40.301891703619496
+5. gampegia.gpx - 33.18844571097323
+6. vocatgwe.gpx - 32.82428111614963
+7. weileman.gpx - 13.273005517255779
+8. fabiosi1.gpx - 7.594858608318807
+
+Ranking based on average speed [km/h]:
+1. bratsjon.gpx - 29.530701897935668
+2. vocatgwe.gpx - 20.496734719831625
+3. gampegia.gpx - 16.353384619669384
+4. selesaro.gpx - 14.13223587090141
+5. jakabnat.gpx - 11.058502460780272
+6. ruchtgia.gpx - 10.168792101719397
+7. fabiosi1.gpx - 5.1300764367887535
+8. weileman.gpx - 4.6539019631721565
+
+Ranking based on total time [h]:
+1. fabiosi1.gpx - 4.9752777777777775
+2. bratsjon.gpx - 3.767777777777778
+3. selesaro.gpx - 3.0655555555555556
+4. ruchtgia.gpx - 2.8716666666666666
+5. gampegia.gpx - 1.0983333333333334
+6. vocatgwe.gpx - 0.9188888888888889
+7. weileman.gpx - 0.07222222222222222
+8. jakabnat.gpx - 0.059444444444444446
+
+Ranking based on total distance [m]:
+1. bratsjon.gpx - 66.39107938151231
+2. selesaro.gpx - 43.3231541864635
+3. ruchtgia.gpx - 25.53988622889889
+4. fabiosi1.gpx - 18.026147934818077
+5. gampegia.gpx - 16.76820845440918
+6. vocatgwe.gpx - 12.637383261957993
+7. jakabnat.gpx - 0.6512820435008357
+8. weileman.gpx - 0.33611514178465557
+
+Number of evaluated .gpx files: 8
+
+Number of files with errors: 9
+Files with errors:
+bachmrya.gpx
+Cohenlii.gpx
+dinismig.gpx
+eggench1.gpx
+erharjan.gpx
+hamidegz.gpx
+romanall.gpx
+sabessar.gpx
+vijaypri.gpx
