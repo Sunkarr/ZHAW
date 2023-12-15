@@ -106,11 +106,33 @@ WHERE NOT EXISTS (
 
 -- Aufgabe 9
 
-create view avgmengep as
+with  avgmengep as (
 select pnr, avg(menge)
 from ltp
-group by pnr;
+group by pnr)
+    select l.lnr
+    from ltp, l, t, avgmengep
+    where ltp.lnr = l.lnr and ltp.tnr = t.tnr and t.tnr = 'T1' and
+          avgmengep.pnr = ltp.pnr and ltp.menge > avgmengep.avg;
 
+SELECT DISTINCT x.LNr
+FROM LTP AS x
+WHERE x.TNr ='T1' AND x.Menge > (
+ SELECT AVG(y.Menge)
+ FROM LTP AS y
+ WHERE x.PNr = y.PNr AND y.TNr ='T1');
+
+-- Aufgabe 10
+
+select stadt
+from l
+union
+select stadt
+from t
+union
+select stadt
+from p
+order by stadt;
 
 
 

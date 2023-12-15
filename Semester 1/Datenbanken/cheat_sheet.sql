@@ -49,3 +49,16 @@ WHERE LTP.LNr = L.LNr AND LTP.PNr = P.PNr AND
 L.Stadt = P.Stadt;
 
 ----------------
+
+-- Allte Städte in denen ein Lieferant, Teil oder Projekt ist
+
+select stadt
+from l
+union
+select stadt
+from t
+union
+select stadt
+from p
+
+----------------
