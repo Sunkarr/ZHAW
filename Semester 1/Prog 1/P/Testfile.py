@@ -1,3 +1,3 @@
-import random
+txt = "hallo, opfer"
+print(txt.split(", "))
 
-random.randint
