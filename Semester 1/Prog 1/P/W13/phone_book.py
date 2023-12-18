@@ -3,7 +3,7 @@ Prog 1
 W13
 3. Phone Book (selective: DS WI)
 Author: Jonas Bratschi (bratsjon)
-Date: 16.12.2023
+Date: 18.12.2023
 """
 
 """phone_book = {
@@ -18,23 +18,48 @@ def print_numbers(numbers):
 
 
 def add_number(numbers, name, number):
-    numbers[name] = number
+    if name not in numbers:
+        numbers[name] = number
+        print(f"Success: {name} has been added")
+    else:
+        print(f"Error: {name} already exists")
 
 
 def lookup_number(numbers, name):
-    number = numbers[name]
-    return number
+    try:
+        number = numbers[name]
+        return number
+    except KeyError:
+        print(f"Error: {name} is not in phonebook")
+        return ""
+
 
 def remove_number(numbers, name):
-    del numbers[name]
+    try:
+        del numbers[name]
+        print(f"Success: {name} has been removed")
+    except KeyError:
+        print(f"Error: {name} is not in phonebook")
+        return ""
 
 def load_numbers(numbers, filename):
-    ???
+    try:
+        with open(filename, "r") as f:
+            for line in f:
+                name, number = line.strip().split(',')
+                numbers[name] = number
+        print(f"Success: File {filename} has been loaded")
+
+    except:
+        print(f"Error: File {filename} not fond")
+        return ""
 
 def save_numbers(numbers, filename):
     with open(filename, "w") as f:
         for name, number in numbers.items():
             f.write(name + "," + number + "\n")
+    print(f"Success: File {filename} has been saved")
+
 
 def print_menu():
     print("1. Print Phone Numbers")
