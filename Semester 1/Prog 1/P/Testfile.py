@@ -1,3 +1,2 @@
-txt = "hallo, opfer"
-print(txt.split(", "))
-
+a = 5//2
+print(a)
