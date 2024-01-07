@@ -62,3 +62,28 @@ select stadt
 from p
 
 ----------------
+
+create table test (
+    id integer unique not null primary key,
+    gebdat  date,
+    bestdat date,
+    CONSTRAINT check_dates CHECK (gebdat > bestdat));
+
+----------------
+
+select bsorte, avg(bewertung)
+from lieblingsbier
+group by bsorte;
+
+select rname, sum(anlager)
+from sortiment
+group by rname;
+
+----------------
+
+select *
+from besucher
+where strasse like '%strasse';
+
+----------------
+
