@@ -5,7 +5,7 @@ check einkaufspreis < verkaufspreis
 
 select *
 from mitarbeiter
-where abteilung = 'HR'
+where abteilung = 'HR';
 
 ----------------
 
@@ -85,5 +85,24 @@ select *
 from besucher
 where strasse like '%strasse';
 
+select *
+from besucher
+where strasse in ('Dorfstrasse');
+
 ----------------
 
+-- Alle "uniquen" Strassen
+select distinct strasse
+from besucher
+order by strasse;
+
+----------------
+
+create table arbeitet (
+    mitarbeiter_id integer NOT NULL default 1,
+    firma_id integer NOT NULL default 1,
+    CONSTRAINT ma_uniq UNIQUE (mitarbeiter_id),
+    CONSTRAINT fk_mitarbeiter FOREIGN KEY (mitarbeiter_id) REFERENCES mitarbeiter(mitarbeiter_id),
+    CONSTRAINT fk_firma FOREIGN KEY (firma_id) REFERENCES firma(firma_id));
+
+----------------
