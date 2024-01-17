@@ -1,2 +1,3 @@
-a = 5//2
-print(a)
+things = {"fruit": "banana", "car": "BMW"}
+
+print(things["fruit"])
