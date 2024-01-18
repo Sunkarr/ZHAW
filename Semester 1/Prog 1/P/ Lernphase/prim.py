@@ -22,5 +22,6 @@ def naechst_groessere_primzahl(zahl):
             zahl += 1
         return zahl
 
+zahl = int(input("Type in a number: "))
 print(prim_number(zahl))
 print(naechst_groessere_primzahl(zahl))
