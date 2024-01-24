@@ -104,4 +104,3 @@ where firma_id = 1;
  drop table firma;
  drop table mitarbeiter;
 
-

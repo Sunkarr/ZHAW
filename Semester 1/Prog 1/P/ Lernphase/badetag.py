@@ -1,4 +1,4 @@
-temperaturen = [25, 21, 22, 27, 29, 23, 29]
+temperaturen = [25, 30, 22, 27, 29, 23, 29]
 
 def optimaler_badetag(temperaturen):
     wochentage = ["MO", "DI", "MI", "DO", "FR", "SA", "SO"]
