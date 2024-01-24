@@ -17,5 +17,6 @@ barplot(table(CS$price_diff_fct))
 
 plot(CS$Sales ~ CS$price_diff_fct)
 
+library(explore)
+explore(CS)
 
-read.table()
