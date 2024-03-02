@@ -42,10 +42,11 @@ class Copies:
 
 
 class Table:
-    def __init__(self, students_per_table, students):
+    def __init__(self, students_per_table, students, document):
         """Class to represent a table in the classroom."""
         self.students_per_table = students_per_table
         self.students = students
+        self.document = document
 
 
 class Human:
@@ -81,14 +82,14 @@ copies_1 = Copies(document_1, nr_copies)
 copied_documents = copies_1.copy_document()
 
 # Create students and distribute copies
-students = [Human("student", f"student_{index + 1}",
-                  [copied_documents[index]]) for index in range(nr_students)]
+students = [Human("student", f"student_{index + 1}", [copied_documents[index]]) for index in range(nr_students)]
 
 # Create tables and distribute students to tables
 tables = []
 for index in range(nr_tables):
     table_students = students[index * students_per_table: (index + 1) * students_per_table]
-    table = Table(students_per_table, table_students)
+    table_document = copied_documents[index % nr_copies]  # Assign a document to each table
+    table = Table(students_per_table, table_students, table_document)
     tables.append(table)
 
 # Create teacher and write name to blackboard
@@ -111,6 +112,7 @@ print("  Students per Table:", tables[0].students_per_table)
 print("  Students:")
 for student in tables[0].students:
     print(f"    Student Name: {student.name}, Document Name: {student.owns[0].name}")
+print("  Document Name:", tables[0].document.name)
 
 print("\nFirst Document:")
 print("  Document Name:", copied_documents[0].name)
@@ -118,7 +120,7 @@ print("  Document Name:", copied_documents[0].name)
 print("\nFirst Student:")
 print("  Role:", students[0].role)
 print("  Name:", students[0].name)
-print("  Copy Name:", students[0].owns[0].name)
+print("  Document Name:", students[0].owns[0].name)
 
 print("\nFirst Teacher:")
 print("  Role:", teacher_1.role)
