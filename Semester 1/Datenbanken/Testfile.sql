@@ -9,5 +9,3 @@ group by rname;
 select *
 from besucher
 where strasse like '%strasse';
-
-
