@@ -7,6 +7,9 @@ for (i in 1:nsim) {
 ohneblau <- apply(w, 1, function(row) !any(row %in% c(7, 8, 9)))
 sum(ohneblau)/nsim
 
+# Besser einen Vektor mit allen Möglichkeiten ausgeschrieben
+# c("Blau", "Blau", ...)
+
 
 # Aufgabe 2: Glücksrad
 
