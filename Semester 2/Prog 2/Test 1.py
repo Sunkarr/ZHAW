@@ -1,12 +1,3 @@
-from dataclasses import dataclass
-
-@dataclass
-class Bogen:
-    name: str
-    preis: int
-    schaden: int = 100
-
-
-bogen1 = Bogen("Feuerbogen", 2500, 35)
-
-print(bogen1)
+x = input("Your Input: ")
+y = x.lower()
+print(y)
