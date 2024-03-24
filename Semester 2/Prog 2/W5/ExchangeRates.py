@@ -28,28 +28,28 @@ class ExchangeRates:
     daten = json.load(f)
     rates = daten['rates']
 
-    def get_usd_chf(self):
-        result = self.rates['CHF']
+    def get_usd_chf(self, amount=1):
+        result = self.rates['CHF'] * amount
         return result
 
-    def get_chf_usd(self):
-        result = 1/self.rates['CHF']
+    def get_chf_usd(self, amount=1):
+        result = 1/self.rates['CHF'] * amount
         return result
 
-    def get_usd_eur(self):
-        result = self.rates['EUR']
+    def get_usd_eur(self, amount=1):
+        result = self.rates['EUR'] * amount
         return result
 
-    def get_eur_usd(self):
-        result = 1/self.rates['EUR']
+    def get_eur_usd(self, amount=1):
+        result = 1/self.rates['EUR'] * amount
         return result
 
-    def get_chf_eur(self):
-        result = self.get_chf_usd() * self.get_usd_eur()
+    def get_chf_eur(self, amount=1):
+        result = self.get_chf_usd() * self.get_usd_eur() * amount
         return result
 
-    def get_eur_chf(self):
-        result = self.get_eur_usd() * self.get_usd_chf()
+    def get_eur_chf(self, amount=1):
+        result = self.get_eur_usd() * self.get_usd_chf() * amount
         return result
 
 
