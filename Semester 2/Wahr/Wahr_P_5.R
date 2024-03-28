@@ -15,4 +15,13 @@ sum(dbinom(x = 0:2, size = 18, prob = prob))
 
 # Aufgabe 2
 
-sum(dbinom(0:(3720/2), size = 3720, prob = 1980/3720))
+sum(dbinom(x = 1800:3720, size = 3720, prob = 0.5))
+
+
+# Aufgabe 3
+
+dbinom(x = 0:200, size = 600, prob = 0.005)
+
+sum(rbinom(200, 600, 0.005))
+
+

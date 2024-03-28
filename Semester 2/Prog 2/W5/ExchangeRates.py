@@ -23,10 +23,13 @@ class ExchangeRates:
     """
 
     id_jonas = "01c82161cc934ff8b87355f0a22ded53"
-    url = f"https://openexchangerates.org/api/latest.json?app_id={id_jonas}"
-    f = urllib.request.urlopen(url)
-    daten = json.load(f)
-    rates = daten['rates']
+    try:
+        url = f"https://openexchangerates.org/api/latest.json?app_id={id_jonas}"
+        f = urllib.request.urlopen(url)
+        api_daten = json.load(f)
+        rates = api_daten['rates']
+    except:
+        raise ValueError("Data not fetchable")
 
     def get_usd_chf(self, amount=1):
         result = self.rates['CHF'] * amount
