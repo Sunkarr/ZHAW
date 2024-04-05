@@ -15,7 +15,7 @@ sum(dbinom(x = 0:2, size = 18, prob = prob))
 
 # Aufgabe 2
 
-sum(dbinom(x = 1800:3720, size = 3720, prob = 0.5))
+sum(dbinom(x = 1801:3720, size = 3720, prob = 0.5))
 
 
 # Aufgabe 3
@@ -39,7 +39,7 @@ sum(M$result) / n
 1 - pgeom(9, 1/7)
 plot(pgeom(0:9, 1/7))
 
-n <- 1000
+n <- 10000
 Leo <- rgeom(n, 10/70)
 smaller_than_20 <- function(vec) {
   count <- 0
