@@ -21,7 +21,7 @@ dhyper(1, 3, 32, 4) / 3
 anzahl <- c(0,1,2,3,4)
 dens <- c(109,65,22,3,1)
 
-lambda <- sum(anzahl * dens) / 200
+lambda <- sum(anzahl * dens) / sum(dens)
 
 1 - sum(dpois(0:4, lambda))
 
