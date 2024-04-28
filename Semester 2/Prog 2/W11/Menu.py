@@ -48,12 +48,11 @@ class TrainConnectionMenu:
             print("No connections found")
 
 if __name__ == "__main__":
-    start = "St Gallen "
+    start = "Männedorf"
     destination = "Bern"
 
-    downloader = TrainConnection.TrainConnection()
-    connections = downloader.TrainConnectionDownloader(start, destination)
+    downloader = TrainConnection.TrainConnectionDownloader(start, destination)
+    connections = downloader.fetch_connections()
 
     menu = TrainConnectionMenu(connections)
     menu.display_next_connection()
-
