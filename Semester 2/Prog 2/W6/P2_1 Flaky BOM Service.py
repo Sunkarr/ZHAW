@@ -1,5 +1,7 @@
 import requests
 import time
+import unittest
+
 
 class BOM:
     def __init__(self):
@@ -33,3 +35,4 @@ if __name__ == "__main__":
     bom1.fetch_data()
     bom1.print_data()
     bom1.print_log()
+    unittest.main()

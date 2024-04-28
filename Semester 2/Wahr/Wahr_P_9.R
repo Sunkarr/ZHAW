@@ -18,7 +18,7 @@ n <- 100000
 kunden_wetter_schlecht <- rpois(n*0.4, 10)
 kunden_wetter_gut <- rpois(n*0.6, 30)
 kunden_total <- c(kunden_wetter_gut, kunden_wetter_schlecht)
-hist(kunden_total, freq = F)
+hist(kunden_total, freq = F, breaks = 50)
 abline(v = mean(kunden_total), col = "red", lwd = 2)
 mean(kunden_total)
 

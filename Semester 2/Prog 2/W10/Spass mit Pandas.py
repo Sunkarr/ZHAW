@@ -15,9 +15,9 @@ print(f"Mean: {mean:2.1f}")"""
 print(sorted_points.head(3))"""
 
 
-def note(punkte):
+"""def grade(punkte):
     note = (punkte*5 / 100) + 1
     return f"{note:.2f}"
 
-points['Note'] = points['Points'].apply(note)
-print(points.sort_values(by='Points', ascending=False))
+points['Note'] = points['Points'].apply(grade)
+print(points.sort_values(by='Points', ascending=False))"""
