@@ -18,38 +18,50 @@ class TrainConnectionMenu:
         # Sort connections by departure time
         sorted_connections = sorted(self.connections, key=lambda x: x['from']['departureTimestamp'])
 
+        # Print header
+        print(f"{'Time':<10} {'Journey':<15} {'Platform':<10}")
+
         # Print the next connection
         if sorted_connections:
             next_conn = sorted_connections[0]
             for section in next_conn['sections']:
                 try:
                     departure_timestamp = section['departure']['departureTimestamp']
+                    arrival_timestamp = section['journey']['passList'][-1]['arrivalTimestamp']
+
                     if isinstance(departure_timestamp, int):
                         departure_time = datetime.fromtimestamp(departure_timestamp).strftime('%H:%M')
+                        arrival_time = datetime.fromtimestamp(arrival_timestamp).strftime('%H:%M')
                     else:
                         departure_time = departure_timestamp.strftime('%H:%M')
+                        arrival_time = arrival_timestamp.strftime('%H:%M')
                 except (KeyError, AttributeError):
-                    print(f"Invalid section data: 'departure.departureTimestamp' key not found or invalid for section: {section}")
+                    print(f"Invalid section data: 'departure.departureTimestamp' "
+                          f"key not found or invalid for section: {section}")
                     continue
 
-                station_name = section['departure']['station']['name']
-                platform = section['departure']['platform'] or '-'
+                station_name_departure = section['departure']['station']['name']
+                station_name_arrival = section['arrival']['station']['name']
+                platform_departure = section['departure']['platform'] or '-'
+                platform_arrival = section['arrival']['platform'] or '-'
 
-                if 'journey' in section and section['journey']:
-                    journey_name = section['journey']['name']
-                    print(f"{departure_time} {station_name:<20}{platform}")
-                    print(f"             {journey_name}")
-                else:
-                    arrival_time = section['arrival']['arrivalTimestamp'].strftime('%H:%M')
-                    arrival_delay = section['arrival']['delay'] if 'delay' in section['arrival'] and section['arrival']['delay'] else ''
-                    print(f"{departure_time} {station_name:<20}{platform}")
-                    print(f"{arrival_time} +{arrival_delay} {section['arrival']['station']['name']}")
+                departure_delay = section['departure']['delay'] if 'delay' in section['departure'] else ''
+                arrival_delay = section['arrival']['delay'] if 'arrival' in section and 'delay' in section[
+                    'arrival'] else ''
+
+                journey_name = section['journey']['name']
+                print(f"{departure_time} {'+' + str(departure_delay) if departure_delay else '':<5}"
+                      f"{station_name_departure:<20}{platform_departure:<10}")
+                print(f"{journey_name:>17}")
+                print(f"{arrival_time} {'+' + str(arrival_delay) if arrival_delay else '':<5}"
+                      f"{station_name_arrival:<20}{platform_arrival:<10}")
+
         else:
             print("No connections found")
 
 if __name__ == "__main__":
-    start = "St Gallen "
-    destination = "Bern"
+    start = "Davos"
+    destination = "st moritz"
 
     downloader = TrainConnection.TrainConnection()
     connections = downloader.TrainConnectionDownloader(start, destination)
