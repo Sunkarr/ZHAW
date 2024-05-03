@@ -21,6 +21,10 @@ x <- 0:20000
 pdf1 <- dlnorm(x, 8.5, 0.97)
 pdf2 <- dlnorm(x, 7.5, 1.20)
 plot(x, pdf1, type = "l", lwd = 2, col = "red", ylim = c(0, max(pdf1, pdf2)), 
+     xlab = "x", ylab = "Density", main = "Comparison of Log-Normal Distributions", log = "x")
+lines(x, pdf2, type = "l", lwd = 2, col = "blue")
+
+plot(x, pdf1, type = "l", lwd = 2, col = "red", ylim = c(0, max(pdf1, pdf2)), 
      xlab = "x", ylab = "Density", main = "Comparison of Log-Normal Distributions")
 lines(x, pdf2, type = "l", lwd = 2, col = "blue")
 
