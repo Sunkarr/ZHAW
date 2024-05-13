@@ -30,7 +30,7 @@ for (i in 1:n){
   M[i,] <- rnorm(1, 26, 1) + 20 + sum(runif(find_sound, 8, 16)) + rexp(1, 1/39.6)
 }
 
-mean(M)
+quantile(M, 0.8)
 
 
 # Inversionsmethode
@@ -44,4 +44,39 @@ x <- g(u)
 mean(x)
 
 
+# Wartezeiten Fluggäste
+
+pexp(5, 1/5, lower.tail = F)
+
+
+# Soda-Stream
+
+pgamma(12, 3, 1/6, lower.tail = F)
+
+
+# Anzahl gelaufener Kilometer einer Person
+
+plnorm(11, 2.04, (0.12)^0.5)
+
+
+# Durchmesser einer Gewindeschraube
+
+pnorm(6.8, 6.3, 0.3) - pnorm(5.8, 6.3, 0.3)
+
+
+# Wartezeit für Gondel auf den Rigi
+
+punif(25, 0, 30) - punif(15, 0, 30)
+
+
+# Windgeschwindigkeiten 
+
+pweibull(3, 0.328, 3.1, lower.tail = F)
+
+
+# Bedienungszeit pro Kunde
+
+190/7
+
+722/7
 
