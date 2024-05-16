@@ -1,6 +1,6 @@
 # Messdaten
 
-hist(messdaten)
+hist(messdaten, breaks = 100)
 
 hist(log(messdaten))
 
@@ -8,12 +8,12 @@ hist(log(messdaten))
 # Mammutbäume
 
 n <- 100000
-stichprobe <- 42
-E <- 2.69
-sd <- 0.44
-Einsatz <- 74
-max <- 2.9
-min <- 1.4
+stichprobe <- 24
+E <- 4.0
+sd <- 0.41
+Einsatz <- 9.0
+max <- 4.8
+min <- 1.6
 
 umfänge <- matrix(rnorm(n * stichprobe, E, sd) * pi, nrow = n)
 gewinne <- rowSums(ifelse(umfänge > max, Einsatz, ifelse(umfänge < min, -Einsatz, 0)))
@@ -79,4 +79,16 @@ pweibull(3, 0.328, 3.1, lower.tail = F)
 190/7
 
 722/7
+
+
+# Erwartungswert
+
+library(Deriv)
+# Definition der Funktion
+f <- function(x) x*(0.25/(x+1))
+# Berechnung des Integrals von f von 0 bis 1
+integral_result <- integrate(f, lower = 0, upper = exp(4)-1)
+print(integral_result)
+
+
 
