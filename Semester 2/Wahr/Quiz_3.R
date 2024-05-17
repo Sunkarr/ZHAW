@@ -1,28 +1,29 @@
-# Installiere und lade das Paket
-# install.packages("Deriv")  # Paket installieren, dies muss nur einmal gemacht werden
-library(Deriv)             # Paket laden
+library(Deriv)
 
 # Definition der Funktion
-f <- function(x) x*(x^2 + 3*x + 2)
-
-# Ableitung der Funktion f nach x
-df <- Deriv(f, "x")
-print(df)
+f <- function(x) 8.28 * exp(-8.28 * x)
 
 # Berechnung des Integrals von f von 0 bis 1
-integral_result <- integrate(f, lower = 0, upper = exp(1))
+integral_result <- integrate(f, lower = 0, upper = 0.06)
 print(integral_result)
 
 
-f <- function(x) x^2 + 3*x + 2
-Deriv(f, "x")                  # Ableitung der Funktion f nach x
+pnorm(205, 2.3*80, 2.8*80)
 
-# Laden des Pakets
-install.packages(pracma)
-library(pracma)
-# Definieren der Funktion, z.B. f(x) = x^2
-f <- function(x) x^2
-# Berechnen des unbestimmten Integrals (Stammfunktion)
-F <- integrate(f, x)
-# Ausgabe der Stammfunktion
-print(F)
+
+n <- 1000000
+M <- matrix(NA, nrow = n, ncol = 1)
+
+for (i in 1:n){
+  M[i,] <- (7 + rnorm(1, 0, 1.5)) *2 + rnorm(1, 6, 1.5) + rexp(1, 1/1.5) + 2
+}
+
+median(M)
+
+
+pexp(19.8, 1/9) - pexp(0.7, 1/9)
+pexp(19.8, 9) - pexp(0.7, 9)
+
+
+4/3.9
+
