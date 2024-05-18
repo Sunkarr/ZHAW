@@ -14,6 +14,23 @@ for ( i in 1:n){
 
 plot(M)
 
+
+#---
+
+x1 <- seq(0,100,1)
+x2 <- seq(0,100,1)
+
+z <- expand.grid(x1=x1,x2=x2)
+
+f <- dmvnorm(z, mean = mu, sigma = sigma)
+
+head(cbind(z,f))
+
+fz <- matrix(f, nrow = length(x1), ncol = length(x2))
+
+image(x1,x2,fz, las=1)
+contour(x1,x2,fz, add=TRUE)
+
 #--------------------------------
 
 n <- 10000
