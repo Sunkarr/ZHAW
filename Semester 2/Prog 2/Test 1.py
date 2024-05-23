@@ -17,3 +17,6 @@ ax.set(xlabel='Poisson Distribution', ylabel='Frequency')
 
 # Display the plot
 plt.show()
+
+x = "Hello World"
+print(x)
