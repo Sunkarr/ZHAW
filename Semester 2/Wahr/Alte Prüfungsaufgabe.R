@@ -34,3 +34,5 @@ mean(m) * 150000
 # Aufgabe 4: Eishockey-Playoffs (Alte Prüfungsaufgabe)
 
 dbinom(3, 5, c(0.5))
+
+sample(0:1, 3, prob = c(0.2, 0.8))
