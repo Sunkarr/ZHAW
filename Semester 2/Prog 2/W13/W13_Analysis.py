@@ -1,24 +1,21 @@
-import math
+def funktion(x, y):
+    return (x-1)/y
 
-def funktion(t, x):
-    return math.cos(t+x) + math.sin(t-x)
-
+# Anfangswerte und Schrittweite
+y_start = 5
 x_start = 0
-t_start = 0
-t_ziel = 1
-n = 10000
+x_ziel = 10
+h = 1  # Schrittweite
+n = int((x_ziel - x_start) / h)  # Anzahl der Schritte
 
-# Step size
-h = (t_ziel - t_start) / n
-
-# Initial values
+# Initialwerte
 x = x_start
-t = t_start
+y = y_start
 
-print(f"Step 0: t = {t:.3f}, x = {x:.3f}")
+print(f"Step 0: x = {x:.3f}, y = {y:.3f}")
 
-# Euler method loop
+# Eulerverfahren Schleife
 for i in range(n):
-    x = x + h * funktion(t, x)
-    print(f"Step {i + 1}: t = {t:.3f}, x = {x:.3f}")
-    t = t + h
+    y = y + h * funktion(x, y)
+    x = x + h
+    print(f"Step {i + 1}: x = {x:.3f}, y = {y:.3f}")
