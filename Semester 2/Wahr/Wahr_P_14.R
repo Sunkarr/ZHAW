@@ -20,10 +20,7 @@ y <- x
 grid.xy <- expand.grid(x,y)
 ### Dichte f(x,y) berechnen (bivariate Normalverteilung)
 out <- dmvnorm(grid.xy,mean=c(mu_f, mu_s),sigma=sigma)
-image(x=x, y=y, matrix(out,ncol=length(x)),
-      main = c(expression(N(hat(mu)[Väter],hat(mu)[Söhne], widehat(Sigma)))),
-      ylab ="Grösse Söhne [m]", xlab = "Grösse Väter [m]",
-      asp =1, las=1)
+image(x=x, y=y, matrix(out,ncol=length(x)), asp =1, las=1)
 contour(x=x, y=y, matrix(out,ncol=length(x)), add=TRUE)
 
 
