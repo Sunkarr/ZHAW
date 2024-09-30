@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5646578-6a99-4bff-9165-9baf01372fd9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Semester 3/DPS/W2/DPS23_02_mm1_bratsjon.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Semester 3/Sensorik/W3/Fehlerrechnung.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Semester 3/Sensorik/W3/Lineare Regression.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +52,9 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\jonas\Documents\GitHub\ZHAW\Semester 3\DPS\W2" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\jonas\Documents\GitHub\ZHAW\Semester 3\Sensorik\W3" />
     </key>
   </component>
   <component name="SharedIndexes">
