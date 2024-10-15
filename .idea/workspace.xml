@@ -5,13 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5646578-6a99-4bff-9165-9baf01372fd9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Semester 3/DPS/W3/DPS23_03_PriceOptimization_bratsjon.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Semester 3/DPS/W5/DPS23_05_EMSR_bratsjon.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Jupyter Notebook" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -45,12 +52,13 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/jonas/Documents/GitHub/ZHAW/Semester 3/DPS/W3",
+    "last_opened_file_path": "C:/Users/jonas/Documents/GitHub/ZHAW/Semester 3/DPS/W5",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jonas\Documents\GitHub\ZHAW\Semester 3\DPS\W5" />
       <recent name="C:\Users\jonas\Documents\GitHub\ZHAW\Semester 3\DPS\W3" />
       <recent name="C:\Users\jonas\Documents\GitHub\ZHAW\Semester 3\DPS\W2" />
     </key>
