@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5646578-6a99-4bff-9165-9baf01372fd9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Semester 3/DPS/W13/DPS23_13_CLV_bratsjon.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -53,7 +54,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "/Users/jonas/Documents/GitHub/ZHAW",
+    "last_opened_file_path": "/Users/jonas/Documents/GitHub/ZHAW/Semester 3/DPS/W13",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -65,11 +66,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Semester 3/DPS/W13" />
       <recent name="C:\Users\jonas\Documents\GitHub\ZHAW\Semester 3\DPS\0_Basics\W9" />
       <recent name="C:\Users\jonas\Documents\GitHub\ZHAW\Semester 3\DPS\W7" />
       <recent name="C:\Users\jonas\Documents\GitHub\ZHAW\Semester 3\DPS\W5" />
       <recent name="C:\Users\jonas\Documents\GitHub\ZHAW\Semester 3\DPS\W3" />
-      <recent name="C:\Users\jonas\Documents\GitHub\ZHAW\Semester 3\DPS\W2" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\jonas\Documents\GitHub\ZHAW\Semester 3\DPS\W9" />
@@ -80,8 +81,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-PY-243.21565.199" />
-        <option value="bundled-python-sdk-cab1f2013843-4ae2d6a61b08-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.21565.199" />
+        <option value="bundled-python-sdk-03dcfb7637b1-fab4200a9dfa-com.jetbrains.pycharm.ds.sharedIndexes.bundled-DS-243.21565.247" />
       </set>
     </attachedChunks>
   </component>
@@ -101,6 +101,7 @@
       <workItem from="1733517833626" duration="2000" />
       <workItem from="1733517843546" duration="163000" />
       <workItem from="1733519686780" duration="60000" />
+      <workItem from="1733604534982" duration="13000" />
     </task>
     <servers />
   </component>
