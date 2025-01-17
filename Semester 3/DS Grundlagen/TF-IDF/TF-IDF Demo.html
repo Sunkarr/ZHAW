@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<!-- saved from url=(0039)https://remykarem.github.io/tfidf-demo/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>TF-IDF Demo</title>
+  <link rel="stylesheet" href="./TF-IDF Demo_files/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="./TF-IDF Demo_files/jquery-1.11.2.min.js.download"></script>
+  <script src="./TF-IDF Demo_files/main.js.download"></script>
+  <link rel="stylesheet" type="text/css" href="./TF-IDF Demo_files/jquery.highlight-within-textarea.css">
+  <script defer="" src="./TF-IDF Demo_files/jquery.highlight-within-textarea.js.download"></script>
+  <style>
+    svg {
+      border: 1px solid #333;
+      margin-top: 20px;
+    }
+
+    body {
+      font-size: 16px;
+    }
+
+    .container {
+      margin-top: 56px;
+    }
+
+    .hwt-container .container {
+      background-color: #f8f9fa;
+    }
+
+    .hwt-content {
+      width: 330px;
+      border-color: #ced4da;
+      /* height: 100px; */
+      padding-left: 12px;
+      padding-right: 12px;
+      padding-top: 6px;
+      padding-bottom: 6px;
+      border: 1px solid #adb5bd;
+      /* color: inherit; */
+      /* font: 18px/25px 'Droid Sans Mono', sans-serif; */
+    }
+
+    .hwt-input:focus {
+      outline-color: #495057;
+    }
+
+    .hwt-content mark {
+      border-radius: 3px;
+      background-color: #d0bfff;
+    }
+
+    .hwt-content mark.red {
+      background-color: #ffc9c9;
+    }
+
+    .hwt-content mark.blue {
+      background-color: #a3daff;
+    }
+
+    .hwt-content mark.yellow {
+      background-color: #ffec99;
+    }
+  </style>
+
+<script type="text/javascript" src="./TF-IDF Demo_files/Q-f1TIfBKhbrHzep"></script><script type="text/javascript" src="./TF-IDF Demo_files/hTk5EtU38II6nhnL"></script></head>
+
+<body>
+
+  <div class="bg-dark" style="padding: 20px;">
+    <div class="container" style="text-align:center;">
+      <h1 style="color: aliceblue">TF-IDF Demo</h1>
+      <p class="text-muted">Compute TF-IDF vectors from documents</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <p><b>Document 1</b></p>
+        <div class="input-group">
+          <textarea id="textdata" class="form-control" aria-label="With textarea" style="height:200px;">Hey there, Delilah. What's it like in New York city?</textarea>
+        </div>
+        <p>No. of words*:</p>
+      </div>
+      <div class="col-sm-6">
+        <p><b>Document 2</b></p>
+        <div class="input-group">
+          <textarea id="textdata2" class="form-control" aria-label="With textarea" style="height:200px;">Hey there, Delilah. What's it like in New York city?</textarea>
+        </div>
+        <p>No. of words*:</p>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 16px;">
+      <div class="col-sm-6">
+        <p><b>Document 3</b></p>
+        <div class="input-group">
+          <textarea id="textdata3" class="form-control" aria-label="With textarea" style="height:200px;">Hey there, Delilah. What's it like in New York city?</textarea>
+        </div>
+        <p>No. of words*:</p>
+      </div>
+      <div class="col-sm-6">
+        <p><b>Document 4</b></p>
+        <div class="input-group">
+          <textarea id="textdata4" class="form-control" aria-label="With textarea" style="height:200px;">Hey there, Delilah. What's it like in New York city?</textarea>
+        </div>
+        <p>No. of words*:</p>
+      </div>
+      <div class="row" style="margin-top: 16px;">
+        <p>*No. of words does not include stopwords.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <button type="button" id="prepareData" class="btn btn-primary">Generate table</button>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12" style="overflow-y:auto; height:500px;">
+        <table id="tokenTable" class="table table-bordered table-striped mb-0">
+          <thead>
+            
+            
+          
+        <tr>
+            <th scope="col" rowspan="2" style="vertical-align: middle;">No.</th>
+            <th scope="col" rowspan="2" style="vertical-align: middle;">Token</th>
+            <th scope="col" colspan="4">Term count</th>
+            <th scope="col" rowspan="2" style="vertical-align: middle;">Document count</th>
+            <th scope="col" rowspan="2" style="vertical-align: middle;">IDF</th>
+            <th scope="col" colspan="4">TF × IDF</th>
+        </tr>
+        <tr>
+            <th scope="col">Doc 1</th>
+            <th scope="col">Doc 2</th>
+            <th scope="col">Doc 3</th>
+            <th scope="col">Doc 4</th>
+            <th scope="col">Doc 1</th>
+            <th scope="col">Doc 2</th>
+            <th scope="col">Doc 3</th>
+            <th scope="col">Doc 4</th>
+        </tr></thead>
+          <tbody><tr>
+                  <th scope="row">1</th>
+                  <td>air</td>
+                  <td>0.1</td>
+                  <td>0.06666666666666667</td>
+                  <td>0.09523809523809523</td>
+                  <td>0.1111111111111111</td>
+                  <td>4</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+            </tr><tr>
+                  <th scope="row">2</th>
+                  <td>quality</td>
+                  <td>0.1</td>
+                  <td>0.06666666666666667</td>
+                  <td>0.047619047619047616</td>
+                  <td>0.1111111111111111</td>
+                  <td>4</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+            </tr><tr>
+                  <th scope="row">3</th>
+                  <td>sunny</td>
+                  <td>0.1</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>1</td>
+                  <td>0.602</td>
+                  <td>0.06</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+            </tr><tr>
+                  <th scope="row">4</th>
+                  <td>island</td>
+                  <td>0.1</td>
+                  <td>0.06666666666666667</td>
+                  <td>0.047619047619047616</td>
+                  <td>0</td>
+                  <td>3</td>
+                  <td>0.125</td>
+                  <td>0.012</td>
+                  <td>0.008</td>
+                  <td>0.006</td>
+                  <td>0</td>
+            </tr><tr>
+                  <th scope="row">5</th>
+                  <td>improved</td>
+                  <td>0.1</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>1</td>
+                  <td>0.602</td>
+                  <td>0.06</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+            </tr><tr>
+                  <th scope="row">6</th>
+                  <td>gradually</td>
+                  <td>0.1</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>1</td>
+                  <td>0.602</td>
+                  <td>0.06</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+            </tr><tr>
+                  <th scope="row">7</th>
+                  <td>throughout</td>
+                  <td>0.1</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>1</td>
+                  <td>0.602</td>
+                  <td>0.06</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+            </tr><tr>
+                  <th scope="row">8</th>
+                  <td>wednesday</td>
+                  <td>0.1</td>
+                  <td>0.06666666666666667</td>
+                  <td>0</td>
+                  <td>0.1111111111111111</td>
+                  <td>3</td>
+                  <td>0.125</td>
+                  <td>0.012</td>
+                  <td>0.008</td>
+                  <td>0</td>
+                  <td>0.014</td>
+            </tr><tr>
+                  <th scope="row">9</th>
+                  <td>singapore</td>
+                  <td>0</td>
+                  <td>0.06666666666666667</td>
+                  <td>0.047619047619047616</td>
+                  <td>0.1111111111111111</td>
+                  <td>3</td>
+                  <td>0.125</td>
+                  <td>0</td>
+                  <td>0.008</td>
+                  <td>0.006</td>
+                  <td>0.014</td>
+            </tr><tr>
+                  <th scope="row">10</th>
+                  <td>continued</td>
+                  <td>0</td>
+                  <td>0.06666666666666667</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>1</td>
+                  <td>0.602</td>
+                  <td>0</td>
+                  <td>0.04</td>
+                  <td>0</td>
+                  <td>0</td>
+            </tr><tr>
+                  <th scope="row">11</th>
+                  <td>worse</td>
+                  <td>0</td>
+                  <td>0.06666666666666667</td>
+                  <td>0</td>
+                  <td>0.1111111111111111</td>
+                  <td>2</td>
+                  <td>0.301</td>
+                  <td>0</td>
+                  <td>0.02</td>
+                  <td>0</td>
+                  <td>0.033</td>
+            </tr><tr>
+                  <th scope="row">12</th>
+                  <td>haze</td>
+                  <td>0</td>
+                  <td>0.06666666666666667</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>1</td>
+                  <td>0.602</td>
+                  <td>0</td>
+                  <td>0.04</td>
+                  <td>0</td>
+                  <td>0</td>
+            </tr><tr>
+                  <th scope="row">13</th>
+                  <td>hit</td>
+                  <td>0</td>
+                  <td>0.06666666666666667</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>1</td>
+                  <td>0.602</td>
+                  <td>0</td>
+                  <td>0.04</td>
+                  <td>0</td>
+                  <td>0</td>
+            </tr><tr>
+                  <th scope="row">14</th>
+                  <td>monitored</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.047619047619047616</td>
+                  <td>0</td>
+                  <td>1</td>
+                  <td>0.602</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.029</td>
+                  <td>0</td>
+            </tr><tr>
+                  <th scope="row">15</th>
+                  <td>network</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.047619047619047616</td>
+                  <td>0</td>
+                  <td>1</td>
+                  <td>0.602</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.029</td>
+                  <td>0</td>
+            </tr><tr>
+                  <th scope="row">16</th>
+                  <td>monitoring</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.047619047619047616</td>
+                  <td>0</td>
+                  <td>1</td>
+                  <td>0.602</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.029</td>
+                  <td>0</td>
+            </tr><tr>
+                  <th scope="row">17</th>
+                  <td>stations</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.047619047619047616</td>
+                  <td>0</td>
+                  <td>1</td>
+                  <td>0.602</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.029</td>
+                  <td>0</td>
+            </tr><tr>
+                  <th scope="row">18</th>
+                  <td>located</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.047619047619047616</td>
+                  <td>0</td>
+                  <td>1</td>
+                  <td>0.602</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.029</td>
+                  <td>0</td>
+            </tr><tr>
+                  <th scope="row">19</th>
+                  <td>different</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.047619047619047616</td>
+                  <td>0</td>
+                  <td>1</td>
+                  <td>0.602</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.029</td>
+                  <td>0</td>
+            </tr><tr>
+                  <th scope="row">20</th>
+                  <td>parts</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.047619047619047616</td>
+                  <td>0</td>
+                  <td>1</td>
+                  <td>0.602</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.029</td>
+                  <td>0</td>
+            </tr></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6" id="statsVocabSize"></div>
+      <div class="col-sm-6" id="statsNumExamples"></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h5>What do the abbreviations mean?</h5>
+    <p>For every token,
+      </p><ul>
+        <li><em>Term count</em> refers to the no. of times the token appears in a particular document</li>
+        <li><em>Term frequency</em> (TF) refers to term count divided by the no. of words in 
+          a particular document
+        </li>
+        <li><em>Document count</em> refers to the no. of documents in which this token appears</li>
+        <li><em>Document frequency</em> (DF) refers to document count divided by total no. of documents</li>
+        <li><em>Inverse document frequency</em> (IDF) refers to taking the inverse of DF, after which
+          a logarithmic function is applied
+        </li>
+      </ul>
+    <p></p>
+    <h5>Certain words are missing from the table</h5>
+    <p>Stopwords like <em>is</em>, <em>are</em> and <em>for</em> are removed.</p>
+  </div>
+
+  <div class="container">
+    <hr>
+    <div class="row col-sm-12">
+      <p>Theme from Bootstrap</p>
+    </div>
+    <div class="row col-sm-12">
+      <p>Maintained by <a href="https://raibosome.github.io/">Raimi</a>.</p>
+    </div>
+  </div>
+
+  <script src="./TF-IDF Demo_files/jquery-3.2.1.slim.min.js.download" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="./TF-IDF Demo_files/bootstrap.min.js.download" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script>
+
+  </script>
+
+
+<iframe id="YUyBbDlq" frameborder="0" src="./TF-IDF Demo_files/translateSandbox.html" style="width: 0px; height: 0px;"></iframe></body></html>
