@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="LevenshteinApp">
+<head>
+     <title>Levenshtein-Distanz</title>
+     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+     <script src="app.js"></script>
+</head>
+<body>
+
+<div class="container col-md-6 col-md-offset-3" ng-controller="LevenshteinCtrl">
+
+<div class="page-header">
+  <h2>Levenshtein distance</h2>
+</div>
+
+
+<h4>Demo 1 - Fruit search</h4>
+<p>Try searching a fruit from the following list [apple, banana, pear, lemon]: </p>
+
+<div ng-app="LevenshteinApp" ng-controller="LevenshteinCtrl"> <p>Word: <input type="text" ng-model="word" ng-change="find_match(word)"></input></p> <p ng-if="best_match"><span style="color:red;">Did you mean:</span> <i style="color:blue;"><strong>{{best_match}}</strong>?</i> (edit distance of {{best_val}})</p>
+
+For example, try typing "lemon" in the box below, you'll notice after "le..." that the word *apple* is shown (because it also has the part "le" in it), but after "lem", the suggestion will switch to *lemon*, because the edit distance is smaller.
+
+<hr>
+
+<h4>Demo 2 - full matrix</h4>
+
+<p>Here's a full matrix view of what happens when calculating the Levenshtein distance. Just edit the words and the matrix will change accordingly:</p>
+
+<p>Word 1: <input type="text" ng-model="word1" ng-change="lev_matrix()"></input></p>
+<p>Word 2: <input type="text" ng-model="word2" ng-change="lev_matrix()"></input></p>
+<p>Levenshtein-Distance: {{ matrix[word1.length][word2.length] }}</p>
+
+<div class="col-md-10">
+      <hr>
+      <h3>Comparison of words:</h3>
+      <table class="table table-hover">
+        <tr>
+          <td></td>
+          <td></td>
+          <td ng-repeat="letter in word2 track by $index"><strong>{{letter}}</strong></td>
+        </tr>
+        <tr ng-repeat="line in matrix ">
+          <td><strong>{{(" " + word1).substring($index, $index+1)}}</strong></td>
+          <td ng-repeat="item in line track by $index"><div ng-if="$index != word2.length || $parent.$index != word1.length">{{item}}</div><strong ng-if="$index == word2.length && $parent.$index == word1.length">{{item}}</strong></td>
+        </tr>
+      </table>
+</div>
+</div> <!-- /container -->
+
+</body>
+</html>
