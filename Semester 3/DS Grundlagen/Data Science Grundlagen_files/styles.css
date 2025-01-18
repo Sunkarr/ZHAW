@@ -1,0 +1,23 @@
+.lcol{font-weight:bold;text-align: left;}
+.rcol{border-left: 2px solid #c0c0c0;text-align: right;}
+.lalign {text-align: left}
+.ralign {text-align: right}
+.boldralign{font-weight:bold;text-align:right}
+.malign {vertical-align: middle}
+
+
+ol {
+    display: inline-block;
+    text-align: left;
+  }
+
+ul {
+    display: inline-block;
+    text-align: left;
+  }
+
+tr:nth-child(even) {background-color: #eee;}
+
+tbody tr:hover {background-color: #d4e6f9;}
+
+tfoot tr:hover {background-color: #d4e6f9;}
