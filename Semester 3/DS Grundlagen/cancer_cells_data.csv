@@ -1,0 +1,5 @@
+﻿Spalte,Name,Diagnose,Radius,Textur,Flaeche,Ebenmaessigkeit,Konkavitaet,Risiko
+Datentyp,"String, not null","Character, not null","Float, not null","Float, not null","Float, not null","Float, not null","Float, not null","String, not null"
+Wertebereich (Min),-,"{M, B}",-20.31,143.5,0.04996,0.757,0.007882,"{Gerin, Mittel, Hoch}"
+Wertebereich (Max),-,"{M, B}",28.11,2501,0.09744,21.98,0.07895,"{Gerin, Mittel, Hoch}"
+Beschreibung,Name der Patientin/des Patienten: Name,der Diagnose: gutartig (B für benign)/bösartig (M für malignant),dem durchschnittlichen Radius der Zellen: Radius,einem Wert für die Beschaffenheit der Oberfläche: Textur,der durchschnittlichen Fläche der Zellen: Flaeche,"einem Wert, welcher die Ebenmässigkeit der Zellen beschreibt: Ebenmaessigkeit","einem Wert, welcher die Konkavität der Zellen beschreibt: Konkavitaet","der Einteilung in eine Risikogruppe der/des Patient:in, der/dem die entsprechende Probe entnommen wurde: Risiko"
