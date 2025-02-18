@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Black">
-    <option name="sdkName" value="DSP" />
+    <option name="sdkName" value="/opt/homebrew/anaconda3/envs/vdss" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="$USER_HOME$/miniconda3" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="/opt/homebrew/anaconda3/envs/vdss" project-jdk-type="Python SDK" />
   <component name="PyCharmDSProjectLayout">
     <option name="id" value="JupyterRightHiddenStructureLayout" />
   </component>
