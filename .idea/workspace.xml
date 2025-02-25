@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5646578-6a99-4bff-9165-9baf01372fd9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Semester 4/Numerik/W2/P2.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Semester 4/Data Engineering 2/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/Semester 4/Dat Eng 2/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Semester 4/Data Engineering 2/.idea/Data Engineering 2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Semester 4/Dat Eng 2/.idea/Data Engineering 2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Semester 4/Data Engineering 2/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Semester 4/Dat Eng 2/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Semester 4/Data Engineering 2/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Semester 4/Dat Eng 2/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Semester 4/Data Engineering 2/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Semester 4/Dat Eng 2/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Semester 4/Data Engineering 2/DE2_Lab01/DE2_Lab01.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Semester 4/Dat Eng 2/DE2_Lab01/DE2_Lab01.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Semester 4/Data Engineering 2/DE2_Lab01/DE2_Lab01.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Semester 4/Dat Eng 2/DE2_Lab01/DE2_Lab01.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Semester 4/Numerik/W2/V2.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Semester 4/Numerik/W2/V2.ipynb" afterDir="false" />
-    </list>
+    <list default="true" id="f5646578-6a99-4bff-9165-9baf01372fd9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
