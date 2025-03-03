@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5646578-6a99-4bff-9165-9baf01372fd9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Semester 4/Numerik/W03/V3.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Semester 4/Numerik/W1/P1.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Semester 4/Numerik/W01/P1.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Semester 4/Numerik/W1/V1.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Semester 4/Numerik/W01/V1.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Semester 4/Numerik/W1/w1.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Semester 4/Numerik/W01/w1.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Semester 4/Numerik/W2/P2.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Semester 4/Numerik/W02/P2.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Semester 4/Numerik/W2/V2.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Semester 4/Numerik/W02/V2.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,8 +89,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-PY-243.21565.199" />
-        <option value="bundled-python-sdk-cab1f2013843-4ae2d6a61b08-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.21565.199" />
+        <option value="bundled-python-sdk-a8e928d85084-fab4200a9dfa-com.jetbrains.pycharm.ds.sharedIndexes.bundled-DS-243.22562.236" />
       </set>
     </attachedChunks>
   </component>
@@ -115,6 +120,7 @@
       <workItem from="1740399251693" duration="2000" />
       <workItem from="1740816792450" duration="791000" />
       <workItem from="1740820011058" duration="97000" />
+      <workItem from="1740833264551" duration="12000" />
     </task>
     <servers />
   </component>
