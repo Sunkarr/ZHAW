@@ -1,0 +1,228 @@
+library(readr)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+
+
+# set working directory to current file location
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+
+
+# Korrigieren der csv Datei
+
+## Lese die CSV als Textzeilen ein
+lines <- readLines("ugz_luftqualitaetsmessung_seit-2012.csv")
+
+## Ersetze in allen Zeilen das fehlerhafte Muster durch einen Zeilenumbruch
+corrected_lines <- gsub("(\\d{2}\\.\\d{2})(\\d{4}-\\d{2}-\\d{2})", "\\1\n\\2", lines)
+
+## Falls in einem Element mehrere Zeilen enthalten sind, splitte sie in separate Elemente
+fixed_lines <- unlist(strsplit(corrected_lines, "\n"))
+
+## Speichere die korrigierte Datei
+writeLines(fixed_lines, "corrected_data.csv")
+
+
+# Importieren der korrigierten Datei und Bereinigung des Tabellenformats
+
+## Using readr to import with all columns as character
+data <- read_csv("corrected_data.csv",
+                 col_names = FALSE,
+                 col_types = cols(.default = col_character()))
+
+
+## Extract and clean the first column
+standort <- data[1,] %>% unlist()|>
+  str_replace_all("Zürich ", "") |>   # Remove "Zürich "
+  tolower() |>                        # Convert to lowercase
+  str_replace_all("strasse", "")  |>  # Remove "strasse"
+  str_replace_all(c("ä" = "ae", "ö" = "oe", "ü" = "ue", "Ä" = "Ae", "Ö" = "Oe", "Ü" = "Ue")) # Replace umlauts
+
+## unique standort
+standort_unique <- unique(standort)
+
+einheiten <- data[4,] |>           # Extract the fourth row and convert to a vector
+  tolower() |>                      # Convert to lowercase
+  str_replace_all(">", "gt") |>     # Replace ">" with "gt"
+  replace_na("")                    # Replace NA with ""
+
+## Combine column names with units and rename first element to "datum"
+new_colnames <- paste(standort, einheiten, sep = "-") |>
+  replace(1, "datum")
+
+## Remove unnecessary rows (1-6)
+data <- data[-c(1:6),]
+
+## Insert new_rownames [,1]
+colnames(data) <- new_colnames
+
+## Pivot the data
+data_long <- data %>%
+  pivot_longer(
+    cols = -datum, # Keep the 'datum' column as is
+    names_to = c("standort", "variable"), # Split column names into 'location' and 'variable'
+    names_sep = "-" # Separate location and variable by minus
+  ) %>%
+  pivot_wider(
+    names_from = variable, # Use 'variable' to create new columns
+    values_from = value # Fill the new columns with 'value'
+  ) |>
+  mutate(across(everything(), ~na_if(., "NaN"))) # Replace "NaN" with NA
+
+## change data types
+data_long <- data_long |>
+  mutate(standort = factor(standort, levels = standort_unique)) |> # Change 'standort' to factor
+  mutate(across(3:15, as.numeric)) |> # Change columns 3 to 15 to numeric
+  mutate(datum = as.Date(datum, format = "%Y-%m-%d")) # Change 'datum' to date
+
+## data types data_long
+str(data_long)
+
+
+# Erweiterung des Datensatzes
+
+
+## Neue Spalten für Jahr, Monat und Wochentag hinzufügen
+data_long <- data_long |> 
+  mutate(datum = as.Date(datum)) |> 
+  mutate(
+    jahr = year(datum),
+    monat = factor(format(datum, "%b", locale = "de_DE.utf8"),
+                   levels = c("Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"),
+                   ordered = TRUE),
+    wochentag = factor(c("Mo", "Di", "Mi", "Do", "Fr", "Sa", "So")[wday(datum, week_start = 1)],
+                       levels = c("Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"),
+                       ordered = TRUE)
+  )
+
+## Kontrolle der neuen Spalten
+str(data_long)
+
+
+# Visualisierung
+
+## Plot 1
+
+'
+Stellen Sie in einem Scatterplot für den Standort Stampfenbachstrasse die Messgrössen
+Globalstrahlung (y-Achse) und die maximale Ozonkonzentration während einer Stunde (xAchse) dar. Legen Sie zudem einen Glätter in die Grafik. Schauen Sie das beide Achsen
+verständlich beschriftet sind und vergessen Sie die Bildunterschrift nicht. Ein Titel ist nicht
+notwendig.
+'
+
+data_long %>%
+  filter(standort == "stampfenbach") %>%
+  drop_na(o3_max_h1, strglo) %>%
+  ggplot(aes(x = o3_max_h1, y = strglo)) +
+  geom_point() +
+  geom_smooth() +
+  labs(
+    x = "Maximale Ozonkonzentration während einer Stunde [µg/m³]",
+    y = "Globalstrahlung [W/m²]",
+  )
+
+Bildunterschrift
+
+## Plot 2
+
+'
+Stellen Sie den Verlauf der Stickoxidkonzentration (NOx = NO + NO2) über den gesamten
+Zeitraum gemeinsam für die Standorte Schimmelstrasse und Heubeeribüel dar. Achten sie
+darauf, dass der zeitliche Verlauf der für beide Standorte gut erkennbar ist, beide Achsen
+und die Legende (innerhalb der Grafik plaziert) verständlich beschriftet sind und vergessen
+Sie die Bildunterschrift nicht. Die Grafik braucht keinen Titel.
+'
+
+data_long$nox <- data_long$no + data_long$no2
+data_long %>%
+  filter(standort == "schimmel" | standort == "heubeeribueel") %>%
+  ggplot(aes(x = datum, y = nox, color = standort)) +
+  geom_line() +
+  scale_color_manual(
+    values = c("schimmel" = "red", "heubeeribueel" = "blue"),
+    labels = c("schimmel" = "Schimmelstrasse", "heubeeribueel" = "Heubeeribüel")
+  ) +
+  labs(
+    x = "Datum",
+    y = "Stickoxidkonzentration (NO + NO2) [µg/m³]",
+    color = "Standort"
+  ) +
+  theme(legend.position = "bottom")
+
+Bildunterschrift
+
+## Plot 3
+
+'
+Stellen Sie die Streuung der PM10 Konzentration an der Rosengartenstrasse pro Wochentag
+dar. Schauen Sie, dass beide Achsen verständlich beschriftet sind und vergessen Sie die
+Bildunterschrift nicht. Die Grafik braucht keinen Titel.
+'
+
+data_long %>%
+  filter(standort == "rosengarten", !is.na(pm10)) %>%  # Remove rows with NA in pm10
+  ggplot(aes(x = wochentag, y = pm10)) +
+  geom_boxplot() +
+  labs(
+    x = "Wochentag",
+    y = "PM10 Konzentration [µg/m³]"
+  )
+
+Bildunterschrift
+
+## Plot 4
+
+'
+Stellen Sie den zeitlichen Verlauf der Stickoxidkonzentration an allen vier Stationen von 2012-
+2020 für jeden Monat dar. In der Abbildung sollte der mittlere Verlauf und die Streuung der
+Monate für alle Jahre ersichtlich sein. Schauen Sie, dass beide Achsen verständlich beschriftet
+sind und vergessen Sie die Bildunterschrift nicht. Die Grafik braucht keinen Titel.
+'
+
+data_long %>%
+  mutate(
+    year = lubridate::year(datum),
+    month = lubridate::month(datum, label = TRUE)
+  ) %>%
+  group_by(standort, month) %>%
+  summarise(
+    mean_nox = mean(nox, na.rm = TRUE),
+    sd_nox = sd(nox, na.rm = TRUE)
+  ) %>%
+  ggplot(aes(x = month, y = mean_nox, color = standort, group = standort)) +
+  geom_line() +
+  geom_ribbon(aes(ymin = mean_nox - sd_nox, ymax = mean_nox + sd_nox, fill = standort), alpha = 0.2) +
+  labs(
+    x = "Monat",
+    y = "Stickoxidkonzentration (NO + NO2) [µg/m³]",
+    color = "Standort",
+    fill = "Standort"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+Bildunterschrift
+
+
+data_long %>%
+  mutate(
+    year = year(datum),
+    month = month(datum, label = TRUE)
+  ) %>%
+  group_by(standort, month) %>%
+  summarise(
+    mean_nox = mean(nox, na.rm = TRUE),
+    sd_nox = sd(nox, na.rm = TRUE)
+  ) %>%
+  ggplot(aes(x = month, y = mean_nox, group = standort)) +
+  geom_line(color = "blue") +
+  geom_ribbon(aes(ymin = mean_nox - sd_nox, ymax = mean_nox + sd_nox), alpha = 0.2, fill = "lightblue") +
+  labs(
+    x = "Monat",
+    y = "Stickoxidkonzentration (NO + NO2) [µg/m³]"
+  ) +
+  facet_wrap(~standort, ncol = 2) +  # Create a 2x2 grid
+  theme_minimal() +
+  theme(legend.position = "none")  # Remove legend for clarity
+
+
