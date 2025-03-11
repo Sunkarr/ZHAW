@@ -1,3 +1,18 @@
+---
+title: "DSPM2 Praktikum 1"
+author: "Jonas Bratschi"
+format: pdf
+editor: visual
+output:
+  pdf_document:
+    toc: true
+    page_breaks: "before"
+---
+
+{{< pagebreak >}}
+
+```{r include=FALSE}
+
 library(readr)
 library(tidyr)
 library(dplyr)
@@ -77,9 +92,6 @@ data_long <- data_long |>
   mutate(across(3:15, as.numeric)) |> # Change columns 3 to 15 to numeric
   mutate(datum = as.Date(datum, format = "%Y-%m-%d")) # Change 'datum' to date
 
-## data types data_long
-str(data_long)
-
 
 # Erweiterung des Datensatzes
 
@@ -106,20 +118,15 @@ data_long <- data_long |>
     )
   )
 
-## Kontrolle der neuen Spalten
-str(data_long)
-
+```
 
 # Visualisierung
 
-## Plot 1
+## Aufgabe a)
 
-'
-Stellen Sie in einem Scatterplot für den Standort Stampfenbachstrasse die Messgrössen
-Globalstrahlung (y-Achse) und die maximale Ozonkonzentration während einer Stunde (xAchse) dar. Legen Sie zudem einen Glätter in die Grafik. Schauen Sie das beide Achsen
-verständlich beschriftet sind und vergessen Sie die Bildunterschrift nicht. Ein Titel ist nicht
-notwendig.
-'
+Stellen Sie in einem Scatterplot für den Standort Stampfenbachstrasse die Messgrössen Globalstrahlung (y-Achse) und die maximale Ozonkonzentration während einer Stunde (xAchse) dar. Legen Sie zudem einen Glätter in die Grafik. Schauen Sie das beide Achsen verständlich beschriftet sind und vergessen Sie die Bildunterschrift nicht. Ein Titel ist nicht notwendig.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 
 data_long %>%
   filter(standort == "stampfenbach") %>%
@@ -131,18 +138,15 @@ data_long %>%
     x = "Maximale Ozonkonzentration während einer Stunde [µg/m³]",
     y = "Globalstrahlung [W/m²]",
   )
+```
 
 Bildunterschrift
 
-## Plot 2
+## Aufgabe b)
 
-'
-Stellen Sie den Verlauf der Stickoxidkonzentration (NOx = NO + NO2) über den gesamten
-Zeitraum gemeinsam für die Standorte Schimmelstrasse und Heubeeribüel dar. Achten sie
-darauf, dass der zeitliche Verlauf der für beide Standorte gut erkennbar ist, beide Achsen
-und die Legende (innerhalb der Grafik plaziert) verständlich beschriftet sind und vergessen
-Sie die Bildunterschrift nicht. Die Grafik braucht keinen Titel.
-'
+Stellen Sie den Verlauf der Stickoxidkonzentration (NOx = NO + NO2) über den gesamten Zeitraum gemeinsam für die Standorte Schimmelstrasse und Heubeeribüel dar. Achten sie darauf, dass der zeitliche Verlauf der für beide Standorte gut erkennbar ist, beide Achsen und die Legende (innerhalb der Grafik plaziert) verständlich beschriftet sind und vergessen Sie die Bildunterschrift nicht. Die Grafik braucht keinen Titel.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 
 data_long$nox <- data_long$no + data_long$no2
 data_long %>%
@@ -159,16 +163,15 @@ data_long %>%
     color = "Standort"
   ) +
   theme(legend.position = "bottom")
+```
 
 Bildunterschrift
 
-## Plot 3
+## Aufgabe c)
 
-'
-Stellen Sie die Streuung der PM10 Konzentration an der Rosengartenstrasse pro Wochentag
-dar. Schauen Sie, dass beide Achsen verständlich beschriftet sind und vergessen Sie die
-Bildunterschrift nicht. Die Grafik braucht keinen Titel.
-'
+Stellen Sie die Streuung der PM10 Konzentration an der Rosengartenstrasse pro Wochentag dar. Schauen Sie, dass beide Achsen verständlich beschriftet sind und vergessen Sie die Bildunterschrift nicht. Die Grafik braucht keinen Titel.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 
 data_long %>%
   filter(standort == "rosengarten", !is.na(pm10)) %>%
@@ -180,16 +183,15 @@ data_long %>%
     y = "PM10 Konzentration [µg/m³] (log-Skala)"
   )
 
-Bildunterschrift
+```
 
-## Plot 4
+Bildunterschrift (Achtun logarithmiert!!!)
 
-'
-Stellen Sie den zeitlichen Verlauf der Stickoxidkonzentration an allen vier Stationen von 2012-
-2020 für jeden Monat dar. In der Abbildung sollte der mittlere Verlauf und die Streuung der
-Monate für alle Jahre ersichtlich sein. Schauen Sie, dass beide Achsen verständlich beschriftet
-sind und vergessen Sie die Bildunterschrift nicht. Die Grafik braucht keinen Titel.
-'
+## Aufgabe d)
+
+Stellen Sie den zeitlichen Verlauf der Stickoxidkonzentration an allen vier Stationen von 2012- 2020 für jeden Monat dar. In der Abbildung sollte der mittlere Verlauf und die Streuung der Monate für alle Jahre ersichtlich sein. Schauen Sie, dass beide Achsen verständlich beschriftet sind und vergessen Sie die Bildunterschrift nicht. Die Grafik braucht keinen Titel.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 
 data_long %>%
   mutate(
@@ -226,7 +228,6 @@ data_long %>%
     axis.text.x = element_text(angle = 0, hjust = 0.5)
   )
 
+```
 
-
-
-
+Bildunterschrift
