@@ -2,6 +2,8 @@ library(readr)
 library(tidyr)
 library(dplyr)
 library(ggplot2)
+library(stringr)
+library(lubridate)
 
 
 # set working directory to current file location
@@ -83,16 +85,25 @@ str(data_long)
 
 
 ## Neue Spalten für Jahr, Monat und Wochentag hinzufügen
+monate <- c("Jan", "Feb", "Mar", "Apr", "Mai", "Jun", 
+            "Jul", "Aug", "Sep", "Okt", "Nov", "Dez")
+wochentage <- c("Mo", "Di", "Mi", "Do", "Fr", "Sa", "So")
+
+## Datentransformation
 data_long <- data_long |> 
-  mutate(datum = as.Date(datum)) |> 
   mutate(
+    datum = as.Date(datum),
     jahr = year(datum),
-    monat = factor(format(datum, "%b", locale = "de_DE.utf8"),
-                   levels = c("Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"),
-                   ordered = TRUE),
-    wochentag = factor(c("Mo", "Di", "Mi", "Do", "Fr", "Sa", "So")[wday(datum, week_start = 1)],
-                       levels = c("Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"),
-                       ordered = TRUE)
+    monat = factor(
+      monate[month(datum)],
+      levels = monate,
+      ordered = TRUE
+    ),
+    wochentag = factor(
+      wochentage[wday(datum, week_start = 1)],
+      levels = wochentage,
+      ordered = TRUE
+    )
   )
 
 ## Kontrolle der neuen Spalten
@@ -139,7 +150,7 @@ data_long %>%
   ggplot(aes(x = datum, y = nox, color = standort)) +
   geom_line() +
   scale_color_manual(
-    values = c("schimmel" = "red", "heubeeribueel" = "blue"),
+    values = c("schimmel" = "brown3", "heubeeribueel" = "lightskyblue"),
     labels = c("schimmel" = "Schimmelstrasse", "heubeeribueel" = "Heubeeribüel")
   ) +
   labs(
@@ -160,12 +171,13 @@ Bildunterschrift nicht. Die Grafik braucht keinen Titel.
 '
 
 data_long %>%
-  filter(standort == "rosengarten", !is.na(pm10)) %>%  # Remove rows with NA in pm10
+  filter(standort == "rosengarten", !is.na(pm10)) %>%
   ggplot(aes(x = wochentag, y = pm10)) +
   geom_boxplot() +
+  scale_y_log10() +  # fügt logarithmische Skala hinzu
   labs(
     x = "Wochentag",
-    y = "PM10 Konzentration [µg/m³]"
+    y = "PM10 Konzentration [µg/m³] (log-Skala)"
   )
 
 Bildunterschrift
@@ -181,48 +193,40 @@ sind und vergessen Sie die Bildunterschrift nicht. Die Grafik braucht keinen Tit
 
 data_long %>%
   mutate(
-    year = lubridate::year(datum),
-    month = lubridate::month(datum, label = TRUE)
+    datum = as.Date(datum),
+    standort = str_to_title(standort)
   ) %>%
-  group_by(standort, month) %>%
-  summarise(
-    mean_nox = mean(nox, na.rm = TRUE),
-    sd_nox = sd(nox, na.rm = TRUE)
-  ) %>%
-  ggplot(aes(x = month, y = mean_nox, color = standort, group = standort)) +
-  geom_line() +
-  geom_ribbon(aes(ymin = mean_nox - sd_nox, ymax = mean_nox + sd_nox, fill = standort), alpha = 0.2) +
-  labs(
-    x = "Monat",
-    y = "Stickoxidkonzentration (NO + NO2) [µg/m³]",
-    color = "Standort",
-    fill = "Standort"
+  filter(datum >= as.Date("2014-01-01") & datum <= as.Date("2020-12-31")) %>%
+  ggplot(aes(x = datum, y = nox, fill = standort)) +  # fill = standort wieder hinzugefügt
+  # Boxplots für jeden Monat und Standort
+  geom_boxplot(
+    aes(group = format(datum, "%Y-%m")), 
+    outlier.size = 0.5, 
+    alpha = 0.7
   ) +
-  theme_minimal() +
-  theme(legend.position = "bottom")
-
-Bildunterschrift
-
-
-data_long %>%
-  mutate(
-    year = year(datum),
-    month = month(datum, label = TRUE)
-  ) %>%
-  group_by(standort, month) %>%
-  summarise(
-    mean_nox = mean(nox, na.rm = TRUE),
-    sd_nox = sd(nox, na.rm = TRUE)
-  ) %>%
-  ggplot(aes(x = month, y = mean_nox, group = standort)) +
-  geom_line(color = "blue") +
-  geom_ribbon(aes(ymin = mean_nox - sd_nox, ymax = mean_nox + sd_nox), alpha = 0.2, fill = "lightblue") +
+  # Achsenbeschriftungen
   labs(
-    x = "Monat",
-    y = "Stickoxidkonzentration (NO + NO2) [µg/m³]"
+    x = "Jahr",
+    y = "Stickoxidkonzentration (NO + NO2) [µg/m³] (log-Skala)"
   ) +
-  facet_wrap(~standort, ncol = 2) +  # Create a 2x2 grid
+  # Zeitachse formatieren - nur Jahreszahlen
+  scale_x_date(
+    date_breaks = "1 year",
+    date_labels = "%Y",
+    expand = expansion(mult = 0.02)
+  ) +
+  # Logarithmische y-Achse
+  scale_y_log10() +
+  # Facetten für jeden Standort untereinander
+  facet_wrap(~standort, ncol = 1) +
+  # Minimalistisches Theme
   theme_minimal() +
-  theme(legend.position = "none")  # Remove legend for clarity
+  theme(
+    legend.position = "none",  # Legende ausgeblendet
+    axis.text.x = element_text(angle = 0, hjust = 0.5)
+  )
+
+
+
 
 
