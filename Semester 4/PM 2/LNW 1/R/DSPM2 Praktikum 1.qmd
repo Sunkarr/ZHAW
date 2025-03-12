@@ -19,10 +19,11 @@ library(dplyr)
 library(ggplot2)
 library(stringr)
 library(lubridate)
+library(here)
 
 
-# set working directory to current file location
-setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+# Use here() to construct paths relative to the project root
+data_path <- here("ugz_luftqualitaetsmessung_seit-2012.csv")
 
 
 # Korrigieren der csv Datei
@@ -120,52 +121,73 @@ data_long <- data_long |>
 
 ```
 
-# Visualisierung
+# Visualisierungen
 
 ## Aufgabe a)
 
 Stellen Sie in einem Scatterplot für den Standort Stampfenbachstrasse die Messgrössen Globalstrahlung (y-Achse) und die maximale Ozonkonzentration während einer Stunde (xAchse) dar. Legen Sie zudem einen Glätter in die Grafik. Schauen Sie das beide Achsen verständlich beschriftet sind und vergessen Sie die Bildunterschrift nicht. Ein Titel ist nicht notwendig.
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-height: 5.85
+#| fig-width: 8
 
 data_long %>%
   filter(standort == "stampfenbach") %>%
   drop_na(o3_max_h1, strglo) %>%
   ggplot(aes(x = o3_max_h1, y = strglo)) +
-  geom_point() +
-  geom_smooth() +
+  geom_point(alpha = 0.3) +
+  geom_smooth(aes(color = "GAM-Glätter"), se = FALSE) +  # se = FALSE entfernt das Konfidenzintervall
   labs(
     x = "Maximale Ozonkonzentration während einer Stunde [µg/m³]",
     y = "Globalstrahlung [W/m²]",
-  )
+    color = ""  # Entfernt den Titel der Farblegende
+  ) +
+  scale_color_manual(values = c("GAM-Glätter" = "blue")) +
+  theme(legend.position = "bottom")
 ```
 
 Bildunterschrift
+
+{{< pagebreak >}}
 
 ## Aufgabe b)
 
 Stellen Sie den Verlauf der Stickoxidkonzentration (NOx = NO + NO2) über den gesamten Zeitraum gemeinsam für die Standorte Schimmelstrasse und Heubeeribüel dar. Achten sie darauf, dass der zeitliche Verlauf der für beide Standorte gut erkennbar ist, beide Achsen und die Legende (innerhalb der Grafik plaziert) verständlich beschriftet sind und vergessen Sie die Bildunterschrift nicht. Die Grafik braucht keinen Titel.
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-height: 5.85
+#| fig-width: 8
 
 data_long$nox <- data_long$no + data_long$no2
 data_long %>%
-  filter(standort == "schimmel" | standort == "heubeeribueel") %>%
+  filter(
+    standort == "schimmel" | standort == "heubeeribueel",
+    nox > 0  # Filter für positive Werte wegen log-Skala
+  ) %>%
   ggplot(aes(x = datum, y = nox, color = standort)) +
   geom_line() +
+  scale_y_log10() +  # Logarithmische y-Achse hinzugefügt
   scale_color_manual(
-    values = c("schimmel" = "brown3", "heubeeribueel" = "lightskyblue"),
+    values = c("schimmel" = "brown3", "heubeeribueel" = "blue3"),
     labels = c("schimmel" = "Schimmelstrasse", "heubeeribueel" = "Heubeeribüel")
   ) +
   labs(
     x = "Datum",
-    y = "Stickoxidkonzentration (NO + NO2) [µg/m³]",
+    y = "Stickoxidkonzentration (NO + NO2) [µg/m³] (log-Skala)",
     color = "Standort"
   ) +
   theme(legend.position = "bottom")
 ```
 
 Bildunterschrift
+
+{{< pagebreak >}}
 
 ## Aufgabe c)
 
@@ -187,47 +209,52 @@ data_long %>%
 
 Bildunterschrift (Achtun logarithmiert!!!)
 
+{{< pagebreak >}}
+
 ## Aufgabe d)
 
 Stellen Sie den zeitlichen Verlauf der Stickoxidkonzentration an allen vier Stationen von 2012- 2020 für jeden Monat dar. In der Abbildung sollte der mittlere Verlauf und die Streuung der Monate für alle Jahre ersichtlich sein. Schauen Sie, dass beide Achsen verständlich beschriftet sind und vergessen Sie die Bildunterschrift nicht. Die Grafik braucht keinen Titel.
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-height: 11.69
+#| fig-width: 8
 
 data_long %>%
   mutate(
     datum = as.Date(datum),
-    standort = str_to_title(standort)
+    standort = str_to_title(standort),
+    nox = ifelse(nox <= 0, NA, nox)  # Ersetze Werte <= 0 mit NA
   ) %>%
-  filter(datum >= as.Date("2014-01-01") & datum <= as.Date("2020-12-31")) %>%
-  ggplot(aes(x = datum, y = nox, fill = standort)) +  # fill = standort wieder hinzugefügt
-  # Boxplots für jeden Monat und Standort
+  filter(
+    datum >= as.Date("2014-01-01") & 
+    datum <= as.Date("2020-12-31"),
+    !is.na(nox)  # Filtere NA-Werte
+  ) %>%
+  ggplot(aes(x = datum, y = nox, fill = standort)) +
   geom_boxplot(
     aes(group = format(datum, "%Y-%m")), 
     outlier.size = 0.5, 
     alpha = 0.7
   ) +
-  # Achsenbeschriftungen
   labs(
     x = "Jahr",
     y = "Stickoxidkonzentration (NO + NO2) [µg/m³] (log-Skala)"
   ) +
-  # Zeitachse formatieren - nur Jahreszahlen
   scale_x_date(
     date_breaks = "1 year",
     date_labels = "%Y",
     expand = expansion(mult = 0.02)
   ) +
-  # Logarithmische y-Achse
   scale_y_log10() +
-  # Facetten für jeden Standort untereinander
   facet_wrap(~standort, ncol = 1) +
-  # Minimalistisches Theme
   theme_minimal() +
   theme(
-    legend.position = "none",  # Legende ausgeblendet
+    legend.position = "none",
     axis.text.x = element_text(angle = 0, hjust = 0.5)
   )
-
 ```
 
-Bildunterschrift
+Bildunterschrift (Achtun logarithmiert!!!)

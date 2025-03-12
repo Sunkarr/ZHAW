@@ -134,6 +134,17 @@ data_long %>%
 
 Bildunterschrift
 
+data_long %>%
+  filter(standort == "stampfenbach") %>%
+  drop_na(o3_max_h1, strglo) %>%
+  ggplot(aes(x = o3_max_h1, y = strglo)) +
+  geom_point(alpha = 0.3) +  # Added alpha parameter for transparency
+  geom_smooth() +
+  labs(
+    x = "Maximale Ozonkonzentration während einer Stunde [µg/m³]",
+    y = "Globalstrahlung [W/m²]",
+  )
+
 ## Plot 2
 
 '
