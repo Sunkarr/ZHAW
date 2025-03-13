@@ -185,7 +185,7 @@ data_long %>%
   theme(legend.position = "bottom")
 ```
 
-Zeitliche Entwicklung der Stickoxidkonzentration (NO + NO~2~) \[µg/m³\] auf einer logarithmischen Skala an den Messstandorten Schimmelstrasse (rot) und Heubeeribüel (blau) im Zeitraum von Januar 2012 bis Oktober 2020. Die Y-Achse wurde logarithmiert, um den Verlauf sowie die zyklischen Wiederholungen deutlicher darzustellen. Dadurch werden Ausreisser in den niedrigen und hohen Bereichen der Grafik weniger stark hervorgehoben.
+Zeitliche Entwicklung der Stickoxidkonzentration (NO + NO~2~) \[µg/m³\] auf einer logarithmischen Skala an den Messstandorten Schimmelstrasse (rot) und Heubeeribüel (blau) im Zeitraum von Januar 2012 bis Oktober 2020. Die Y-Achse wurde logarithmiert, um den Verlauf sowie die zyklischen Wiederholungen deutlicher darzustellen. Dadurch werden Ausreisser im hohen Bereich der Grafik weniger stark hervorgehoben.
 
 {{< pagebreak >}}
 
