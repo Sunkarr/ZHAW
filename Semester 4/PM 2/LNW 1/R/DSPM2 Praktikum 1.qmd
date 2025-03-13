@@ -141,7 +141,7 @@ data_long %>%
   geom_point(alpha = 0.3) +
   geom_smooth(aes(color = "GAM-Glätter"), se = FALSE) +  # se = FALSE entfernt das Konfidenzintervall
   labs(
-    x = "Maximale Ozonkonzentration während einer Stunde [µg/m³]",
+    x = "Höchstes Stundenmittel Ozonkonzentration [µg/m³]",
     y = "Globalstrahlung [W/m²]",
     color = ""  # Entfernt den Titel der Farblegende
   ) +
@@ -149,7 +149,7 @@ data_long %>%
   theme(legend.position = "bottom")
 ```
 
-Bildunterschrift
+Die Grafik zeigt die Beziehung zwischen der maximalen Ozonkonzentration \[µg/m³\] (höchstes Stundenmittel) und der Globalstrahlung \[W/m²\] am Standort Stampfenbachstrasse. Gemessen wurde im Zeitraum von Januar 2012 bis Oktober 2020. Ein GAM-Glätter (blau) visualisiert den Trend. Die Datenpunkte sind leicht transparent um Häuffungen besser erkennbar zu machen.
 
 {{< pagebreak >}}
 
@@ -185,7 +185,7 @@ data_long %>%
   theme(legend.position = "bottom")
 ```
 
-Bildunterschrift
+Zeitliche Entwicklung der Stickoxidkonzentration (NO + NO~2~) \[µg/m³\] auf einer logarithmischen Skala an den Messstandorten Schimmelstrasse (rot) und Heubeeribüel (blau) im Zeitraum von Januar 2012 bis Oktober 2020. Die Y-Achse wurde logarithmiert, um den Verlauf sowie die zyklischen Wiederholungen deutlicher darzustellen. Dadurch werden Ausreisser in den niedrigen und hohen Bereichen der Grafik weniger stark hervorgehoben.
 
 {{< pagebreak >}}
 
@@ -207,7 +207,7 @@ data_long %>%
 
 ```
 
-Bildunterschrift (Achtun logarithmiert!!!)
+Boxplot der Feinstaub-Konzentration (PM10) \[µg/m³\] auf einer logarithmischen Skala, aufgeteilt nach Wochentagen (Mo–So). Die Grafik zeigt die Verteilung der Feinstaubbelastung über die Woche hinweg am Standort Rosengartenstrasse. Die Y-Achse wurde logarithmiert, um die Verteilung der Feinstaub-Konzentration (PM10) über die Zeit besser darzustellen. Dadurch werden die Positionen und Grössen des Medians sowie des Interquartilsbereichs (IQR) deutlicher sichtbar, was die Interpretation der Daten erleichtert.
 
 {{< pagebreak >}}
 
@@ -219,7 +219,7 @@ Stellen Sie den zeitlichen Verlauf der Stickoxidkonzentration an allen vier Stat
 #| echo: false
 #| warning: false
 #| message: false
-#| fig-height: 11.69
+#| fig-height: 7
 #| fig-width: 8
 
 data_long %>%
@@ -257,4 +257,16 @@ data_long %>%
   )
 ```
 
-Bildunterschrift (Achtun logarithmiert!!!)
+Zeitliche Entwicklung der Stickoxidkonzentration (NO + NO~2~) \[µg/m³\] auf einer logarithmischen Skala für die Messstandorte Heubeeribüel, Rosengartenstrasse, Schimmelstrasse und Stampfenbachstrasse im Zeitraum von Januar 2014 bis Oktober 2020. Die Boxplots zeigen die monatliche Verteilung der Konzentrationen. Die Y-Achse wurde logarithmiert, um die Verteilung der Stickoxidkonzentrationen (NO + NO~2~) über die Zeit besser darzustellen. Dadurch werden die Positionen und Grössen des Medians sowie des Interquartilsbereichs (IQR) deutlicher sichtbar, was die Interpretation der Daten erleichtert.
+
+{{< pagebreak >}}
+
+## Quelle
+
+Im Rahmen dieser Projektarbeit wurden Daten der Luftqualitätsmessungen der Stadt Zürich verwendet. Diese Daten wurden im Rahmen von **Open Government Data (OGD)** bereitgestellt und umfassen Messungen von Luftschadstoffen und meteorologischen Grössen an verschiedenen Standorten in der Stadt Zürich. Die Daten decken den Zeitraum vom **1. Januar 2012 bis zum 31. Oktober 2020** ab.
+
+Detaillierte Informationen zu den Messgrössen und Attributen des Datensatzes sind auf den folgenden Webseiten verfügbar:
+
+-   <https://data.stadt-zuerich.ch/dataset/luftqualitaet-historisierte-messungen>
+
+-   <https://data.stadt-zuerich.ch/dataset/ugz_luftschadstoffmessung_tageswerte/download/uzg_ogd_metadaten.json>
