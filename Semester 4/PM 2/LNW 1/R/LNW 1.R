@@ -38,10 +38,12 @@ standort <- data[1,] %>% unlist()|>
   str_replace_all("Zürich ", "") |>   # Remove "Zürich "
   tolower() |>                        # Convert to lowercase
   str_replace_all("strasse", "")  |>  # Remove "strasse"
-  str_replace_all(c("ä" = "ae", "ö" = "oe", "ü" = "ue", "Ä" = "Ae", "Ö" = "Oe", "Ü" = "Ue")) # Replace umlauts
+  str_replace_all(c("ä" = "ae", "ö" = "oe", "ü" = "ue", "Ä" = "Ae", "Ö" = "Oe", "Ü" = "Ue")) |> # Replace umlauts
+  unique()                           # Keep only unique values
 
 ## unique standort
-standort_unique <- unique(standort)
+standort_unique <- unique(standort[-1])
+
 
 einheiten <- data[4,] |>           # Extract the fourth row and convert to a vector
   tolower() |>                      # Convert to lowercase

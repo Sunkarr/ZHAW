@@ -19,11 +19,6 @@ library(dplyr)
 library(ggplot2)
 library(stringr)
 library(lubridate)
-library(here)
-
-
-# Use here() to construct paths relative to the project root
-data_path <- here("ugz_luftqualitaetsmessung_seit-2012.csv")
 
 
 # Korrigieren der csv Datei
@@ -32,9 +27,10 @@ data_path <- here("ugz_luftqualitaetsmessung_seit-2012.csv")
 lines <- readLines("ugz_luftqualitaetsmessung_seit-2012.csv")
 
 ## Ersetze in allen Zeilen das fehlerhafte Muster durch einen Zeilenumbruch
+## Sucht nach dem Muster Zahl (xx.xx) und Datum (JJJJ-MM-DD) und fügt dazwischen einen Absatz ein
 corrected_lines <- gsub("(\\d{2}\\.\\d{2})(\\d{4}-\\d{2}-\\d{2})", "\\1\n\\2", lines)
 
-## Falls in einem Element mehrere Zeilen enthalten sind, splitte sie in separate Elemente
+## Falls in einem Element mehrere Zeilen enthalten sind, splitte sie in separate Elemente und erstelle eine Liste
 fixed_lines <- unlist(strsplit(corrected_lines, "\n"))
 
 ## Speichere die korrigierte Datei
@@ -56,8 +52,9 @@ standort <- data[1,] %>% unlist()|>
   str_replace_all("strasse", "")  |>  # Remove "strasse"
   str_replace_all(c("ä" = "ae", "ö" = "oe", "ü" = "ue", "Ä" = "Ae", "Ö" = "Oe", "Ü" = "Ue")) # Replace umlauts
 
-## unique standort
-standort_unique <- unique(standort)
+## Check unique standort (without first element "date")
+standort_unique <- unique(standort[-1])
+  
 
 einheiten <- data[4,] |>           # Extract the fourth row and convert to a vector
   tolower() |>                      # Convert to lowercase
@@ -94,6 +91,10 @@ data_long <- data_long |>
   mutate(datum = as.Date(datum, format = "%Y-%m-%d")) # Change 'datum' to date
 
 
+## Check datatypes
+str(data_long)
+
+
 # Erweiterung des Datensatzes
 
 
@@ -105,21 +106,31 @@ wochentage <- c("Mo", "Di", "Mi", "Do", "Fr", "Sa", "So")
 ## Datentransformation
 data_long <- data_long |> 
   mutate(
-    datum = as.Date(datum),
-    jahr = year(datum),
+    datum = as.Date(datum), # Die Spalte datum wird in ein echtes Datumsobjekt umgewandelt.
+    jahr = year(datum), # Aus dem Datum wird das Jahr extrahiert und in einer neuen Spalte jahr gespeichert.
     monat = factor(
       monate[month(datum)],
       levels = monate,
       ordered = TRUE
-    ),
+    ), # Monat wird extrahiert als nummer abgespeichert und mit dem entsprechenden element aus dem Vektor monate angereichert
     wochentag = factor(
       wochentage[wday(datum, week_start = 1)],
       levels = wochentage,
       ordered = TRUE
     )
-  )
+  ) # Wochentag wird extrahiert als nummer abgespeichert und mit dem entsprechenden element aus dem Vektor wochentage angereichert
+
+str(data_long)
 
 ```
+
+# Video
+
+Link zum Video:
+
+[Meeting with Bratschi Jonas (bratsjon)-20250315_174637-Meeting Recording.mp4](https://zhaw-my.sharepoint.com/:v:/g/personal/bratsjon_students_zhaw_ch/Eb7rGeENQYFHleXuQVGoLtkB-pkKR27RZxZrgd6hyku1cA?e=ZfTUm2&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D)
+
+{{< pagebreak >}}
 
 # Visualisierungen
 
