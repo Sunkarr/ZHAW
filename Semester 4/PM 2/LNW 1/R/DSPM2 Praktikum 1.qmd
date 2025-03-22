@@ -154,13 +154,15 @@ data_long %>%
   labs(
     x = "Höchstes Stundenmittel Ozonkonzentration [µg/m³]",
     y = "Globalstrahlung [W/m²]",
-    color = ""  # Entfernt den Titel der Farblegende
+    caption = "Abb. 1: Zusammenhang zwischen maximaler Ozonkonzentration und Globalstrahlung mit Glätter",
+  color = ""  # Entfernt den Titel der Farblegende
   ) +
   scale_color_manual(values = c("GAM-Glätter" = "blue")) +
-  theme(legend.position = "bottom")
+  theme(
+    legend.position = "bottom",
+  plot.caption = element_text(size = 8, hjust = 0.5)  # Schriftgröße kleiner und zentriert
+  )
 ```
-
-Die Grafik zeigt die Beziehung zwischen der maximalen Ozonkonzentration \[µg/m³\] (höchstes Stundenmittel) und der Globalstrahlung \[W/m²\] am Standort Stampfenbachstrasse. Gemessen wurde im Zeitraum von Januar 2012 bis Oktober 2020. Ein GAM-Glätter (blau) visualisiert den Trend. Die Datenpunkte sind leicht transparent um Häuffungen besser erkennbar zu machen.
 
 {{< pagebreak >}}
 
@@ -191,12 +193,14 @@ data_long %>%
   labs(
     x = "Datum",
     y = "Stickoxidkonzentration (NO + NO2) [µg/m³] (log-Skala)",
+    caption = "Abb. 2: Zeitlicher Verlauf der Stickoxidkonzentration von 2012-2020 auf einer logarithmischen Skala",
     color = "Standort"
   ) +
-  theme(legend.position = "bottom")
+  theme(
+    legend.position = "bottom",
+  plot.caption = element_text(size = 8, hjust = 0.5)  # Schriftgröße kleiner und zentriert
+  )
 ```
-
-Zeitliche Entwicklung der Stickoxidkonzentration (NO + NO~2~) \[µg/m³\] auf einer logarithmischen Skala an den Messstandorten Schimmelstrasse (rot) und Heubeeribüel (blau) im Zeitraum von Januar 2012 bis Oktober 2020. Die Y-Achse wurde logarithmiert, um den Verlauf sowie die zyklischen Wiederholungen deutlicher darzustellen. Dadurch werden Ausreisser im hohen Bereich der Grafik weniger stark hervorgehoben.
 
 {{< pagebreak >}}
 
@@ -213,12 +217,15 @@ data_long %>%
   scale_y_log10() +  # fügt logarithmische Skala hinzu
   labs(
     x = "Wochentag",
-    y = "PM10 Konzentration [µg/m³] (log-Skala)"
+    y = "PM10 Konzentration [µg/m³] (log-Skala)",
+    caption = "Abb. 3: Boxplots der Feinstaubkonzentration nach Wochentagen auf einer logarithmischen Skala"
+  )+
+  theme(
+    legend.position = "bottom",
+  plot.caption = element_text(size = 8, hjust = 0.5)  # Schriftgröße kleiner und zentriert
   )
 
 ```
-
-Boxplot der Feinstaub-Konzentration (PM10) \[µg/m³\] auf einer logarithmischen Skala, aufgeteilt nach Wochentagen (Mo–So). Die Grafik zeigt die Verteilung der Feinstaubbelastung über die Woche hinweg am Standort Rosengartenstrasse. Die Y-Achse wurde logarithmiert, um die Verteilung der Feinstaub-Konzentration (PM10) über die Zeit besser darzustellen. Dadurch werden die Positionen und Grössen des Medians sowie des Interquartilsbereichs (IQR) deutlicher sichtbar, was die Interpretation der Daten erleichtert.
 
 {{< pagebreak >}}
 
@@ -252,7 +259,8 @@ data_long %>%
   ) +
   labs(
     x = "Jahr",
-    y = "Stickoxidkonzentration (NO + NO2) [µg/m³] (log-Skala)"
+    y = "Stickoxidkonzentration (NO + NO2) [µg/m³] (log-Skala)",
+    caption = "Abb. 4: Zeitliche Entwicklung der Stickoxidkonzentration auf einer logarithmischen Skala mit monatlicher Verteilung an vier Messstandorten."
   ) +
   scale_x_date(
     date_breaks = "1 year",
@@ -264,11 +272,12 @@ data_long %>%
   theme_minimal() +
   theme(
     legend.position = "none",
-    axis.text.x = element_text(angle = 0, hjust = 0.5)
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
+  plot.caption = element_text(size = 8, hjust = 0.5)  # Schriftgröße kleiner und zentriert
   )
-```
 
-Zeitliche Entwicklung der Stickoxidkonzentration (NO + NO~2~) \[µg/m³\] auf einer logarithmischen Skala für die Messstandorte Heubeeribüel, Rosengartenstrasse, Schimmelstrasse und Stampfenbachstrasse im Zeitraum von Januar 2014 bis Oktober 2020. Die Boxplots zeigen die monatliche Verteilung der Konzentrationen. Die Y-Achse wurde logarithmiert, um die Verteilung der Stickoxidkonzentrationen (NO + NO~2~) über die Zeit besser darzustellen. Dadurch werden die Positionen und Grössen des Medians sowie des Interquartilsbereichs (IQR) deutlicher sichtbar, was die Interpretation der Daten erleichtert.
+
+```
 
 {{< pagebreak >}}
 

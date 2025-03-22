@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5646578-6a99-4bff-9165-9baf01372fd9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Semester 4/Numerik/W05/P5.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Semester 4/Numerik/W05/V5.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Semester 4/Numerik/W05/V5.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Semester 4/VDSS/W05/.env" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,33 +45,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.Draw a match.executor&quot;: &quot;Run&quot;,
-    &quot;Python.prim.executor&quot;: &quot;Run&quot;,
-    &quot;R.hallo.R.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/jonas/Documents/GitHub/ZHAW&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;bigdataide_conn_settings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.Draw a match.executor": "Run",
+    "Python.prim.executor": "Run",
+    "R.hallo.R.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "/Users/jonas/Documents/GitHub/ZHAW/Semester 4/VDSS/W05",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "bigdataide_conn_settings",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Semester 4/VDSS/W05" />
       <recent name="$PROJECT_DIR$/Semester 3/DPS/W13" />
       <recent name="C:\Users\jonas\Documents\GitHub\ZHAW\Semester 3\DPS\0_Basics\W9" />
       <recent name="C:\Users\jonas\Documents\GitHub\ZHAW\Semester 3\DPS\W7" />
       <recent name="C:\Users\jonas\Documents\GitHub\ZHAW\Semester 3\DPS\W5" />
-      <recent name="C:\Users\jonas\Documents\GitHub\ZHAW\Semester 3\DPS\W3" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Semester 4/Numerik/W1" />
