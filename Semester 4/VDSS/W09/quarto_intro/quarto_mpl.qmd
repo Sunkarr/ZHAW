@@ -1,0 +1,110 @@
+---
+title: "Introduction to Quarto"
+format:
+    html:
+        code-fold: false
+        code-block-bg: true
+        code-line-numbers: false
+execute:
+    echo: false
+---
+
+## Intro
+Quarto can render source from compositions of Markdown and inputs and outputs from code blocks in R, Python and Julia.
+
+It can produce:
+
+- Html, pdf, MS Word and Markdown documents
+- presentations: revealjs, ppt, latex/beamer
+- Websites
+- Books
+
+The source documents can be written in any editor, but Jupyter and VS Code are particularly suited for Python, RStudio for R.
+
+## Workflow
+1. Write the source .qmd or .ipynb-file
+2. In `vscode` preview with quarto extension
+3. From a Jupyter notebook: Execute all cells in the current notebook
+4. From a terminal: Render the source to a specified format
+
+``` {.bash filename="Terminal"}
+quarto render co2_quarto.qmd --to html
+```
+or
+
+``` {.bash filename="Terminal"}
+quarto render co2_quarto.qmd --to revealjs
+```
+
+## Render process
+When you render a document with Quarto, the contents (code, markdown, and outputs) are converted to plain markdown and then processed by Pandoc, which creates the finished format.
+
+![](https://quarto.org/docs/get-started/hello/images/ipynb-how-it-works.png)
+
+## The Markdown Syntax
+Quarto is based on Pandoc and uses its variation of markdown as its underlying document syntax.
+[https://quarto.org/docs/authoring/markdown-basics.html](https://quarto.org/docs/authoring/markdown-basics.html)
+
+## Example visualisation
+
+```{python}
+import os
+from dotenv import load_dotenv
+
+import pandas as pd
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+
+# import plotly.express as px
+load_dotenv()
+data_folder = os.getenv('DATA_FOLDER')
+
+# Load the dataset
+df = pd.read_csv(os.path.join(data_folder, 'co2_gdp', 'co2_gdp_country.csv'))
+```
+
+```{python}
+year_selected = 1964
+df_selected = df[df['year']== year_selected]
+
+fig, ax = plt.subplots()
+for loc in ['top', 'right']:
+    ax.spines[loc].set_visible(False)
+
+ax.tick_params(axis='x', labelsize=14)
+ax.tick_params(axis='y', labelsize=14)
+ax.set_ylabel('CO2 emissions (metric tons per capita)', fontsize=14)
+ax.set_xlabel('GDP (USD per capita)', fontsize=14)
+
+# Convert the y-axis to a logarithmic scale
+ax.set_yscale('log')
+# ax.set_xscale('log')
+
+# Format the x-tick labels with a thousands separator
+#ax.xaxis.set_major_formatter(mpl.ticker.FuncFormatter(lambda x, pos: '{:,.0f}'.format(x/1000)))
+
+# Create a scatter plot for each unique category in the 'region' column
+for region in df_selected['region'].unique():
+    ax.scatter(x='gdp', y='co2', data=df_selected[df_selected['region'] == region], label=region)
+
+# Add a legend
+ax.legend()
+
+plt.show()
+```
+
+## Initialise a git repository
+
+* go to your zhaw github account
+* create a new repository 
+* follow the steps to initialise git repository locally
+* push the files from local into the remote repository
+
+## Deploy html docs on github pages {.smaller}
+On github.zhaw.ch/your_username/your_new_repository
+
+* go to Settings - Pages:
+* select "Deploy from a branch": main
+* and the root-directory
+* within a minute your html document should be served as<br>
+github.zhaw.ch/pages/your_username/your_new_repository/your_filename.html
