@@ -2,5 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Semester 4/VDSS/W09/streamlit_intro" vcs="Git" />
   </component>
 </project>
