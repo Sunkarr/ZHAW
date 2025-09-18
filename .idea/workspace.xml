@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5646578-6a99-4bff-9165-9baf01372fd9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.agent.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.edit.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Semester 5/PM3/Test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="f5646578-6a99-4bff-9165-9baf01372fd9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -123,7 +118,7 @@
       <workItem from="1740820011058" duration="97000" />
       <workItem from="1740833264551" duration="12000" />
       <workItem from="1758036668171" duration="108000" />
-      <workItem from="1758210997349" duration="770000" />
+      <workItem from="1758210997349" duration="1415000" />
     </task>
     <servers />
   </component>
