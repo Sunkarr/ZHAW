@@ -1,0 +1,6 @@
+com.microstar.xml
+ptolemy.gui
+ptolemy.plot
+ptolemy.plot.compat
+ptolemy.plot.plotml
+ptolemy.util
