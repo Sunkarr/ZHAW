@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="ptplot5">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../ptplot5.7" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="file://$PROJECT_DIR$/../ptplot5.7/doc/codeDoc" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../ptplot5.7" />
+    </SOURCES>
+  </library>
+</component>
