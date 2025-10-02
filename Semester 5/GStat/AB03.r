@@ -17,6 +17,37 @@ N <- 10000
 dat <- replicate(N, rnorm(n = n))
 s_1_2 <- function(x) (1/(n-1)) * mean((x - mean(x))^2)
 s_2_2 <- function(x) 1/n * mean((x - mean(x))^2)
+var_1_2 <- apply(dat, 2, s_1_2)
+var_2_2 <- apply(dat, 2, s_2_2)
+
+par(mfrow = c(1,2))
+hist(var_1_2, main = "Unbiased Varianzschätzung", xlab = "Varianz", breaks = 30)
+hist(var_2_2, main = "Biased Varianzschätzung", xlab = "Varianz", breaks = 30)
+
+# Berechnung in abhängigkeit von Stichprobengrösse, plot to show bias
+n.tot <- 30
+s.var1.n <- rep(0,n.tot)
+s.var2.n <- s.var1.n
+for( n in 1:n.tot) {
+  s.var1 <- rep( 0, N)
+  s.var2 <- s.var1
+  for(i in 1:N) {
+    x <- rnorm(n)
+    m <- sum((x-mean(x))^2)
+    s.var1[i] <- m/(n-1)
+    s.var2[i] <- m/n
+  }
+  s.var1.n[n] <- mean(s.var1)
+  s.var2.n[n] <- mean(s.var2)
+}
+par(mfrow=c(1,1))
+plot(1:n.tot, s.var1.n, type="b", col="blue", pch=19, ylim=c(0,1.5),
+     xlab="Stichprobengrösse n", ylab="Erwartungswert der Varianzschätzung")
+lines(1:n.tot, s.var2.n, type="b", col="red", pch=19)
+abline(h=1, col="black", lty=2)
+legend("topright", legend=c("unbiased", "biased", "true var"),
+       col=c("blue", "red", "black"), pch=c(19,19,NA), lty=c(NA,NA,2))
+    
 
 
 # Aufgabe 4: Effizienz: Mittelwert vs. Median
@@ -69,5 +100,7 @@ MSE_median_dirty
 
 # Ratio
 MSE_mean_dirty / MSE_median_dirty
+
+
 
 
