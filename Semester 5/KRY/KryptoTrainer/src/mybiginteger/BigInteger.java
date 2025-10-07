@@ -3369,8 +3369,23 @@ public class BigInteger
     }
     return result;
   }
+
+  /*
+  Erstellen Sie für die Klasse BigInteger der Package mybiginteger eine Spezialversion der Methode
+  myModPow() zur Dechiffrierung von RSA-Chiffraten. Dabei sollen der Methode anstelle des RSA-Moduls
+  𝑚𝑚 dessen beiden Primfaktoren 𝑝𝑝 und 𝑞𝑞 mitgegeben werden, so dass der Algorithmus mit Hilfe des
+  chinesischen Restsatzes beschleunigt werden kann. kleiner satz von fermat (p & q sind prim)
+  Die Deklaration der Methode lautet also wie folgt:
+  public BigInteger myModPow(BigInteger exponent, BigInteger p, BigInteger q).
+   */
       public BigInteger myModPow(BigInteger exponent, BigInteger p, BigInteger q) {
-    return BigInteger.ZERO;
+          BigInteger a1 = this.myModPow(exponent.mod(p.subtract(BigInteger.ONE)), p);
+          BigInteger a2 = this.myModPow(exponent.mod(q.subtract(BigInteger.ONE)), q);
+            BigInteger qInv = q.modInverse(p);
+            BigInteger pInv = p.modInverse(q);
+            BigInteger result = a1.multiply(q).multiply(qInv).add(a2.multiply(p).multiply(pInv)).mod(p.multiply(q));
+          return result;
+
   }
 
   /**
