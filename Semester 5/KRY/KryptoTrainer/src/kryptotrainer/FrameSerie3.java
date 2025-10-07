@@ -282,9 +282,44 @@ public class FrameSerie3 extends JFrame implements ActionListener{
    * Diese Methode muss ausprogrammiert werden!
    */
   private void doDatenbankVerschl() {
-  	// Schluessel erzeugen
-	   
+      /*
+       * Schluessel erzeugen
+       * Konstruktion von 5 paarweise teilerfremden Primzahlen p_i
+       */
+
+      schluessel[0] = BigInteger.probablePrime(256, new Random());
+      schluessel[1] = BigInteger.probablePrime(256, new Random());
+      schluessel[2] = BigInteger.probablePrime(256, new Random());
+      schluessel[3] = BigInteger.probablePrime(256, new Random());
+      schluessel[4] = BigInteger.probablePrime(256, new Random());
+
+
     // Datenbank verschlüsseln
+      // Berechne m als Produkt aller Schlüssel
+      BigInteger m = BigInteger.ONE;
+      for (int i = 0; i < schluessel.length; i++) {
+          m = m.multiply(schluessel[i]);
+      }
+
+      // Berechne M[i] und u[i] für jeden Index
+      BigInteger[] M = new BigInteger[schluessel.length];
+      BigInteger[] u = new BigInteger[schluessel.length];
+      for (int i = 0; i < schluessel.length; i++) {
+          M[i] = m.divide(schluessel[i]);
+          u[i] = M[i].modInverse(schluessel[i]);
+      }
+
+      // Berechne datenbankVerschl
+      datenbankVerschl = BigInteger.ZERO;
+      for (int i = 0; i < datenSatzUnverschl.length; i++) {
+          datenbankVerschl = datenbankVerschl.add(
+                  datenSatzUnverschl[i].multiply(M[i]).multiply(u[i])
+          );
+      }
+      datenbankVerschl = datenbankVerschl.mod(m);
+
+
+
  
     // Ergebnisse anzeigen
     schluesselAnzeigen();
@@ -296,7 +331,25 @@ public class FrameSerie3 extends JFrame implements ActionListener{
    */
   private void doDatenbankEntschl() {
   	// Datenbank entschlüsseln
-	   
+        // Berechne m als Produkt aller Schlüssel
+        BigInteger m = BigInteger.ONE;
+        for (int i = 0; i < schluessel.length; i++) {
+            m = m.multiply(schluessel[i]);
+        }
+
+        // Berechne M[i] und u[i] für jeden Index
+        BigInteger[] M = new BigInteger[schluessel.length];
+        BigInteger[] u = new BigInteger[schluessel.length];
+        for (int i = 0; i < schluessel.length; i++) {
+            M[i] = m.divide(schluessel[i]);
+            u[i] = M[i].modInverse(schluessel[i]);
+        }
+
+        // Berechne datenSatzEntschl
+        for (int i = 0; i < datenSatzEntschl.length; i++) {
+            datenSatzEntschl[i] = datenbankVerschl.mod(schluessel[i]);
+        }
+
     // Ergebnisse anzeigen
     datenSatzEntschlAnzeigen();
   }
