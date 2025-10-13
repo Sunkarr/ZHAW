@@ -79,3 +79,19 @@ for (i in 2:length(theta)) {
 }
 legend(x = "top", legend = c("theta=1/3", "theta=1/2", "theta=1", "theta=2", "theta=3"),
        fill = 1:5, cex = 0.5)
+
+
+# Aufgabe 4
+m <- 20
+n <- c(seq(0, 200, 1))
+k <- 15
+x <- 3
+
+fische <- dhyper(x, m, n, k)
+plot(fische)
+# vertical line in plot for which.max(fische)
+abline(v = which.max(fische), col = "red")
+which.max(fische)
+# write which.max(fische) next to line
+text(x = which.max(fische) + 25, y = max(fische)/2, labels = paste0("Max at n=", which.max(fische)), col = "red")
+
