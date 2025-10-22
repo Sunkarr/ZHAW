@@ -3415,8 +3415,37 @@ public class BigInteger
    *         false if it's definitely composite.
    */
   public boolean myIsProbablePrime(int t) {
-    return true;
-  }
+          if (this.compareTo(TWO) < 0) return false;
+          if (this.equals(ONE)) return false;
+          if (this.equals(TWO)) return true;
+          if (!this.testBit(0)) return false; // even numbers > 2 are not prime
+
+          // Trial division with small primes if tableOfPrimes is available
+          if (tableOfPrimes != null) {
+              for (int p : tableOfPrimes) {
+                  if (this.compareTo(BigInteger.valueOf(p)) <= 0) break;
+                  if (this.mod(BigInteger.valueOf(p)).equals(ZERO)) return false;
+                  BigInteger nMinusOne = this.subtract(ONE);
+              }
+          }
+
+          BigInteger nMinusOne = this.subtract(ONE);
+          Random rnd = new Random();
+
+          for (int i = 0; i < t; i++) {
+              // Generate random a in [2, n-2]
+              BigInteger a;
+              do {
+                  a = new BigInteger(this.bitLength(), rnd);
+              } while (a.compareTo(TWO) < 0 || a.compareTo(nMinusOne) >= 0);
+
+              // Fermat test: a^(n-1) mod n == 1 ?
+              if (!a.modPow(nMinusOne, this).equals(ONE)) return false;
+          }
+      System.out.println(this + " is (probably) prime.");
+      return true;
+      }
+
 
   /**
    * After a call to createTableOfPrimes, this array contains all the prime
@@ -3424,14 +3453,41 @@ public class BigInteger
    */
   private static int[] tableOfPrimes;
 
+
   /**
    * Returns an array of all the primes less or equal than max.
    * A copy of the array is also stored in the private static array
    * tableOfPrimes.
    */
   public static int[] createTableOfPrimes(int max) {
-    return null;
+      if (max < 2) {
+          tableOfPrimes = new int[0];
+          return tableOfPrimes;
+      }
+      boolean[] isPrime = new boolean[max + 1];
+      Arrays.fill(isPrime, true);
+      isPrime[0] = false;
+      isPrime[1] = false;
+      for (int i = 2; i * i <= max; i++) {
+          if (isPrime[i]) {
+              for (int j = i * i; j <= max; j += i) {
+                  isPrime[j] = false;
+              }
+          }
+      }
+      int count = 0;
+      for (int i = 2; i <= max; i++) {
+          if (isPrime[i]) count++;
+      }
+      int[] primes = new int[count];
+      int idx = 0;
+      for (int i = 2; i <= max; i++) {
+          if (isPrime[i]) primes[idx++] = i;
+      }
+      tableOfPrimes = primes;
+      return primes;
   }
+
 
   /**
    * Returns the floor value of the square root of this, i.e the integral part
