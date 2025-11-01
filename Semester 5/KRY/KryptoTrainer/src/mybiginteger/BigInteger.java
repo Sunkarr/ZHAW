@@ -3520,9 +3520,9 @@ public class BigInteger
   public int findExp(BigInteger r)  
   {
 	  int result = 0;
+      // z = this
+      return (int)Math.floor(Math.log(r.doubleValue()) / Math.log(this.doubleValue()));
 	  
-	  
-	  return result; 
   }
   
   
@@ -3531,11 +3531,46 @@ public class BigInteger
    */
   
   public BigInteger findFactor(BigInteger B) {
-  	
-	BigInteger result = new BigInteger("0");
+      BigInteger result;
+      while (true) {
+          // Compute k
+          BigInteger k = BigInteger.ONE;
+          int[] primes = createTableOfPrimes(B.intValue());
+          for (int j : primes) {
+              BigInteger prime = BigInteger.valueOf(j);
+              int exp = prime.findExp(B); // floor(log(B) / log(prime))
+              if (exp > 0) {
+                  k = k.multiply(prime.pow(exp));
+              }
+          }
 
-	
-    return result;
+          // Generate random a in [2, n-1]
+          BigInteger n = this.subtract(ONE);
+          BigInteger a;
+          do {
+              a = new BigInteger(n.bitLength(), new Random());
+          } while (a.compareTo(n) >= 0 || a.compareTo(ONE) <= 0);
+
+          // Check gcd(a, n)
+          BigInteger g = a.gcd(this);
+          if (!g.equals(ONE)) {
+              // Non-trivial factor found
+              result = g;
+              break;
+          }
+
+          // Compute gcd(a^k - 1, n)
+          BigInteger x = a.modPow(k, this);
+          BigInteger diff = x.subtract(ONE).abs();
+          BigInteger factor = diff.gcd(this);
+          if (factor.compareTo(ONE) > 0 && factor.compareTo(this) < 0) {
+              // Non-trivial factor found
+              result = factor;
+              break;
+          }
+      }
+
+      return result;
   }
   
 
