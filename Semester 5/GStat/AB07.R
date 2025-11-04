@@ -1,3 +1,6 @@
+install.packages("boot")  # Falls das Paket noch nicht installiert ist
+library(boot)
+
 # Aufgabe 1
 # a)
 
@@ -59,6 +62,12 @@ text(x = min(spatial$A), y = max(spatial$B),
                     round(cor(spatial$A, spatial$B), 3)), pos = 4)
 
 # b)
+bootRes_cor <- boot(spatial, function(d,i) cor(d$A[i], d$B[i]), R = 1000)
+hist(bootRes_cor$t)
+
+# c)
+boot.ci(bootRes_cor, type = "bca", conf = 0.9)
+
 
 
 
