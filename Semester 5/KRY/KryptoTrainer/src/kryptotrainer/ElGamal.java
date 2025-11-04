@@ -37,22 +37,59 @@ public class ElGamal {
    * generieren und in publicKeyAlice bzw. privateKeyAlice speichern.
    */
   public void generateKeyPair() {
-    publicKeyAlice = new BigInteger[] {BigInteger.ZERO, BigInteger.ONE, BigInteger.valueOf(2)};
-    privateKeyAlice = BigInteger.valueOf(3);
+      BigInteger p = BigInteger.probablePrime(bitLengthPublicKey, new java.util.Random());
+      // initialisiere g, von 2 bis p-2
+        java.util.Random rnd = new java.util.Random();
+        BigInteger min = BigInteger.valueOf(2);
+        BigInteger max = p.subtract(BigInteger.valueOf(2));
+        BigInteger range = max.subtract(min).add(BigInteger.valueOf(1)); // range = p-3
+
+        BigInteger g;
+        if (range.signum() <= 0) {
+          // fallback for very small p
+          g = min;
+        } else {
+          do {
+            g = new BigInteger(p.bitLength(), rnd).mod(range).add(min);
+          } while (g.compareTo(min) < 0 || g.compareTo(max) > 0);
+        }
+        // generiere privaten Schlüssel a, 1 < a < p-2
+        BigInteger a = BigInteger.probablePrime(bitLengthPublicKey - 2, new java.util.Random());
+        // berechne öffentlichen Schlüssel A = g^a mod p
+        BigInteger A = g.modPow(a, p);
+
+
+    publicKeyAlice = new BigInteger[] {p, g, A};
+    privateKeyAlice = a;
   }
 
   /**
    * Chiffrat (B,c) Bob -> Alice erstellen und in cipheredText abspeichern.
    */
   public void createCipheredText() {
-    cipheredText = new BigInteger[] {BigInteger.valueOf(4), BigInteger.valueOf(5)};
+      // Bob wählt b aus Zp*
+      BigInteger b = BigInteger.probablePrime(bitLengthPublicKey - 2, new java.util.Random());
+      BigInteger p = publicKeyAlice[0];
+      BigInteger g = publicKeyAlice[1];
+      BigInteger A = publicKeyAlice[2];
+        // berechne B = g^b mod p
+        BigInteger B = g.modPow(b, p);
+        // berechne c = m * A^b mod p
+        BigInteger c = plainText.multiply(A.modPow(b, p)).mod(p);
+
+    cipheredText = new BigInteger[] {B, c};
   }
 
   /**
    * Dechiffrierten Text Bob -> Alice erstellen und in decipheredText abspeichern.
    */
   public void createDecipheredText() {
-    decipheredText = BigInteger.valueOf(6);
+      BigInteger c = cipheredText[1];
+        BigInteger B = cipheredText[0];
+        BigInteger p = publicKeyAlice[0];
+
+        BigInteger m = c.multiply(B.modPow(privateKeyAlice.negate().add(p.subtract(BigInteger.ONE)), p)).mod(p);
+    decipheredText = m;
   }
 
 

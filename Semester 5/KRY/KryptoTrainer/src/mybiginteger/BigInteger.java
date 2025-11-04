@@ -979,7 +979,7 @@ public class BigInteger
    *
    * @since   1.2
    */
-  public static final BigInteger ZERO = new BigInteger(new int[0], 0);
+  public static BigInteger ZERO = new BigInteger(new int[0], 0);
 
   /**
    * The BigInteger constant one.
@@ -3596,12 +3596,31 @@ public class BigInteger
    * @see    #bitLength
    */
   public static BigInteger myProbableSafePrime(int bitLength, int certainity, Random rnd) {
+      // p = 2*q + 1
+      // where p and q are prime
+      // q = 5 (mod 6) => p = 11 (mod 12) => p is a safe prime
+    BigInteger safeprime = BigInteger.ZERO;
+    if (bitLength >= 2) {
+      boolean found = false;
+      while (!found) {
+        BigInteger q = new BigInteger(bitLength - 1, certainity, rnd);
+        if (q.mod(BigInteger.valueOf(6)).equals(BigInteger.valueOf(5))) {
+          BigInteger p = q.multiply(TWO).add(ONE);
+          if (p.isProbablePrime(certainity)) {
+            safeprime = p;
+            found = true;
+          }
+        }
+      }
+    }
+    else {
     if (bitLength < 2) {
       throw new ArithmeticException("bitLength < 2");
     }
 
-    return ZERO;
   }
+    return safeprime;
+}
 
   /**
    * Returns an array of two BigIntegers.
