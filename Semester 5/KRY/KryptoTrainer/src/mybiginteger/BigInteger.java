@@ -3494,8 +3494,18 @@ public class BigInteger
    * of the square root of this.
    */
   public BigInteger mySqrtFloor() {
-    return BigInteger.ZERO;
+      // calc sqrt using Newton's method (for sqrt: xk^2 + n / 2*xk)
+      // set initial guess to half bitlength
+      BigInteger xk = BigInteger.ONE.shiftLeft(this.bitLength() / 2);
+      BigInteger xk1 = xk.add(this.divide(xk)).shiftRight(1);
+      while (xk1.compareTo(xk) < 0) {
+          xk = xk1;
+          xk1 = xk.add(this.divide(xk)).shiftRight(1);
+      }
+      return xk;
   }
+
+
 
   /**
    * Returns the square root of this mod p, if it exists and BigInteger -1 otherwise.
@@ -3509,8 +3519,32 @@ public class BigInteger
    * Returns an integer factor of this, or ONE if this is prime.
    */
   public BigInteger myPollardRho() {
-    return BigInteger.ONE;
+      // Implementation of Pollard's Rho algorithm
+        BigInteger n = this;
+        if (n.mod(TWO).equals(ZERO)) {
+            return TWO; // Return 2 if n is even
+        }
+        // a = random != 0 and -2
+        // xi+1 = (xi^2 + a) mod n
+        // yi+1 = (yi^2 + a)^2 mod n
+
+        BigInteger x = BigInteger.valueOf(2);
+        BigInteger y = BigInteger.valueOf(2);
+        BigInteger a = BigInteger.valueOf(1); // You can choose any non-zero value for a
+        BigInteger d = BigInteger.ONE;
+        Random rand = new Random();
+        while (d.equals(BigInteger.ONE)) {
+            x = x.multiply(x).add(a).mod(n);
+            y = y.multiply(y).add(a).mod(n);
+            y = y.multiply(y).add(a).mod(n);
+            d = x.subtract(y).abs().gcd(n);
+            if (d.equals(n)) {
+                return BigInteger.ONE; // Failure, return 1
+            }
+        }
+        return d; // Non-trivial factor found
   }
+
   
   
   /**
