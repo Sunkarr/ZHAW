@@ -3512,7 +3512,60 @@ public class BigInteger
    * Caution: ZERO may be a valid result and may hence not be used as "no result" flag.
    */
   public BigInteger myModSqrt(BigInteger p) {
-    return BigInteger.valueOf(-1);
+        // Check if p is prime using myIsProbablePrime
+        if (!p.myIsProbablePrime(10)) {
+            throw new IllegalArgumentException("Modulus p must be prime.");
+        }
+
+        // Check if this is a quadratic residue mod p using Legendre symbol
+        BigInteger legendreSymbol = this.modPow(p.subtract(BigInteger.ONE).shiftRight(1), p);
+        if (!legendreSymbol.equals(BigInteger.ONE)) {
+            return BigInteger.valueOf(-1); // No square root exists
+        }
+
+        // Simple case for p ≡ 3 (mod 4)
+        if (p.mod(BigInteger.valueOf(4)).equals(BigInteger.valueOf(3))) {
+            return this.modPow(p.add(BigInteger.ONE).shiftRight(2), p);
+        }
+
+        // Extended Tonelli-Shanks algorithm for general case
+        BigInteger s = BigInteger.ZERO;
+        BigInteger q = p.subtract(BigInteger.ONE);
+        while (q.mod(TWO).equals(BigInteger.ZERO)) {
+            q = q.shiftRight(1);
+            s = s.add(BigInteger.ONE);
+  }
+
+        // Find a quadratic non-residue z
+        BigInteger z = BigInteger.TWO;
+        while (z.modPow(p.subtract(BigInteger.ONE).shiftRight(1), p).equals(BigInteger.ONE)) {
+            z = z.add(BigInteger.ONE);
+        }
+
+        BigInteger m = s;
+        BigInteger c = z.modPow(q, p);
+        BigInteger r = this.modPow(q.add(BigInteger.ONE).shiftRight(1), p);
+        BigInteger t = this.modPow(q, p);
+        BigInteger t2i;
+
+        while (!t.equals(BigInteger.ONE)) {
+            t2i = t;
+            BigInteger i = BigInteger.ZERO;
+            for (i = BigInteger.ONE; i.compareTo(m) < 0; i = i.add(BigInteger.ONE)) {
+                t2i = t2i.modPow(TWO, p);
+                if (t2i.equals(BigInteger.ONE)) {
+                    break;
+                }
+            }
+
+            BigInteger b = c.modPow(TWO.pow(m.subtract(i).subtract(BigInteger.ONE).intValue()), p);
+            m = i;
+            c = b.modPow(TWO, p);
+            r = r.multiply(b).mod(p);
+            t = t.multiply(c).mod(p);
+        }
+
+        return r;
   }
 
   /**
@@ -3689,6 +3742,17 @@ public class BigInteger
    * Addition algorithm for Elliptic Curves: Computes and returns
    * R = P+Q, where P=(this, P_y) and Q=(Q_x, Q_y) are the given elements of
    * the elliptic curve specified by the numbers p, a and b.
+   *
+   * Schreiben Sie f¨ur die Klasse BigInteger der Package mybiginteger eine Methode
+   *
+   * BigInteger[] elliptAdd (BigInteger P y, BigInteger Q x, BigInteger Q y, BigInteger p, BigInteger a, BigInteger b),
+   *
+   * die falls m¨oglich ¨uber dem K¨orper K = GF(p) f¨ur die elliptische Kurve E: y 2 = x 3 +ax+b den Punkt R = P + Q
+   * berechnet und zur¨uckgibt. Falls P = (this, P y) oder Q = (Q x, Q y) nicht zu E geh¨oren, so soll eine
+   * NumberFormatException mit der Nachricht Punkt liegt nicht auf der Kurve! ausgegeben werden. Der unendlich ferne
+   * Punkt O soll in der Form (p, ∗) entgegengenommen bzw. zur¨uckgegeben werden, wobei ∗ ein beliebiger Wert sein darf
+   * (weil er nirgends weiter beachtet wird). ¨Uberpr¨ufen Sie den Algorithmus in der Testumgebung ”Prakt. 12.2”.
+   *
    */
   public BigInteger[] elliptAdd(BigInteger P_y,
                                 BigInteger Q_x,
@@ -3696,8 +3760,52 @@ public class BigInteger
                                 BigInteger p,
                                 BigInteger a,
                                 BigInteger b) throws Exception {
-    BigInteger[] res = {ZERO, ZERO};
-    return res;
+      // Check if P is the point at infinity
+      if (this.equals(p)) {
+          return new BigInteger[]{Q_x, Q_y};
+      }
+      // Check if Q is the point at infinity
+      if (Q_x.equals(p)) {
+          return new BigInteger[]{this, P_y};
+      }
+
+      // Check if P is on the curve
+      if (!P_y.modPow(TWO, p).equals(this.modPow(BigInteger.valueOf(3), p).add(a.multiply(this)).add(b).mod(p))) {
+          throw new NumberFormatException("Punkt liegt nicht auf der Kurve!");
+      }
+      // Check if Q is on the curve
+      if (!Q_y.modPow(TWO, p).equals(Q_x.modPow(BigInteger.valueOf(3), p).add(a.multiply(Q_x)).add(b).mod(p))) {
+          throw new NumberFormatException("Punkt liegt nicht auf der Kurve!");
+      }
+
+      // if x1 == x2 and y1 == -y2 mod p (inverse points)
+      if (this.equals(Q_x) && P_y.add(Q_y).mod(p).equals(ZERO)) {
+          // Result is the point at infinity
+          return new BigInteger[]{p, ZERO};
+      }
+
+      // if x1 == x2 and y1 == y2 (point doubling)
+      if (this.equals(Q_x) && P_y.equals(Q_y)) {
+          //m = (3*x1^2 + a) / (2*y1) mod p
+          BigInteger m = (this.modPow(TWO, p).multiply(BigInteger.valueOf(3)).add(a))
+                  .multiply(P_y.multiply(TWO).modInverse(p)).mod(p);
+          //x3 = m^2 - 2*x1 mod p
+          BigInteger x3 = (m.modPow(TWO, p).subtract(this.shiftLeft(1))).mod(p);
+          //y3 = m(x1 - x3) - y1 mod p
+          BigInteger y3 = (m.multiply(this.subtract(x3)).subtract(P_y)).mod(p);
+          return new BigInteger[]{x3, y3};
+      }
+
+      // if x1 != x2 (standard point addition)
+      //m = (y2 - y1) / (x2 - x1) mod p
+      BigInteger ys = Q_y.subtract(P_y).mod(p);
+        BigInteger xs = Q_x.subtract(this).mod(p);
+        BigInteger m = ys.multiply(xs.modInverse(p)).mod(p);
+      //x3 = m^2 - x1 - x2 mod p
+      BigInteger x3 = (m.modPow(TWO, p).subtract(this).subtract(Q_x)).mod(p);
+      //y3 = -m(x1 - x3) - y1 mod p
+        BigInteger y3 = (m.multiply(this.subtract(x3)).negate().subtract(P_y)).mod(p);
+      return new BigInteger[]{x3, y3};
   }
 
   /**
