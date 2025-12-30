@@ -81,4 +81,92 @@ library(fitdistrplus)
 x.gamma.mle <- fitdist(data = x.gamma, distr = "gamma", method = "mle")
 x.gamma.mle$estimate
 
+### SW04 Aufgabe 2: Maximum-Likelihood-Schätzung bei Normalverteilung
+
+xs <- c(-0.033, -0.76, 2.02, 1.13, 0.65, 0.49, 0.76, 0.40, 0.10, 0.61)
+loglik <- function(mu, sigma, dat) {
+  sum(dnorm(x = dat, mean = mu, sd = sigma, log = TRUE))
+}
+loglik(mu = 0, sigma = 1, dat = xs)
+
+gitter <- expand.grid(mu = seq(0.5, 0.6, 0.001), sigma = seq(0.6, 0.75, 0.001))
+m <- dim(gitter)[1]
+lik <- rep(-Inf, m)
+for (i in 1:m) {
+  lik[i] <- loglik(mu = gitter[i, 1], sigma = gitter[i, 2], dat = xs)
+}
+gitter[which.max(lik), ]
+
+lik <- function(param) {
+  -loglik(mu = param[1], sigma = param[2], dat = xs)
+}
+optim(c(0.5,0.5), lik)
+
+norm.mle <- fitdist(data = xs, distr = "norm", method = "mle")
+norm.mle$estimate
+
+
+## Konfidenzintervall
+
+### Varianz bekannt
+data <- rnorm(n = 100, mean = 50, sd = 10)
+#### Manuell
+n <- length(data)
+mean_data <- mean(data)
+sd_data <- sd(data)
+alpha <- 0.05
+mean_data + c(-1, 1)*qnorm(1 - alpha/2)*sd_data/sqrt(n)
+#### via z.test
+library(BSDA)
+z.test(x = data, mu = mean_data, sigma.x = sd_data, conf.level = 1-alpha)$conf.int
+
+### Varianz unbekannt (mit Student-t-Verteilung)
+data <- rnorm(n = 100, mean = 50, sd = 10)
+#### Manuell
+n <- length(data)
+mean_data <- mean(data)
+sd_data <- sd(data)
+alpha <- 0.05
+mean_data + c(-1, 1)*qt(1 - alpha/2, df = n-1)*sd_data/sqrt(n)
+#### via t.test
+library(BSDA)
+t.test(x = data, conf.level = 1-alpha)$conf.int
+
+### Asymptitisches Konfidenzintervall
+data <- rnorm(n = 100, mean = 50, sd = 10)
+n <- length(data)
+mean_data <- mean(data)
+sd_data <- sd(data)
+alpha <- 0.05
+mean_data + c(-1, 1)*qnorm(1 - alpha/2)*sd_data/sqrt(n)
+
+### Clopper-Pearson Intervall für Binomialverteilung
+#### Weil binomiale Verteilungen sehr schlecht approximiert werden mit Asymptotischen KI's
+#### verwendet man in diesem Fall besser Clopper-Pearson Intervalle
+data <- rbinom(n = 1, size = 100, prob = 0.3) # 100 Versuche, 30 Erfolge
+library(BSDA)  
+binom.test(x = data, n = 100, conf.level = 0.95)$conf.int
+#### Auch für Poissonverteilung
+data <- rpois(n = 1, lambda = 5) # 5 Ereignisse
+poisson.test(x = data, conf.level = 0.95)$conf.int # KI für Ereignis pro Zeit
+  
+### Bootstrap Konfidenzintervall
+#### Manuell
+xn <- rnorm(5)
+B <- 500
+Ti <- matrix(NA, nrow = B)
+for (i in 1:B) {
+  boot_sample <- sample(xn, size = length(xn), replace = TRUE)
+  Ti[i] <- mean(boot_sample)
+}
+alpha <- 0.05
+quantile(Ti, probs = c(alpha/2, 1 - alpha/2))
+#### via boot Paket
+library(boot)
+xn <- rnorm(5)
+estimator <- function(data, indices) {
+  return(mean(data[indices]))
+}
+boot.res <- boot(data = xn, statistic = estimator, R = 500)
+boot.ci(boot.res, type = "perc", conf = 0.95)
 

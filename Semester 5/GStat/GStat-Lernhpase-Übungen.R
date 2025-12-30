@@ -62,3 +62,211 @@ bias <- mean(data) - 2
 bias
 MSE <- var(data) + bias^2
 MSE
+
+
+# SW03 Aufgabe 2: Varianzschätzung verzerrt (biased) und unverzerrt (unbiased)
+
+s1 <- function(x) {
+  n <- length(x)
+  (1/n-1) * sum((x - mean(x))^2)
+}
+s2 <- function(x) {
+  n <- length(x)
+  (1/n) * sum((x - mean(x))^2)
+}
+n <- 1000
+data_s1 <- matrix(NA, nrow = n)
+data_s2 <- matrix(NA, nrow = n)
+for (i in 1:n) {
+  sample_data <- rnorm(3)
+  data_s1[i] <- s1(sample_data)
+  data_s2[i] <- s2(sample_data)
+}
+par(mfrow = c(1,2))
+hist(data_s1, breaks = 30, main = "Varianzschätzung s1", xlab = "s1")
+abline(v = mean(data_s1), col = "red", lwd = 2)
+hist(data_s2, breaks = 30, main = "Varianzschätzung s2", xlab = "s2")
+abline(v = mean(data_s2), col = "red", lwd = 2)
+par(mfrow = c(1,1))
+mean(data_s1)
+mean(data_s2)
+
+
+# SW03 Aufgabe 4: Effizienz: Mittelwert vs. Median
+
+n <- 20
+N <- 10000
+data_mean <- matrix(NA, nrow = N)
+data_median <- matrix(NA, nrow = N)
+for (i in 1:N) {
+  sample_data <- rnorm(n)
+  data_mean[i] <- mean(sample_data)
+  data_median[i] <- median(sample_data)
+}
+MSE_mean <- var(data_mean)
+MSE_median <- var(data_median)
+MSE_mean
+MSE_median
+effizienz <- MSE_median / MSE_mean
+effizienz
+# Der Mittelwert ist effizienter als der Median in Bezug auf die MSE.
+
+
+# SW04 Aufgabe 1: ML-Schätzer für die Binomial- und Exponentialverteilung
+
+library(fitdistrplus)
+data <- c(1, 2, 3)
+lambda.mle <- fitdist(data = data, distr = "exp", method = "mle")
+lambda.mle$estimate
+
+
+# SW04 Aufgabe 2: Maximum-Likelihood-Schätzung bei Normalverteilung
+
+xs <- c(-0.033, -0.76, 2.02, 1.13, 0.65, 0.49, 0.76, 0.40, 0.10, 0.61)
+loglik <- function(mu, sigma, dat) {
+  sum(dnorm(x = dat, mean = mu, sd = sigma, log = TRUE))
+}
+loglik(mu = 0, sigma = 1, dat = xs)
+
+gitter <- expand.grid(mu = seq(0.5, 0.6, 0.001), sigma = seq(0.6, 0.75, 0.001))
+m <- dim(gitter)[1]
+lik <- rep(-Inf, m)
+for (i in 1:m) {
+  lik[i] <- loglik(mu = gitter[i, 1], sigma = gitter[i, 2], dat = xs)
+}
+gitter[which.max(lik), ]
+
+lik <- function(param) {
+  -loglik(mu = param[1], sigma = param[2], dat = xs)
+}
+optim(c(0.5,0.5), lik)
+
+norm.mle <- fitdist(data = xs, distr = "norm", method = "mle")
+norm.mle$estimate
+
+
+# SW04 Aufgabe 3: Maximum-Likelihood-Schätzung
+
+f <- function(theta, x) {
+  theta * x^(theta - 1)
+}
+theta_values <- c(1/3, 1/2, 1, 2, 3)
+theta_values_rounded <- round(theta_values, digits = 3)
+x_values <- seq(0, 1, by = 0.001)
+plot(NULL, xlim = c(0, 1), ylim = c(0, 3), xlab = "x", ylab = "f(x; θ)", main = "Dichtefunktionen für verschiedene θ")
+colors <- rainbow(length(theta_values))
+for (i in 1:length(theta_values)) {
+  theta <- theta_values[i]
+  f_values <- f(theta, x_values)
+  lines(x_values, f_values, col = colors[i], pch = 19)
+}
+legend("topleft", legend = paste("θ =", theta_values_rounded), col = colors, pch = 19)
+
+
+# SW04 Aufgabe 5: Capture-Recapture (Karpfen / Fische)
+
+mögliche_fische <- seq(0, 200, 1)
+wahr <- dhyper(x = 3, m = 20, n = mögliche_fische, k = 15)
+plot(mögliche_fische, wahr, 
+     type = "line", 
+     pch = 19, 
+     col = "blue",
+     xlab = "Anzahl Fische im See", 
+     ylab = "Likelihood", 
+     main = "Likelihood Funktion (Capture-Recapture)")
+# Max MLE
+max <- which.max(wahr)
+abline(v = max, col = "red", lty = 2)
+dhyper(x = 3, m = 20, n = 78:81, k = 15)
+# Wir erhalten also als Schätzung 79 bzw. 80 (für beide Werte ist die Likelihood gleich gross!)
+# unmarkierte Fische, was zusammen mit den markierten 99 bzw. 100 Fische im See ergibt.
+
+
+# SW06 Aufgabe 1: Simulation des Konfidenzintervalls
+
+library(BSDA)
+mu <- 5
+sigma <- 2
+n <- 30
+m <- 10000
+
+matrix <- matrix(NA, nrow = m)
+for (i in 1:m) {
+  sample_data <- rnorm(n, mean = mu, sd = sigma)
+  ci <- z.test(sample_data, sigma.x = sigma, conf.level = 0.95)$conf.int
+  matrix[i] <- (ci[1] <= mu) & (ci[2] >= mu)
+}
+length(which(matrix == TRUE)) / m
+
+
+# SW06 Aufgabe 2: Konfidenzintervalle: Waschmittel
+
+mu <- 6.09
+sd <- 0.02
+n <- 1219
+x_strich <- 6.048
+alpha <- 0.1
+x_strich + c(-1, 1) * qnorm(1 - alpha/2) * (sd / sqrt(n))
+
+pnorm(6, mean = 6.048, sd = sd)
+
+(2*(sd/0.001)*qnorm(1 - alpha/2))^2
+
+
+# SW06 Aufgabe 5: Kaffeemaschine
+
+x <- c(104, 103, 107, 105, 102, 109, 105, 104, 106)
+t.test(x, alternative = "two.sided", conf.level = 0.95)$conf.int
+
+
+# SW07 Aufgabe 1: Konfidenzintervalle für Anteile
+
+binom.test(x=35, n=487)$conf.int
+
+binom.test(x=2, n=44, conf.level = 0.9)$conf.int
+
+
+# SW07 Aufgabe 2: Konfidenzintervalle für Poisson-Intensitätsparameter
+
+poisson.test(62, T = 1)$conf.int
+
+load("/Users/jonas/Documents/GitHub/ZHAW/Semester 5/GStat/Daten/asbestos.RData")
+asbestos
+poisson.test(x = sum(asbestos), T = length(asbestos), conf.level = 0.99)$conf.int
+
+
+# SW07 Aufgabe 3: Bootstrap-Konfidenzintervalle für Median und Quartilsdispersionskoeffizient
+library(boot)
+# load galaxies from package MASS
+library(MASS)
+data(galaxies)
+estimator_median <- function(data, indices) {
+  median(data[indices])
+}
+boot_median <- boot(data = galaxies, statistic = estimator_median, R = 5000)
+boot.ci(boot_median, type = "perc", conf = 0.95)
+
+QDK <- function(data, indices) {
+  sample_data <- data[indices]
+  Q1 <- quantile(sample_data, 0.25)
+  Q3 <- quantile(sample_data, 0.75)
+  median <- median(sample_data)
+  QDK_value <- (Q3 - Q1) / median
+  return(QDK_value)
+}
+boot_QDK <- boot(data = galaxies, statistic = QDK, R = 5000)
+boot.ci(boot_QDK, type = "perc", conf = 0.99)
+
+
+# SW07 Aufgabe 4: Bootstrap-Konfidenzintervall für Korrelationskoeffizient
+
+load("/Users/jonas/Documents/GitHub/ZHAW/Semester 5/GStat/Daten/spatial.Rdata")
+plot(spatial)
+cor(spatial)
+
+library(boot)
+schaetzer <- function(dat, ind) cor(dat[ind, "A"], dat[ind, "B"])
+boot.erg <- boot(data = spatial, statistic = schaetzer, R = 1000)
+hist(boot.erg$t)
+boot.ci(boot.erg, conf = 0.90, type = "bca")
+
