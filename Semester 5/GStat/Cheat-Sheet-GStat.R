@@ -170,3 +170,29 @@ estimator <- function(data, indices) {
 boot.res <- boot(data = xn, statistic = estimator, R = 500)
 boot.ci(boot.res, type = "perc", conf = 0.95)
 
+
+## Statistischen Testen
+
+### Binomialtest
+
+binom.test(x = 47, n = 120, conf.level = 0.95, alternative = "greater", p = 0.3)
+
+### Poissontest
+
+## Annahmebereich
+qpois(0.95, lambda = 8.4)
+1 - sum(dpois(x = 0:13, lambda = 8.4))
+### Der Annahmebereich ist [0, 13]
+### Der Verwerfungsbereich ist [14, ∞)
+## p-Wert
+1 - ppois(10, lambda = 8.4)
+poisson.test(x = 11, r = 8.4, alternative = "greater")$p.value
+
+poisson.test(x = 9 + 8 + 12, T = 9, r = 3, alternative = "greater")
+
+### Z-Test
+library(BSDA)
+unterlegescheiben <- load("/Users/jonas/Documents/GitHub/ZHAW/Semester 5/GStat/Daten/unterlegscheiben.rda")
+z.test(x = x, sigma.x = 0.003, mu = 0.3)
+
+### T-Test

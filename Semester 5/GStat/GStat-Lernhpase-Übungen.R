@@ -270,3 +270,64 @@ boot.erg <- boot(data = spatial, statistic = schaetzer, R = 1000)
 hist(boot.erg$t)
 boot.ci(boot.erg, conf = 0.90, type = "bca")
 
+
+# SW08 Aufgabe 2: Biomilch
+
+qbinom(0.95, size = 20, prob = 0.5)
+sum(dbinom(x = 14:20, size = 20, prob = 0.5))
+sum(dbinom(x = 15:20, size = 20, prob = 0.5))
+
+sum(dbinom(x = 15:20, size = 20, prob = 0.5))
+
+binom.test(x = 15, n = 20, conf.level = 0.95, alternative = "greater")
+
+
+# SW08 Aufgabe 3: Bauteil
+
+binom.test(x = 47, n = 120, conf.level = 0.95, alternative = "greater", p = 0.3)
+
+
+# SW08 Aufgabe 4: Appenzell-AR ein Bubenkanton?
+
+binom.test(x = 24, n = 43, p = 0.52, conf.level = 0.95, alternative = "greater")
+
+
+# SW08 Aufgabe 5: Verkehrsunfälle
+
+## Annahmebereich
+qpois(0.95, lambda = 8.4)
+1 - sum(dpois(x = 0:13, lambda = 8.4))
+### Der Annahmebereich ist [0, 13]
+### Der Verwerfungsbereich ist [14, ∞)
+
+## p-Wert
+1 - ppois(10, lambda = 8.4)
+
+poisson.test(x = 11, r = 8.4, alternative = "greater")$p.value
+
+
+# SW09 Aufgabe 1: Webfehler
+
+poisson.test(x = 9 + 8 + 12, T = 9, r = 3, alternative = "greater")
+
+
+# SW09 Aufgabe 2: Luftfahrtunfälle
+
+poisson.test(x = c(107, 126), alternative = "less")
+
+
+# SW09 Aufgabe 3: Unterlegscheiben
+
+load("/Users/jonas/Documents/GitHub/ZHAW/Semester 5/GStat/Daten/unterlegscheiben.RData")
+
+
+# SW09 Aufgabe 4: Kugelschreiber
+
+pt(-2.3, df = 17)
+
+
+# SW09 Aufgabe 5: Müllverbrennungsanlage
+
+t <- sqrt(50) * (148 - 150) / 3
+pt(t, df = 49)
+
