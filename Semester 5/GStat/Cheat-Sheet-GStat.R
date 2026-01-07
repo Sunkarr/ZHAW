@@ -1,5 +1,23 @@
 # Cheat Sheet Gstat
 
+## Nützliches
+
+### Vektoren zu Dataframe
+sand_1 <- c(0.17, 0.63, 0.35, 0.49, 0.18, 0.43, 0.12, 0.20, 0.47, 1.36, 0.51, 0.45, 0.84, 0.32, 0.40)
+sand_2 <- c(1.13, 0.54, 0.96, 0.26, 0.39, 0.88, 0.92, 0.53, 1.01, 0.48, 0.89, 1.07, 1.11, 0.58)
+sand <- data.frame(
+  menge = c(sand_1, sand_2),
+  gruppe = factor(rep(c("1", "2"), times = c(length(sand_1), length(sand_2))))
+)
+
+frau <- c(68, 130, 84)
+mann <- c(137, 72, 26)
+data <- matrix(c(frau, mann), nrow = 2, byrow = TRUE)
+colnames(data) <- c("kaum", "etwas", "stark")
+rownames(data) <- c("Frau", "Mann")
+prop.table(data, margin = 2)
+
+
 
 ## QQ-Plot
 library("car")
@@ -196,3 +214,123 @@ unterlegescheiben <- load("/Users/jonas/Documents/GitHub/ZHAW/Semester 5/GStat/D
 z.test(x = x, sigma.x = 0.003, mu = 0.3)
 
 ### T-Test
+
+
+### Ungepaarter Test
+# SW10 Aufgabe 2: Blutdruck
+load("/Users/jonas/Documents/GitHub/ZHAW/Semester 5/GStat/Daten/blutdruck.Rdata")
+t.test(blutdruck$x, blutdruck$y, alternative = "greater", paired = F)
+
+
+### Gepaarter Test
+# SW10 Aufgabe 3: Hals- und Schulterprobleme
+load("/Users/jonas/Documents/GitHub/ZHAW/Semester 5/GStat/Daten/hals.Rdata")
+hals$diff <- hals$Before - hals$After
+t.test(hals$diff, alternative = "two.sided", mu = 0)
+t.test(x = hals$Before, y = hals$After, alternative = "two.sided", paired = TRUE)
+
+
+### Mulitiples Testen
+data("chickwts")
+boxplot(weight ~ feed, data = chickwts, main = "Kükengewicht nach Futterart", xlab = "Futterart", ylab = "Gewicht (g)")
+#### ohne Korrektur
+pairwise.t.test(chickwts$weight, chickwts$feed, p.adjust.method = "none", pool.sd = F)
+#### mit Bonferroni Korrektur
+pairwise.t.test(chickwts$weight, chickwts$feed, p.adjust.method = "bonferroni", pool.sd = F)
+
+
+### Permutationstest (Monte-Carlo Test)
+
+#### Manuell
+n <- 10000
+HaeKonz <- c(9.1, 10.3, 11.0, 11.5, 11.9, 8.1, 8.4, 9.2, 9.4)
+Gruppe <- c(rep("b", 5), rep("k", 4))
+dat <- data.frame(HaeKonz, Gruppe)
+dat$Gruppe <- as.factor(dat$Gruppe)
+p <- combinat::permn(Gruppe) # erzeugt alle Permutationen
+p <- p[!duplicated(p)] # lösche Duplikate
+(m <- tapply(dat$HaeKonz, dat$Gruppe, mean))
+(stat <- as.numeric(m[1] - m[2]))
+stati <- rep(NA, length(n))
+for (i in 1:n) {
+  dat$Gruppe <- sample(x = dat$Gruppe, replace = FALSE)
+  m <- tapply(dat$HaeKonz, dat$Gruppe, mean)
+  stati[i] <- abs(m[1] - m[2])
+}
+hist(stati)
+mean(stati > stat)
+
+#### mit Combinat Paket
+fun <- function(x, g) {
+  abs(mean(x[g == "behandelte"]) - mean(x[g == "kontrolle"]))
+}
+p <- combinat::permn(dat$Gruppe) # alle Permutation
+p <- p[!duplicated(p)] # lösche Duplikate
+permDistExactH0 <- unlist( lapply(p, function(x,dat){fun(x=dat$HaeKonz, g = x)}, dat = dat))
+hist(permDistExactH0)
+abline(v = stat, col = "red")
+sum(permDistExactH0 > stat) / length(permDistExactH0)
+
+#### Automatisiert mit coin Paket
+library(coin)
+independence_test(formula = HaeKonz ~ Gruppe,
+                  data = dat,
+                  alternative = "two.sided",
+                  distribution = "exact")
+
+### Wilcoxon Test
+#### Ungepaarter Test
+sand_1 <- c(0.17, 0.63, 0.35, 0.49, 0.18, 0.43, 0.12, 0.20, 0.47, 1.36, 0.51, 0.45, 0.84, 0.32, 0.40)
+sand_2 <- c(1.13, 0.54, 0.96, 0.26, 0.39, 0.88, 0.92, 0.53, 1.01, 0.48, 0.89, 1.07, 1.11, 0.58)
+sand <- data.frame(
+  menge = c(sand_1, sand_2),
+  gruppe = factor(rep(c("1", "2"), times = c(length(sand_1), length(sand_2))))
+)
+library(coin)
+wilcox_test(menge ~ gruppe,
+            data = sand,
+            alternative = "two.sided",
+            conf.level = 0.99,
+            distribution = "exact")
+
+#### Gepaarter Test
+library(readr)
+reifen <- read_csv("Documents/GitHub/ZHAW/Semester 5/GStat/Daten/reifen.csv")
+boxplot(reifen$`Profil A sA in m`, reifen$`Profil B sB in m`,
+        names = c("Profil A", "Profil B"),
+        main = "Bremswege für verschiedene Reifenprofile",
+        ylab = "Bremsweg (m)")
+hist(reifen$`Profil A sA in m`, main = "Histogramm Bremswege Profil A", xlab = "Bremsweg (m)")
+hist(reifen$`Profil B sB in m`, main = "Histogramm Bremswege Profil B", xlab = "Bremsweg (m)")
+wilcox.test(x = reifen$`Profil A sA in m`,
+            y = reifen$`Profil B sB in m`,
+            alternative = "two.sided",
+            paired = T,
+            exact = T)
+
+
+### Chi-Quadrat Test
+#### Manuell
+
+frau <- c(68, 130, 84)
+mann <- c(137, 72, 26)
+data <- matrix(c(frau, mann), nrow = 2, byrow = TRUE)
+colnames(data) <- c("kaum", "etwas", "stark")
+rownames(data) <- c("Frau", "Mann")
+
+(erwartet <- outer(rowSums(data), colSums(data)) / sum(data))
+
+Tstat <- sum((data - erwartet)^2 / erwartet)
+freiheitsgrade <- (nrow(data) - 1) * (ncol(data) - 1)
+qchisq(0.95, df = freiheitsgrade)
+##### p-Wert
+1 - pchisq(Tstat, df = freiheitsgrade)
+
+#### via chisq.test
+chisq.test(data)
+
+
+## Güte/Macht von Tests
+power.t.test(n = NULL, delta = 1, sd = 1, sig.level = 0.05, power = 0.99, alternative = "one.sided", type = "one.sample")
+
+

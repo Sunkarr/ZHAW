@@ -331,3 +331,320 @@ pt(-2.3, df = 17)
 t <- sqrt(50) * (148 - 150) / 3
 pt(t, df = 49)
 
+
+# SW10 Aufgabe 2: Blutdruck
+
+load("/Users/jonas/Documents/GitHub/ZHAW/Semester 5/GStat/Daten/blutdruck.Rdata")
+t.test(blutdruck$x, blutdruck$y, alternative = "greater", paired = F)
+
+
+# SW10 Aufgabe 3: Hals- und Schulterprobleme
+load("/Users/jonas/Documents/GitHub/ZHAW/Semester 5/GStat/Daten/hals.Rdata")
+hals$diff <- hals$Before - hals$After
+t.test(hals$diff, alternative = "two.sided", mu = 0)
+t.test(x = hals$Before, y = hals$After, alternative = "two.sided", paired = TRUE)
+
+
+# SW10 Aufgabe 4: Wärmepumpen
+
+binom.test(x = 15, n = 50, p = 0.5, alternative = "less")
+
+n_sim <- 10000
+ergebnisse <- numeric(n_sim) # Vektor zum Speichern der p-Werte
+for (i in 1:n_sim) {
+  # 1. Simuliere 10 Filialen, die jeweils 50 Versuche haben (p=0.5)
+  filialen <- rbinom(10, size = 50, prob = 0.5)
+  
+  # 2. Finde die "schlechteste" Filiale (Minimum der Abonnements)
+  schlechteste <- min(filialen)
+  
+  # 3. Führe für DIESE eine Filiale den Binomialtest durch
+  # H0: p = 0.5, H1: p < 0.5 (einseitig "weniger erfolgreich")
+  test <- binom.test(x = schlechteste, n = 50, p = 0.5, alternative = "less")
+  
+  # 4. Speichere den p-Wert
+  ergebnisse[i] <- test$p.value
+}
+
+# 5. Berechnung: Wie oft ist der p-Wert <= 0.05?
+falsch_beschuldigt <- mean(ergebnisse <= 0.05)
+
+print(paste("Wahrscheinlichkeit für falsche Beschuldigung:", falsch_beschuldigt))
+
+
+# SW10 Aufgabe 5: Multiples Testen: Kükengewicht
+
+
+data("chickwts")
+boxplot(weight ~ feed, data = chickwts, main = "Kükengewicht nach Futterart", xlab = "Futterart", ylab = "Gewicht (g)")
+
+pairwise.t.test(chickwts$weight, chickwts$feed, p.adjust.method = "none", pool.sd = F)
+
+pairwise.t.test(chickwts$weight, chickwts$feed, p.adjust.method = "bonferroni", pool.sd = F)
+
+
+# SW10 Aufgabe 6: Multiples Testen: Lieferantenwechsel
+
+load("/Users/jonas/Documents/GitHub/ZHAW/Semester 5/GStat/Daten/isolier.Rdata")
+hist(isolier$Fehler)
+
+
+
+# SW11 Aufgabe 1: Natriumaufnahme
+
+sodium <- readRDS("/Users/jonas/Documents/GitHub/ZHAW/Semester 5/GStat/Daten/sodium.rds")
+t.test(sodium, mu = 1500, alternative = "two.sided", conf.level = 0.99)
+
+
+# SW11 Aufgabe 2: Güte des t-Tests
+
+n <- c(3:20)
+sim <- function(n, alpha = 0.05, runs = 10000) {
+  pvals <- replicate(
+    runs,
+    t.test(rnorm(n, mean = 1, sd = 1), mu = 0, alternative = "greater")$p.value)
+  sum(pvals < alpha) / runs
+}
+
+res.simu <- sapply(n, sim)
+plot(n, res.simu, type = "line")
+
+power.t.test(n = NULL, delta = 1, sd = 1, sig.level = 0.05, power = 0.99, alternative = "one.sided", type = "one.sample")
+
+
+# SW11 Aufgabe 3: Simulation von p-Werten beim t-Test
+
+n <- 10000
+m <- 10
+p_values <- numeric(n)
+for (i in 1:n) {
+  sample_data <- rnorm(m, mean = 0, sd = 1)
+  test_result <- t.test(sample_data, mu = 0, alternative = "two.sided")
+  p_values[i] <- test_result$p.value
+}
+hist(p_values, breaks = 20, main = "Verteilung der p-Werte", xlab = "p-Wert", ylab = "Häufigkeit")
+length(p_values[p_values < 0.05]) / n
+
+for (i in 1:n) {
+  sample_data <- rnorm(m, mean = 1, sd = 1)
+  test_result <- t.test(sample_data, mu = 0, alternative = "two.sided")
+  p_values[i] <- test_result$p.value
+}
+hist(p_values, breaks = 20, main = "Verteilung der p-Werte", xlab = "p-Wert", ylab = "Häufigkeit")
+length(p_values[p_values < 0.05]) / n
+
+
+# SW12 Aufgabe 1: Behandlung gegen Blutarmut
+
+n <- 10000
+
+HaeKonz <- c(9.1, 10.3, 11.0, 11.5, 11.9, 8.1, 8.4, 9.2, 9.4)
+Gruppe <- c(rep("b", 5), rep("k", 4))
+dat <- data.frame(HaeKonz, Gruppe)
+dat$Gruppe <- as.factor(dat$Gruppe)
+
+p <- combinat::permn(Gruppe) # erzeugt alle Permutationen
+p <- p[!duplicated(p)] # lösche Duplikate
+
+(m <- tapply(dat$HaeKonz, dat$Gruppe, mean))
+(stat <- as.numeric(m[1] - m[2]))
+
+stati <- rep(NA, length(n))
+for (i in 1:n) {
+  dat$Gruppe <- sample(x = dat$Gruppe, replace = FALSE)
+  m <- tapply(dat$HaeKonz, dat$Gruppe, mean)
+  stati[i] <- abs(m[1] - m[2])
+}
+hist(stati)
+mean(stati > stat)
+
+library(coin)
+independence_test(formula = HaeKonz ~ Gruppe,
+                  data = dat,
+                  alternative = "two.sided",
+                  distribution = "exact")
+
+
+# SW12 Aufgabe 2: Sand
+
+sand_1 <- c(0.17, 0.63, 0.35, 0.49, 0.18, 0.43, 0.12, 0.20, 0.47, 1.36, 0.51, 0.45, 0.84, 0.32, 0.40)
+sand_2 <- c(1.13, 0.54, 0.96, 0.26, 0.39, 0.88, 0.92, 0.53, 1.01, 0.48, 0.89, 1.07, 1.11, 0.58)
+sand <- data.frame(
+  menge = c(sand_1, sand_2),
+  gruppe = factor(rep(c("1", "2"), times = c(length(sand_1), length(sand_2))))
+)
+
+library(coin)
+wilcox_test(menge ~ gruppe,
+            data = sand,
+            alternative = "two.sided",
+            conf.level = 0.99,
+            distribution = "exact")
+
+
+# SW12 Aufgabe 3: Bremswege
+
+library(readr)
+reifen <- read_csv("Documents/GitHub/ZHAW/Semester 5/GStat/Daten/reifen.csv")
+boxplot(reifen$`Profil A sA in m`, reifen$`Profil B sB in m`,
+        names = c("Profil A", "Profil B"),
+        main = "Bremswege für verschiedene Reifenprofile",
+        ylab = "Bremsweg (m)")
+hist(reifen$`Profil A sA in m`, main = "Histogramm Bremswege Profil A", xlab = "Bremsweg (m)")
+hist(reifen$`Profil B sB in m`, main = "Histogramm Bremswege Profil B", xlab = "Bremsweg (m)")
+
+wilcox.test(x = reifen$`Profil A sA in m`,
+            y = reifen$`Profil B sB in m`,
+            alternative = "two.sided",
+            paired = T,
+            exact = T)
+
+
+# SW13 Aufgabe 1: Umfragedaten einer Tourismusgesellschaft
+
+frau <- c(68, 130, 84)
+mann <- c(137, 72, 26)
+data <- matrix(c(frau, mann), nrow = 2, byrow = TRUE)
+colnames(data) <- c("kaum", "etwas", "stark")
+rownames(data) <- c("Frau", "Mann")
+
+(erwartet <- outer(rowSums(data), colSums(data)) / sum(data))
+
+Tstat <- sum((data - erwartet)^2 / erwartet)
+freiheitsgrade <- (nrow(data) - 1) * (ncol(data) - 1)
+qchisq(0.95, df = freiheitsgrade)
+1 - pchisq(Tstat, df = freiheitsgrade)
+
+chisq.test(data)
+
+
+# SW13 Aufgabe 2: Überlebenschancen von Haustieren
+
+haustierbesitzer <- c("Nein", "Ja")
+geschlecht <- c("Frau", "Mann")
+data <- matrix(c(28, 50, 11, 3), nrow = 2, byrow = TRUE)
+colnames(data) <- haustierbesitzer
+rownames(data) <- geschlecht
+
+
+# SW13 Aufgabe 3: Nervenzusammenbruch
+
+nervenzusammenbruch <- c("Ja", "Nein")
+verheiratet <- c("Verheiratet", "Nicht verheiratet")
+Frauen <- matrix(c(143, 5, 431, 57), nrow = 2, byrow = TRUE)
+Männer <- matrix(c(40, 9, 503, 90), nrow = 2, byrow = TRUE)
+colnames(Frauen) <- verheiratet
+rownames(Frauen) <- nervenzusammenbruch
+colnames(Männer) <- verheiratet
+rownames(Männer) <- nervenzusammenbruch
+
+(nerv.test.frau <- chisq.test(Frauen))
+(nerv.test.mann <- chisq.test(Männer))
+
+nerv.test.frau$expected
+nerv.test.mann$expected
+
+Kombiniert <- Frauen + Männer
+prop.table(Kombiniert, margin = 2)
+(nerv.test.kombiniert <- chisq.test(Kombiniert))
+# create a mosaic plot of residuals
+mosaicplot(Kombiniert, main = "Mosaikplot Nervenzusammenbruch vs. Verheiratet", shade = TRUE)
+
+#-------------------------------------------------------------------------------
+
+# Probeprüfung GStat HS2022
+
+# Aufgabe 1: Maximum Likelihood Estimation
+## a)
+
+llh_sol <- function(theta, x){sum(log( 2*theta^2*x*exp(-(theta*x)^2)))}
+
+llh <- function(theta, x){
+  sum(log(2) + 2*log(theta) + log(x) - theta^2 * x^2)
+}
+
+d <- c(5, 4, 3, 2, 5, 4, 2, 6, 2, 1, 1)
+llh(theta = 0.2, x = d)
+
+## b)
+negll <- function(theta, x){
+  -sum(log(2) + 2*log(theta) + log(x) - theta^2 * x^2)
+  }
+
+start <- c(max(d), min(d))
+optim(par = start, fn = negll, x = d)
+
+
+# Aufgabe 2: Multiple Choic
+
+power.t.test(n=100, delta = 1, sd = 1, sig.level = 0.05)
+
+
+
+# Aufgabe 3: Testen
+
+ohne_Besch <- c(120, 130, 150, 90, 100, 140)
+mit_Besch <- c(180, 130, 120, 190, 220, 120)
+
+brillen <- data.frame(endorphine = c(ohne_Besch, mit_Besch),
+                      beschichtung = factor(x = c(rep("nein", length(ohne_Besch)), rep("ja", length((mit_Besch))))))
+
+boxplot(endorphine ~ beschichtung, data = brillen)
+
+library(coin)
+wilcox_test(formula = endorphine ~ beschichtung,
+            data = brillen,
+            alternative = "greater",
+            distribution = "exact")
+
+
+# Aufgabe 4: Tests und Konfidenzintervall
+
+# a)
+Zürich <- c(95, 300, 160, 250, 320)
+Lausanne <- c(75, 200, 100, 230, 270)
+data <- matrix(c(Zürich, Lausanne), nrow = 2, byrow = TRUE)
+colnames(data) <- c("Mathe", "Ing", "Chemie", "Wirtschaft", "sonstige")
+rownames(data) <- c("Zürich", "Lausanne")
+
+studienf.test <- chisq.test(data)
+studienf.test$p.value
+
+# b)
+erdbeben <- c(55, 72, 64, 73, 57)
+poisson.test(sum(erdbeben), T = length(erdbeben), conf.level = 0.9)
+
+# c)
+12.73 + c(-1,1) * 2.06/sqrt(40) * qt(0.995, df=39)
+
+
+# Aufgabe 5: Bootstrap
+
+set.seed(20200123)
+x <- rlnorm(20, meanlog = 1, sdlog = sqrt(log(2)))
+
+## a)
+schaetzer_t <- function(data){
+  n <- length(data)
+  x_hut <- mean(data)
+  summe <- 0
+  for (i in 1:n){
+    summe <- summe + sum((data[i] - x_hut)^2)
+  }
+  res <- (sqrt((1/n) * summe)) / x_hut
+  return(res)
+}
+schaetzer_t(x)
+
+
+## b)
+
+library(boot)
+estimator <- function(data, indices) {
+  return(schaetzer_t(data[indices]))
+}
+boot.res <- boot(data = x, statistic = estimator, R = 4999)
+boot.ci(boot.res, type = "perc", conf = 0.90)
+boot.res
+
+
