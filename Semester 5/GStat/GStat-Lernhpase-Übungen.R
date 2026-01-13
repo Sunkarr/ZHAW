@@ -648,3 +648,82 @@ boot.ci(boot.res, type = "perc", conf = 0.90)
 boot.res
 
 
+#-------------------------------------------------------------------------------
+
+# Quiz 1
+
+
+## Aufgabe 3
+
+load("/Users/jonas/Documents/GitHub/ZHAW/Semester 5/GStat/Daten/simDat2.rda")
+const <- 1.34898
+(sigma_hat <- IQR(simDat) / const)
+
+## Bootstrap
+library(boot)
+estimator <- function(data, indices) {
+  return(IQR(data[indices]) / const)
+}
+boot.res <- boot(data = simDat, statistic = estimator, R = 10000)
+boot.ci(boot.res, type = "perc", conf = 0.77)
+
+
+## Aufgabe 5
+
+load("/Users/jonas/Documents/GitHub/ZHAW/Semester 5/GStat/Daten/schraubenlaengen.rda")
+hist(schraubenlaengen)
+t.test(schraubenlaengen, conf.level = 0.6)$conf
+
+erwartungswert_geschätzt <- mean(schraubenlaengen)
+varianz_geschätzt <- var(schraubenlaengen)
+sd_geschätzt <- sd(schraubenlaengen)
+
+
+## Aufgabe 6
+
+
+x_hat <- 38.5
+sd_hat <- 1.6
+n <- 46
+alpha <- 0.25
+
+x_hat + c(-1, 1) * qnorm(1-alpha/2) * sd_hat / sqrt(n)
+
+
+# Aufgabe 9
+
+
+load("/Users/jonas/Documents/GitHub/ZHAW/Semester 5/GStat/Daten/stichprobe_dichte.rda")
+
+negative_log_likelihood <- function(theta, data){
+  log_lik <- sum(log(theta * data^(theta - 1)))
+  return(-log_lik)
+}
+
+start <- mean(stichprobe_dichte)
+optim(par = start, fn= negative_log_likelihood, method = "BFGS", data = stichprobe_dichte)
+
+
+# Aufgabe 10
+
+n <- 100000
+meanlog <- 3
+sdlog <- 0.5
+
+s1_data <- numeric(length = n)
+s2_data <- numeric(length = n)
+
+for(i in 1:n) {
+  stichprobe <- rlnorm(5, meanlog = meanlog, sdlog = sdlog)
+  s1_data[i] <- mean(log(stichprobe))
+  s2_data[i] <- log(mean(stichprobe))
+}
+
+mean(s1_data)
+mean(s2_data)
+
+var(s1_data)
+var(s2_data)  
+
+
+

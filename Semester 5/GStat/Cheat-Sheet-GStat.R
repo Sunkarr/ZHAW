@@ -1,5 +1,14 @@
 # Cheat Sheet Gstat
 
+## Libraries
+
+library("boot")
+library("car")
+library("MASS")
+library("moonboot")
+library("Sleuth3")
+Daten_Sleuth3 <- case0101
+
 ## Nützliches
 
 ### Vektoren zu Dataframe
@@ -17,6 +26,18 @@ colnames(data) <- c("kaum", "etwas", "stark")
 rownames(data) <- c("Frau", "Mann")
 prop.table(data, margin = 2)
 
+
+## Punktschätzer
+erwartungswert_geschätzt <- mean(data)
+varianz_geschätzt <- var(data)
+sd_geschätzt <- sd(data)
+
+varianz_manuell <- function(daten, mittelwert) {
+  n <- length(daten)
+  quadrat_summe <- sum((daten - mittelwert)^2)
+  ergebnis <- quadrat_summe / (n - 1)
+  return(ergebnis)
+}
 
 
 ## QQ-Plot
@@ -58,6 +79,12 @@ MSE_Estimator <- function(lambda_hat, lambda_true) {
   var(lambda_hat) + (mean(lambda_hat) - lambda_true)^2
 }
 
+MSE <- function(var, bias){
+  return(var + bias^2)
+}
+MSE(1/5, 4)
+MSE(1+exp(-3*10), 3)
+MSE(1/10, 0)
 
 ## Maximum Likelihood
 
@@ -86,6 +113,7 @@ abline(v = mle_p, col = "red", lty = 2)
 set.seed(801)
 x.gamma <- rgamma(n = 20, shape = 3, rate = 1/9)
 x.gamma
+##### LOG-Likelihood!!!!
 negative_log_likelihood <- function(params, data) {
   shape <- params[1]
   rate <- params[2]
@@ -99,7 +127,19 @@ library(fitdistrplus)
 x.gamma.mle <- fitdist(data = x.gamma, distr = "gamma", method = "mle")
 x.gamma.mle$estimate
 
-### SW04 Aufgabe 2: Maximum-Likelihood-Schätzung bei Normalverteilung
+#### MLE Likelihood
+
+load("/Users/jonas/Documents/GitHub/ZHAW/Semester 5/GStat/Daten/stichprobe_dichte.rda")
+
+negative_log_likelihood <- function(theta, data){
+  log_lik <- sum(log(theta * data^(theta - 1)))
+  return(-log_lik)
+}
+
+start <- mean(stichprobe_dichte)
+optim(par = start, fn= negative_log_likelihood, method = "BFGS", data = stichprobe_dichte)
+
+#### SW04 Aufgabe 2: Maximum-Likelihood-Schätzung bei Normalverteilung
 
 xs <- c(-0.033, -0.76, 2.02, 1.13, 0.65, 0.49, 0.76, 0.40, 0.10, 0.61)
 loglik <- function(mu, sigma, dat) {
@@ -128,12 +168,18 @@ norm.mle$estimate
 
 ### Varianz bekannt
 data <- rnorm(n = 100, mean = 50, sd = 10)
-#### Manuell
+#### Manuell 1
 n <- length(data)
 mean_data <- mean(data)
 sd_data <- sd(data)
 alpha <- 0.05
 mean_data + c(-1, 1)*qnorm(1 - alpha/2)*sd_data/sqrt(n)
+#### Manuell 2
+x_hat <- 38.5
+sd_hat <- 1.6
+n <- 46
+alpha <- 0.05
+x_hat + c(-1, 1) * qnorm(1-alpha/2) * sd_hat / sqrt(n)
 #### via z.test
 library(BSDA)
 z.test(x = data, mu = mean_data, sigma.x = sd_data, conf.level = 1-alpha)$conf.int
