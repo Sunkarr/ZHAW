@@ -726,4 +726,68 @@ var(s1_data)
 var(s2_data)  
 
 
+#-------------------------------------------------------------------------------
+
+# Quiz 2
+
+
+## Aufgabe 1
+
+p_vals <- c(0.00602, 0.04016, 0.0047, 0.03418, 0.04975, 0.03096, 0.0432, 0.00162, 0.04998, 0.4313)
+p_vals_corr <- p.adjust(p_vals, method = "bonferroni")
+length(p_vals_corr[p_vals_corr < 0.05])
+
+
+## Aufgabe 2
+
+n <- 199
+ländlich <- c(38, 33)
+städtisch <- c(87, 41)
+data <- matrix(c(ländlich, städtisch), nrow = 2, byrow = TRUE)
+colnames(data) <- c("Margarine", "Butter")
+rownames(data) <- c("ländlich", "städtisch")
+data
+prop.table(data, margin = 2)
+
+marktforschung_erwartet <- outer(rowSums(data), colSums(data) / n)
+sum((data - marktforschung_erwartet)^2 / marktforschung_erwartet)
+df <- (2-1) * (2-1)
+qchisq(0.95, df = df)
+
+# Ohne default Korrektur (weniger Konservativ)
+chisq.test(data, correct = F)
+
+
+# Aufgabe 7
+
+behandelt <- c(25.4, 28.1, 26.2, 24.3, 21.6, 20.6, 21.5, 25, 22.6, 26.5, 24.8, 27.9, 23.6, 22.9, 23.9)
+unbehandelt <- c(23.9, 27.1, 26.3, 21.7, 24.3, 29.5, 23.8)
+pilze <- data.frame(
+  menge = c(behandelt, unbehandelt),
+  gruppe = factor(rep(c("behandelt", "unbehandelt"), times = c(length(behandelt), length(unbehandelt))))
+)
+t.test(formula = menge ~ gruppe,
+       data = pilze,
+       alternative = "greater")
+
+
+# Aufgabe 8
+
+load("/Users/jonas/Documents/GitHub/ZHAW/Semester 5/GStat/Daten/kaffeepulver2.rda")
+t.test(x = kaffeepulver$Abfuellanlage_A, y = kaffeepulver$Abfuellanlage_B,
+       paired = F,
+       conf.level = 0.99)
+
+
+# Aufgabe 9
+
+load("/Users/jonas/Documents/GitHub/ZHAW/Semester 5/GStat/Daten/testscores2.rda")
+testscores
+wilcoxsign_test(formula = vorher ~ nachher,
+                data = testscores,
+                distribution = "exact",
+                alternative = "less")
+
+
+
 
