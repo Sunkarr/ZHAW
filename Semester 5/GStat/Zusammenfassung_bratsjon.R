@@ -28,6 +28,19 @@ data
 prop.table(data, margin = 2)
 
 
+### IF ELSE
+
+temp <- 25
+
+if (temp > 30) {
+  print("Hot")
+} else if (temp >= 15) {
+  print("Mild")
+} else {
+  print("Cold")
+}
+
+
 ## Punktschätzer
 erwartungswert_geschätzt <- mean(data)
 varianz_geschätzt <- var(data)
@@ -42,7 +55,8 @@ varianz_manuell <- function(daten, mittelwert) {
 
 
 ## QQ-Plot
-library("car")
+
+
 x <- rnorm(n = 100, mean = 1, sd = 2)
 par(mfrow = c(1,2))
 hist(x, breaks = 10, main = "Histogramm von x", xlab = "x-Werte", ylab = "Häufigkeit")
