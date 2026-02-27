@@ -35,3 +35,6 @@ abline(fit_uhren, col = "red")
 # legend on botten with coefficients alpha and beta
 legend("bottomright", legend = c(paste("alpha =", round(coef(fit_uhren)[1], 2)), paste("beta =", round(coef(fit_uhren)[2], 2))), col = "red", lty = 1)
                                              
+# d)
+summary(fit_uhren)$sigma
+
