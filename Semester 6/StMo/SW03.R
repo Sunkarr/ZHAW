@@ -23,11 +23,12 @@ lmWind2 <- lm(Strom ~ trans_x, data = windmühlen)
 plot(windmühlen$Windgeschwindigkeit, windmühlen$Strom)
 xx <- seq(0,25,1)
 lines(xx, coef(lmWind2)[1] + coef(lmWind2)[2]*1/xx, col = "red", lwd = 2)
+legend("bottomright", legend = c(paste("alpha =", round(coef(lmWind2)[1], 2)), paste("beta =", round(coef(lmWind2)[2], 2))), col = "red", lty = 1, lwd = 2)
 
 # d)
 par(mfrow = c(2,3))
 plot(lmWind2, which = 1:3) # ohne Simulationen
-plot.lmSim(lmWind2)
+plot.lmSim(lmWind2, nsim = 100)
 
 # e)
 summary(lmWind2)
@@ -37,7 +38,7 @@ confint(lmWind2)
 
 # g)
 predict_data <- data.frame(trans_x = 1/15)
-predict(lmWind2, newdata = predict_data, interval = "confidence", level = 0.95)
+predict(lmWind2, newdata = predict_data, interval = "prediction", level = 0.95)
 
 
 # Aufgabe 2
@@ -88,7 +89,7 @@ for (i in 1:nrow(model_stats)) {
 }
 
 
-# c)
+# d)
 # Tukey-Ascombe-Plot for each model
 par(mfrow = c(2, 2))
 for (i in 1:nrow(model_stats)) {
