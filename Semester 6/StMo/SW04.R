@@ -55,8 +55,30 @@ fit_mpizh <- lm(MPI ~ KPI + HZ, data = mpizh)
 summary(fit_mpizh)
 
 # c)
-install.packages("car")
-install.packages("scatterplot3d")
-library(car)
-library(scatterplot3d)
-scatterplot3d(mpizh$KPI, mpizh$HZ, mpizh$MPI, xlab = "KPI", ylab = "HZ", zlab = "MPI", main = "3D Scatterplot")
+
+# d)
+summary(fit_mpizh)
+
+
+# Aufgabe 3
+
+dat <- read.table("/Users/jonas/Documents/GitHub/ZHAW/Semester 6/StMo/data/SynWarumMR.dat", header = T)
+
+# a)
+fit_dat_x1 <- lm(y ~ x1, data = dat)
+fit_dat_x2 <- lm(y ~ x2, data = dat)
+
+summary(fit_dat_x1)$coefficients[,1:2]
+summary(fit_dat_x2)$coefficients[,1:2]
+
+# b)
+fit_dat <- lm(y ~ x1 + x2, data = dat)
+summary(fit_dat)$coefficients[,1:2]
+
+# c)
+summary(fit_dat_x1)$coefficients
+summary(fit_dat_x2)$coefficients
+summary(fit_dat)$coefficients
+
+
+
