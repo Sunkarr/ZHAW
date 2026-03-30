@@ -50,7 +50,44 @@ par(mfrow = c(1,1))
 lmSalary <- lm(income ~ experience + education, data = salary)
 summary(lmSalary)
 
+# f)
+new_data <- data.frame(experience = c(20, 20), education = c("1", "3"))
+predict(lmSalary, newdata = new_data, interval = "prediction", level = 0.95)
+
+summary(lmSalary)
 
 
+# Aufgabe 3
 
-        
+diamonds <- read.table("/Users/jonas/Documents/GitHub/ZHAW/Semester 6/StMo/data/diamant.dat", header = TRUE)
+
+# a)
+diamonds$log_Carat <- log(diamonds$Carat)
+diamonds$log_Carat_pwr2 <- log(diamonds$Carat)^2
+diamonds$log_Price <- log(diamonds$Price)
+
+lmDiamonds <- lm(log_Price ~ log_Carat + log_Carat_pwr2, data = diamonds)
+summary(lmDiamonds)
+
+# b)
+diamonds$Colour <- as.factor(diamonds$Colour)
+diamonds$Clarity <- as.factor(diamonds$Clarity)
+diamonds$CBody <- as.factor(diamonds$CBody)
+
+lmDiamonds2 <- lm(log_Price ~ log_Carat + log_Carat_pwr2  + Colour + Clarity + CBody, data = diamonds)
+summary(lmDiamonds2)
+
+# c)
+drop1(lmDiamonds2, test="F")
+
+# d)
+summary(lmDiamonds)$r.squared
+summary(lmDiamonds2)$r.squared
+
+anova(lmDiamonds, lmDiamonds2)
+
+# e)
+dummy.coef(lmDiamonds2)
+
+# f)
+summary(lmDiamonds2)
