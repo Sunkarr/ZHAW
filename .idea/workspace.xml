@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f5646578-6a99-4bff-9165-9baf01372fd9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Semester 6/MLDM 2/SW06/1_Sequence_to_Sequence_Learning_with_Neural_Networks.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Semester 6/MLDM 2/SW06/1_Sequence_to_Sequence_Learning_with_Neural_Networks.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Semester 6/MLDM 2/SW06/seq2seq_translation_tutorial.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Semester 6/MLDM 2/SW06/seq2seq_translation_tutorial.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Semester 6/XAI/SW05/XAI_Tutorial_2_Visual_Explanations.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Semester 6/XAI/SW05/XAI_Tutorial_2_Visual_Explanations.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Semester 6/XAI/XAI_Lab1_Assignment.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Semester 6/XAI/XAI_Lab1_Assignment.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Semester 6/XAI/XAI_Lab2_Assignment.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Semester 6/XAI/XAI_Lab2_Assignment.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,11 +105,11 @@
       <recent name="$PROJECT_DIR$/Semester 5/MLDM/SW02" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Semester 6/MLDM 2/data" />
       <recent name="$PROJECT_DIR$/Semester 5/MLDM/Hackathon" />
       <recent name="$PROJECT_DIR$/Semester 5/MLDM/SW01" />
       <recent name="$PROJECT_DIR$/Semester 5/Krypto" />
       <recent name="$PROJECT_DIR$/Semester 4/Numerik/W1" />
-      <recent name="C:\Users\jonas\Documents\GitHub\ZHAW\Semester 3\DPS\W9" />
     </key>
   </component>
   <component name="RunManager">
@@ -125,6 +126,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Semester 5/Krypto/GGH_Kryptosystem.py" />
@@ -145,8 +147,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-PY-253.31033.139" />
-        <option value="bundled-python-sdk-2653e85de345-6d6dccd035ac-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-253.31033.139" />
+        <option value="bundled-python-sdk-f988f707c298-7604a7d53f56-com.jetbrains.pycharm.ds.sharedIndexes.bundled-DS-261.22158.332" />
       </set>
     </attachedChunks>
   </component>
@@ -184,6 +185,8 @@
       <workItem from="1758882970026" duration="804000" />
       <workItem from="1758885820443" duration="26000" />
       <workItem from="1774735779822" duration="60000" />
+      <workItem from="1774900748176" duration="49000" />
+      <workItem from="1774981374508" duration="3000" />
     </task>
     <servers />
   </component>
