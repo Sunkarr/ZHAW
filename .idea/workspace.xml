@@ -12,13 +12,31 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CopilotChats">
+    <option name="panelChat">
+      <chat>
+        <option name="activeSessionId" value="60127ce6-6e08-42a2-8cc1-b44ad5bf7275" />
+        <option name="sessions">
+          <session>
+            <option name="chatType" value="PANEL" />
+            <option name="id" value="60127ce6-6e08-42a2-8cc1-b44ad5bf7275" />
+            <option name="modeId" value="Agent" />
+            <option name="modelType" value="builtin_family" />
+            <option name="modelValue" value="auto" />
+            <option name="targetType" value="LOCAL" />
+          </session>
+        </option>
+        <option name="type" value="PANEL" />
+      </chat>
+    </option>
+  </component>
   <component name="CopilotPersistence">
     <persistenceIdMap>
       <entry key="_/Users/jonas/Documents/GitHub/ZHAW" value="2mVfv55Uz8ZlGQfMQBiIHatwyHp" />
     </persistenceIdMap>
   </component>
   <component name="DataSuggestionNotificationService">
-    <option name="lastNotificationTime" value="2026-05-03T10:13:32.099453Z" />
+    <option name="lastNotificationTime" value="2026-05-08T05:55:15.204386Z" />
   </component>
   <component name="EmbeddingIndexingInfo">
     <option name="cachedIndexableFilesCount" value="1439" />
