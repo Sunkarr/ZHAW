@@ -12,8 +12,8 @@ pairs(sniffer)
 fun_far2cel <- function(x) (x - 32) * 5/9
 sniffer$Temp.Tank <- fun_far2cel(sniffer$Temp.Tank)
 sniffer$Temp.Gas  <- fun_far2cel(sniffer$Temp.Gas)
-# transform ppm to bar (sniffer$Pressure.Tank and sniffer$Pressure.Gas)
-fun_ppm2bar <- function(x) (x * 1e-6) * 1.01325
+# transform psi to bar (sniffer$Pressure.Tank and sniffer$Pressure.Gas)
+fun_ppm2bar <- function(x) (x * 0.0689476)
 sniffer$Vapor.Dispensed <- fun_ppm2bar(sniffer$Vapor.Dispensed)
 sniffer$Vapor.Tank <- fun_ppm2bar(sniffer$Vapor.Tank)
 
@@ -24,7 +24,7 @@ vif(fit.sniffer)
 
 # d)
 backAIC.sniffer <- step(fit.sniffer, direction = "backward")
-summary(backAIC.sniffer)
+vif(backAIC.sniffer)
 
 # e)
 sniffer$MeanVapor <- 0.5*(sniffer$Vapor.Tank + sniffer$Vapor.Dispensed)
@@ -35,7 +35,7 @@ summary(fit.sniffer2)
 vif(fit.sniffer2)
 
 backAIC.sniffer2 <- step(fit.sniffer2, direction = "backward")
-summary(backAIC.sniffer2)
+vif(backAIC.sniffer2)
 
 # f)
 par(mfrow=c(2,4))
@@ -79,3 +79,5 @@ fit.empty <- lm(logRUT ~ 1, data = asphalt)
 
 mb <- step(fit.full, direction = "backward", k = log(nrow(asphalt)))
 mf <- step(fit.empty, direction = "forward", k = log(nrow(asphalt)), scope = list(upper = fit.full))
+vif(mb) == vif(mf)
+vif(mb)
