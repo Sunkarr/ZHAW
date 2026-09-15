@@ -3,13 +3,15 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+  <component name="BackgroundAgentGlobalSettings">
+    <option name="selectedModelId" value="auto" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="f5646578-6a99-4bff-9165-9baf01372fd9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Semester 7/AAMS/SW01.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Semester 7/H Analysis/SW01.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/ZHAW.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ZHAW.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Semester 6/MLDM 2/SW02/Lab2_TryItOut.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Semester 6/MLDM 2/SW02/Lab2_TryItOut.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Semester 6/StMo/SW13.R" beforeDir="false" afterPath="$PROJECT_DIR$/Semester 6/StMo/SW13.R" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +45,7 @@
     <option name="lastNotificationTime" value="2026-06-05T12:30:11.477464Z" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="1439" />
+    <option name="cachedIndexableFilesCount" value="1575" />
   </component>
   <component name="ExportToHTMLSettings">
     <option name="printScope" value="4" />
@@ -78,12 +80,86 @@
     <commands />
     <urls />
   </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.227531518122724" />
+      <entry key="MS500" value="3.217745180734633" />
+      <entry key="S2" value="10.581952303810189" />
+      <entry key="S5" value="23.262181856374394" />
+      <entry key="S10" value="38.90255572170289" />
+      <entry key="S30" value="63.34965272783554" />
+      <entry key="S60" value="80.620718663848" />
+      <entry key="M2" value="123.14320311792629" />
+      <entry key="M5" value="243.1355594230442" />
+      <entry key="M10" value="350.56014006011884" />
+      <entry key="M15" value="404.06461534207125" />
+      <entry key="M30" value="470.8536438493316" />
+      <entry key="H1" value="510.45123689597483" />
+      <entry key="H2" value="532.063111156655" />
+      <entry key="H4" value="543.3600976222374" />
+      <entry key="D1" value="553.0356888876855" />
+      <entry key="W1" value="554.7187815234352" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="0.0" />
+      <entry key="S60" value="0.0" />
+      <entry key="M2" value="0.0" />
+      <entry key="M5" value="0.0" />
+      <entry key="M10" value="0.0" />
+      <entry key="M15" value="0.0" />
+      <entry key="M30" value="0.0" />
+      <entry key="H1" value="0.0" />
+      <entry key="H2" value="0.0" />
+      <entry key="H4" value="0.0" />
+      <entry key="D1" value="0.0" />
+      <entry key="W1" value="0.0" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="1.1871488203943628" />
+      <entry key="MS500" value="3.1979702369847254" />
+      <entry key="S2" value="10.565754649935258" />
+      <entry key="S5" value="23.248037123809407" />
+      <entry key="S10" value="38.890867958421936" />
+      <entry key="S30" value="63.343379070285124" />
+      <entry key="S60" value="80.61667371255993" />
+      <entry key="M2" value="123.13996534564811" />
+      <entry key="M5" value="243.13281355982747" />
+      <entry key="M10" value="350.55807480662827" />
+      <entry key="M15" value="404.062999573488" />
+      <entry key="M30" value="470.85268308295554" />
+      <entry key="H1" value="510.4507102884671" />
+      <entry key="H2" value="532.0628351057861" />
+      <entry key="H4" value="543.3599562472299" />
+      <entry key="D1" value="553.0356648454461" />
+      <entry key="W1" value="554.7187780768855" />
+    </decayedShown>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
   <component name="ProjectId" id="2mVfv55Uz8ZlGQfMQBiIHatwyHp" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectSessionTemplates">
+    <option name="panelTemplate">
+      <template>
+        <option name="modeId" value="Agent" />
+        <option name="model">
+          <model>
+            <option name="modelType" value="builtin_id" />
+            <option name="modelValue" value="auto" />
+          </model>
+        </option>
+        <option name="targetType" value="BACKGROUND" />
+        <option name="worktreeMode" value="WORKSPACE" />
+      </template>
+    </option>
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -105,6 +181,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ToolWindow.Jupyter Variables.ShowToolbar": "false",
     "ai.playground.ignore.import.keys.banner.in.settings": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
     "copilot.chat.legacySessionMetadata.migrated": "true",
     "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
     "git-widget-placeholder": "main",
@@ -115,7 +192,8 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
+    "settings.editor.selected.configurable": "ml.llm.LLMConfigurable",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -170,7 +248,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-1985701721fb-7604a7d53f56-com.jetbrains.pycharm.ds.sharedIndexes.bundled-DS-261.25134.18" />
+        <option value="bundled-python-sdk-eff1e8def5f5-5bd6d13a2a75-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-262.10315.174" />
       </set>
     </attachedChunks>
   </component>
@@ -210,6 +288,10 @@
       <workItem from="1774735779822" duration="60000" />
       <workItem from="1774900748176" duration="49000" />
       <workItem from="1774981374508" duration="3000" />
+      <workItem from="1789490857553" duration="55000" />
+      <workItem from="1789490998822" duration="2163000" />
+      <workItem from="1789493201019" duration="97000" />
+      <workItem from="1789493305537" duration="1946000" />
     </task>
     <servers />
   </component>

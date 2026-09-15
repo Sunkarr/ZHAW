@@ -81,3 +81,4 @@ mb <- step(fit.full, direction = "backward", k = log(nrow(asphalt)))
 mf <- step(fit.empty, direction = "forward", k = log(nrow(asphalt)), scope = list(upper = fit.full))
 vif(mb) == vif(mf)
 vif(mb)
+
