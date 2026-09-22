@@ -8,10 +8,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5646578-6a99-4bff-9165-9baf01372fd9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Semester 7/AAMS/SW02.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ZHAW.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ZHAW.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Semester 7/RL/01_lab_Intro_RL.ipynb" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -293,7 +291,7 @@
       <workItem from="1789493201019" duration="97000" />
       <workItem from="1789493305537" duration="2174000" />
       <workItem from="1789731086569" duration="570000" />
-      <workItem from="1789995313151" duration="1856000" />
+      <workItem from="1789995313151" duration="3710000" />
     </task>
     <servers />
   </component>
