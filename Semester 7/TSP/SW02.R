@@ -78,11 +78,11 @@ fi <- function(dataset,
 n <- 1000
 len <- 50
 
-m <- matrix(NA, nrow = n, ncol = 2)
+m <- matrix(NA, nrow = n, ncol = 3)
 for (i in 1:n) {
   m[i,1] <- fi(arima.sim(list(ma = c(b_1, b_2)), n = len, sd = sigma), 0, 2, 0, 1)$lower
-  m[i,2] <- fi(arima.sim(list(ma = c(b_1, b_2)), n = len, sd = sigma), 0, 2, 0, 1)$upper
+  m[i,2] <- fi(arima.sim(list(ma = c(b_1, b_2)), n = len, sd = sigma), 0, 2, 0, 1)$pred
+  m[i,3] <- fi(arima.sim(list(ma = c(b_1, b_2)), n = len, sd = sigma), 0, 2, 0, 1)$upper
 }
-
 
 
