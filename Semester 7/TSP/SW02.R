@@ -86,3 +86,72 @@ for (i in 1:n) {
 }
 
 
+# Exercise 2.3
+
+## 1)
+
+c_i<-6
+a_vec<-c(1.6,-1.4,0.5)
+# Process is stationary: all roots smaller one in absolute value
+abs(polyroot(c(-a_vec[length(a_vec):1],1)))
+
+#   Second (simpler) formula
+mu<-c_i/(1-sum(a_vec))
+# Acf decays to zero beyond lag 40: 'long' memory
+# The cycle in the acf is indicative of cycles in the data with similar mean-length
+ts.plot(ARMAacf( ar = a_vec, lag.max = 100, pacf = FALSE))
+
+len<-300
+x<-arima.sim(list(ar=a_vec),n=len)
+ts.plot(x)
+
+acf(x)
+pacf(x)
+tsdiag(arima(x, order = c(3,0,0)), gof.lag = 20)
+
+## 2)
+
+mat <- read_table("Documents/GitHub/ZHAW/Semester 7/TSP/Data/exercise23.txt")
+
+par(mfrow=c(4,1))
+acf(mat[,1])
+acf(mat[,2])
+acf(mat[,3])
+acf(mat[,4])
+
+par(mfrow=c(4,1))
+pacf(mat[,1])
+pacf(mat[,2])
+pacf(mat[,3])
+pacf(mat[,4])
+
+x<-mat[,4]
+y_ma<-arima(x,order=c(4,0,0))
+tsdiag(y_ma,gof.lag=20)
+tsdiag(y_ma,gof.lag=200)
+
+## 3)
+
+set.seed(10)
+len <- 100
+# x = 0.95x_{t-1} + e_t
+x <- arima.sim(list(ar=0.95), n=len)
+par(mfrow=c(2,1))
+acf(x)
+pacf(x)
+xar_obj<-arima(x,order=c(1,0,0))
+tsdiag(xar_obj)
+
+xma_obj<-arima(x,order=c(0,0,5))
+tsdiag(xma_obj)
+xma_obj<-arima(x,order=c(0,0,6))
+tsdiag(xma_obj)
+
+# MA(1)
+xma_obj<-arima(x,order=c(0,0,1))
+tsdiag(xma_obj)
+# AR(1)
+xma_obj<-arima(x,order=c(1,0,0))
+tsdiag(xma_obj)
+
+
