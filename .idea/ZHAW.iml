@@ -5,7 +5,7 @@
       <excludeFolder url="file://$MODULE_DIR$/Semester 7/H Analysis/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/Semester 7/RL/Graded Lab 1/.venv" />
     </content>
-    <orderEntry type="jdk" jdkName="~/miniconda3/envs/zhaw" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="~/miniconda3/envs/RL" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
