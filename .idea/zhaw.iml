@@ -2,9 +2,9 @@
 <module external.system.id="pyproject.toml" type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <excludeFolder url="file://$MODULE_DIR$/Semester 7/H Analysis/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/Semester 7/RL/Graded Lab 1/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/Semester 7/HANA/.venv" />
     </content>
     <orderEntry type="jdk" jdkName="~/Documents/GitHub/ZHAW/.venv" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
