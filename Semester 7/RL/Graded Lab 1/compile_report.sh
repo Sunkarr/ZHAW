@@ -26,7 +26,7 @@ fi
 
 # 3. Kompilieren des Reports
 echo "Kompiliere Graded-Lab-1_jakabnat+bratsjon_Report.md zu PDF..."
-pandoc -s Graded-Lab-1_jakabnat+bratsjon_Report.md --pdf-engine=xelatex -o Graded-Lab-1_jakabnat+bratsjon_Report.pdf
+pandoc -s Graded-Lab-1_jakabnat_bratsjon_Report_v3.md --pdf-engine=xelatex -o Graded-Lab-1_jakabnat+bratsjon_Report.pdf
 
 echo "Erfolgreich erstellt: Graded-Lab-1_jakabnat+bratsjon_Report.pdf"
 

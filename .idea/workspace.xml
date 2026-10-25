@@ -9,6 +9,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f5646578-6a99-4bff-9165-9baf01372fd9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Semester 7/RL/Graded Lab 1/Graded-Lab-1_jakabnat+bratsjon_Report.md" beforeDir="false" afterPath="$PROJECT_DIR$/Semester 7/RL/Graded Lab 1/Graded-Lab-1_jakabnat+bratsjon_Report.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Semester 7/RL/Graded Lab 1/Graded-Lab-1_jakabnat+bratsjon_Report.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Semester 7/RL/Graded Lab 1/Graded-Lab-1_jakabnat+bratsjon_Report.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Semester 7/RL/Graded Lab 1/compile_report.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Semester 7/RL/Graded Lab 1/compile_report.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,23 +82,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.7386688311792464" />
-      <entry key="MS500" value="5.010863430991281" />
-      <entry key="S2" value="12.418652095041399" />
-      <entry key="S5" value="27.414720669877994" />
-      <entry key="S10" value="52.40462014946866" />
-      <entry key="S30" value="109.21521652946682" />
-      <entry key="S60" value="153.0590608302623" />
-      <entry key="M2" value="207.09939983676455" />
-      <entry key="M5" value="315.567924848834" />
-      <entry key="M10" value="461.87364821414974" />
-      <entry key="M15" value="566.1279032647077" />
-      <entry key="M30" value="749.2337971999211" />
-      <entry key="H1" value="914.4061985924444" />
-      <entry key="H2" value="1039.1399742536523" />
-      <entry key="H4" value="1119.2088643648083" />
-      <entry key="D1" value="1240.1623296644834" />
-      <entry key="W1" value="2050.0209245686037" />
+      <entry key="MS100" value="1.7869159061522737" />
+      <entry key="MS500" value="4.690999153997721" />
+      <entry key="S2" value="14.093460714383404" />
+      <entry key="S5" value="23.784657437831246" />
+      <entry key="S10" value="29.927789785464356" />
+      <entry key="S30" value="35.56094749474461" />
+      <entry key="S60" value="37.47355306127853" />
+      <entry key="M2" value="40.78730200190201" />
+      <entry key="M5" value="64.37930044546053" />
+      <entry key="M10" value="145.32581533223114" />
+      <entry key="M15" value="248.74819892141997" />
+      <entry key="M30" value="529.9828613965805" />
+      <entry key="H1" value="864.1893979357455" />
+      <entry key="H2" value="1147.9638541475013" />
+      <entry key="H4" value="1340.2265906858836" />
+      <entry key="D1" value="1577.705351671139" />
+      <entry key="W1" value="2408.80972506834" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -105,35 +108,35 @@
       <entry key="S10" value="0.0" />
       <entry key="S30" value="0.0" />
       <entry key="S60" value="0.0" />
-      <entry key="M2" value="5.2502423551691334E-238" />
-      <entry key="M5" value="1.8474845395899735E-95" />
-      <entry key="M10" value="6.073665349809344E-48" />
-      <entry key="M15" value="4.193387651749564E-32" />
-      <entry key="M30" value="2.8957298510135556E-16" />
-      <entry key="H1" value="2.406490505999946E-8" />
-      <entry key="H2" value="2.1938382659254747E-4" />
-      <entry key="H4" value="0.020946752011475007" />
-      <entry key="D1" value="0.9862717532325717" />
-      <entry key="W1" value="3.4564761281786534" />
+      <entry key="M2" value="4.074936532846241E-244" />
+      <entry key="M5" value="6.645955237581736E-98" />
+      <entry key="M10" value="3.6428321331039895E-49" />
+      <entry key="M15" value="6.425257615365217E-33" />
+      <entry key="M30" value="1.1334981343492495E-16" />
+      <entry key="H1" value="1.5056205575068368E-8" />
+      <entry key="H2" value="1.7352829474265815E-4" />
+      <entry key="H4" value="0.018629428706373664" />
+      <entry key="D1" value="0.9671868936502853" />
+      <entry key="W1" value="3.4468409873445545" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.680510359589397" />
-      <entry key="MS500" value="4.977244789390027" />
-      <entry key="S2" value="12.398700293294306" />
-      <entry key="S5" value="27.397240334878067" />
-      <entry key="S10" value="52.387880240800214" />
-      <entry key="S30" value="109.203500965332" />
-      <entry key="S60" value="153.05078356290178" />
-      <entry key="M2" value="207.09373524869235" />
-      <entry key="M5" value="315.5643980292005" />
-      <entry key="M10" value="461.8709981251757" />
-      <entry key="M15" value="566.1256242423699" />
-      <entry key="M30" value="749.2318708787084" />
-      <entry key="H1" value="914.404548828771" />
-      <entry key="H2" value="1039.138985024885" />
-      <entry key="H4" value="1119.2290512145437" />
-      <entry key="D1" value="1241.1483838673623" />
-      <entry key="W1" value="2053.4772918054696" />
+      <entry key="MS100" value="1.7346393649598748" />
+      <entry key="MS500" value="4.662237669819" />
+      <entry key="S2" value="14.071156764879486" />
+      <entry key="S5" value="23.769208647329208" />
+      <entry key="S10" value="29.917962158850468" />
+      <entry key="S30" value="35.55702395710596" />
+      <entry key="S60" value="37.47147976087069" />
+      <entry key="M2" value="40.786164957520825" />
+      <entry key="M5" value="64.37856213359406" />
+      <entry key="M10" value="145.32495355317764" />
+      <entry key="M15" value="248.74719163191895" />
+      <entry key="M30" value="529.9816164452232" />
+      <entry key="H1" value="864.1880596787722" />
+      <entry key="H2" value="1147.9628999813606" />
+      <entry key="H4" value="1340.244453240936" />
+      <entry key="D1" value="1578.6723092822317" />
+      <entry key="W1" value="2412.2564551710043" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -176,6 +179,8 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;SHELLCHECK.PATH&quot;: &quot;/Users/jonas/Library/Application Support/JetBrains/PyCharm2026.2/plugins/Shell Script/shellcheck&quot;,
+    &quot;Shell Script.compile_report.sh.executor&quot;: &quot;Run&quot;,
     &quot;ToolWindow.Jupyter Variables.ShowToolbar&quot;: &quot;false&quot;,
     &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
@@ -212,7 +217,7 @@
       <recent name="$PROJECT_DIR$/Semester 4/Numerik/W1" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Shell Script.compile_report.sh">
     <configuration name="GGH_Kryptosystem" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="zhaw" />
       <option name="ENV_FILES" value="" />
@@ -238,8 +243,24 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="compile_report.sh" type="ShConfigurationType" temporary="true">
+      <option name="SCRIPT_TEXT" value="" />
+      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
+      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/Semester 7/RL/Graded Lab 1/compile_report.sh" />
+      <option name="SCRIPT_OPTIONS" value="" />
+      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
+      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$/Semester 7/RL/Graded Lab 1" />
+      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
+      <option name="INTERPRETER_PATH" value="/bin/bash" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="EXECUTE_IN_TERMINAL" value="true" />
+      <option name="EXECUTE_SCRIPT_FILE" value="true" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Shell Script.compile_report.sh" />
         <item itemvalue="Python.GGH_Kryptosystem" />
       </list>
     </recent_temporary>
@@ -304,7 +325,9 @@
       <workItem from="1791312006627" duration="11459000" />
       <workItem from="1791905539833" duration="11553000" />
       <workItem from="1792235797349" duration="813000" />
-      <workItem from="1792481445847" duration="7408000" />
+      <workItem from="1792481445847" duration="7829000" />
+      <workItem from="1792562099346" duration="3000" />
+      <workItem from="1792940713768" duration="1862000" />
     </task>
     <servers />
   </component>
