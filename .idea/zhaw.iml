@@ -6,7 +6,7 @@
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/Semester 7/HANA/.venv" />
     </content>
-    <orderEntry type="jdk" jdkName="~/miniconda3/envs/RL" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="~/miniconda3/envs/zhaw" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
