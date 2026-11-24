@@ -1,0 +1,46 @@
+Graded Lab 2 - DQN Land on the Moon
+This is the second and last graded lab of our Reinforcement Learning course! In this lab, you'll be tasked with implementing the Deep Q-Network (DQN) algorithm for the Lunar Lander Gym environment. This lab aims to test your understanding and implementation skills with a more complex problem.
+
+Educational Objectives
+
+Understand the fundamentals of the Deep Q-Network (DQN) algorithm and its application in reinforcement learning.
+Implement the DQN algorithm in a complex environment like Lunar Lander, demonstrating your coding and problem-solving skills.
+Gain practical experience in training and fine-tuning deep reinforcement learning models for more challenging environments.
+Evaluate the performance of your DQN implementation based on various metrics, such as average reward, convergence, and stability.
+
+Getting Started
+
+Please group up in pairs and download and open the jupyter notebook "DQN_lands_on_the_moon" provided for this lab session. Please note that this notebook requires a GPU to run efficiently. You can use your local installation, Google Colab or a similar platform.
+
+Tasks
+
+Implementation of DQN: Implement the DQN algorithm in the provided notebook for the Lunar Lander environment.
+Training and Tuning: Train your DQN model on the Lunar Lander environment. Observe its performance and make necessary adjustments to the hyperparameters to improve its performance.
+Performance Metrics: Evaluate and report the performance of your DQN implementation based on metrics such as average episode reward, episodes required for convergence, and any additional relevant statistics.
+Plotting Outputs and Creating a Video: Create a video of the fully trained agent running one episode. We expect you to include a link to a video of your final DQN agent in your submission.
+
+Submission
+
+Your submission should include the code used to implement the methods, and a report.
+
+The agent you code should implement the following standardized function
+actions = agent.select_action(states)
+
+To be executed in the Lunar Lander Environment
+next_states, rewards, dones, infos = env.step(actions)
+
+The report should include:
+
+Brief explanation of the implemented method and results. It should include: (max 3 pages)
+List of hyperparameters values chosen for each of the methods, as well as the approach you used to select them.
+Plot the performance of the algorithms, including:
+Learning curves wrt to the number of episodes.
+Mean performance of the trained model in 10 evaluation episodes.
+Link to video of trained model.
+General discussion on the performance and the implementation of this model (max 1 page).
+
+The deadline for completing this graded lab is announced separately. Make sure to include the names of both students of the team in your submission.
+
+Key Takeaways
+
+Complexity and Scalability: Understand that as environments become more complex, algorithms like DQN offer scalable solutions for training agents in challenging scenarios.
